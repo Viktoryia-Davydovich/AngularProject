@@ -1,12 +1,7 @@
 <div class="card">
   <h1>{{ course.title }}</h1>
   <p>
-    {{
-      course.creationDate
-        .toISOString()
-        .slice(0, 19)
-        .replace("T", " ")
-    }}
+    {{ course.creationDate | date }}
   </p>
   <p>{{ course.duration }} mins</p>
   <p>{{ course.description }}</p>
