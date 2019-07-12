@@ -1,0 +1,18 @@
+.coursesbackgroud {
+  background-color: #f2f3f7;
+  padding-top: 30px;
+}
+
+.loadmorebtn {
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 70px;
+  border-radius: 6px;
+  background-color: white;
+  border: none;
+  box-shadow: 0px 0px 31px -12px rgba(0, 0, 0, 0.75);
+}
+
+.loadmorebtn::content {
+  padding: 10px;
+}

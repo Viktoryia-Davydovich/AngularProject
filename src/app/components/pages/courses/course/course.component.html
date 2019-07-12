@@ -1,0 +1,17 @@
+<div class="card">
+  <h1>{{ course.title }}</h1>
+  <p>
+    {{
+      course.creationDate
+        .toISOString()
+        .slice(0, 19)
+        .replace("T", " ")
+    }}
+  </p>
+  <p>{{ course.duration }} mins</p>
+  <p>{{ course.description }}</p>
+  <div>
+    <span><button type="button">Edit</button></span>
+    <span class="delpadding"><button type="button">Delete</button></span>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+.card {
+  border-radius: 6px;
+  background-color: white;
+  box-shadow: 0px 0px 31px -12px rgba(0, 0, 0, 0.75);
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.delpadding {
+  padding-left: 25px;
+}
