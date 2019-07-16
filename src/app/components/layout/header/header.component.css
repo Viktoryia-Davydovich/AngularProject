@@ -1,8 +1,31 @@
 .header {
-  background-color: #2b2b30;
+  background-color: #414452;
 }
 
-.header app-logo {
-  padding: 20px;
+.header__items {
+  padding-left: 85px;
+  padding-right: 39px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__items--display {
+  display: flex;
+}
+
+.header__buttons-text {
+  color: white;
+  font-family: "SourceSansPro";
+  font-size: 14px;
+  padding-left: 9px;
+}
+
+.header__buttons-text--space {
+  padding-right: 25px;
+}
+
+.logo {
+  padding-top: 16px;
+  padding-bottom: 16px;
   color: #ffffff;
 }
