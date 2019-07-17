@@ -6,4 +6,8 @@
   font-size: 14px;
   line-height: 1.71;
   color: #c0c3ce;
+  position: fixed;
+  right: 0;
+  left: 0;
+  bottom: 0;
 }

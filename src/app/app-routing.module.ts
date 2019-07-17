@@ -3,10 +3,7 @@ import { Routes, RouterModule } from "@angular/router";
 
 import { CourselistComponent } from "./components/pages/courses/courselist/courselist.component";
 
-const routes: Routes = [
-  { path: "courses", component: CourselistComponent },
-  { path: "**", redirectTo: "/courses" }
-];
+const routes: Routes = [{ path: "courses", component: CourselistComponent }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
