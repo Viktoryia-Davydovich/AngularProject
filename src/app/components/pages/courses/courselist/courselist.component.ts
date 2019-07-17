@@ -44,4 +44,6 @@ export class CourselistComponent implements OnInit {
   onDeleted = (deletedCourseId: number) => {
     console.log(`You have deleted course number ${deletedCourseId}`);
   };
+
+  loadmore = () => console.log("Loading more...");
 }

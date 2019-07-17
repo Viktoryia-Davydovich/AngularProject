@@ -5,5 +5,7 @@
     [course]="course"
     (deleted)="onDeleted($event)"
   ></app-course>
-  <button type="button" class="loadmorebtn">LOAD MORE</button>
+  <button type="button" class="loadmorebtn" (click)="loadmore()">
+    LOAD MORE
+  </button>
 </div>
