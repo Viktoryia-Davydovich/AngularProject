@@ -1,31 +1,30 @@
 .header {
   background-color: #414452;
-}
-
-.header__items {
   padding-left: 85px;
   padding-right: 39px;
   justify-content: space-between;
   align-items: center;
-}
-
-.header__items--display {
   display: flex;
+  color: #ffffff;
 }
 
-.header__buttons-text {
-  color: white;
-  font-family: "SourceSansPro";
+.header__logo {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  cursor: pointer;
+}
+
+.header__log-buttons {
+  display: flex;
+  text-decoration: none;
   font-size: 14px;
+  color: #ffffff;
+}
+
+.header__log-buttons--icon-space {
   padding-left: 9px;
 }
 
-.header__buttons-text--space {
-  padding-right: 25px;
-}
-
-.logo {
-  padding-top: 16px;
-  padding-bottom: 16px;
-  color: #ffffff;
+.header__log-buttons--items-space {
+  padding-left: 25px;
 }

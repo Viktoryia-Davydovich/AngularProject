@@ -1,9 +1,9 @@
 .footer {
-  background-color: #2b2b30;
-}
-
-.footer p {
-  padding: 20px 0 20px;
+  background-color: #414452;
+  padding: 20px 84px 20px;
   color: #ffffff;
   text-align: right;
+  font-size: 14px;
+  line-height: 1.71;
+  color: #c0c3ce;
 }

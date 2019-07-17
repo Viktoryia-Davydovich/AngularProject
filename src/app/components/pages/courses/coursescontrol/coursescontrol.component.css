@@ -1,8 +1,8 @@
 .coursecontrol {
-  padding: 24px 85px 12px;
+  padding: 24px 0px 12px;
 }
 
-.coursecontrol__input-field {
+.coursecontrol__search-field {
   width: 360px;
   height: 48px;
   border-radius: 3px;
@@ -11,13 +11,11 @@
   background-image: url(../../../../../assets//ic-search.svg);
   background-repeat: no-repeat;
   background-position: 12px center;
-  padding-left: 42px;
+  padding: 0 0 0 42px;
 }
 
-.coursecontrol__input-field::placeholder {
-  font-family: "SourceSansPro";
+.coursecontrol__search-field::placeholder {
   font-size: 14px;
-  line-height: 1.71;
   letter-spacing: 0.22px;
   color: #c0c3ce;
 }
@@ -31,18 +29,19 @@
   height: 48px;
   border-radius: 3px;
   background-color: #9bc837;
-  font-family: "SourceSansPro";
   font-size: 18px;
   font-weight: 600;
   color: #ffffff;
+  border: none;
 }
 
-.coursecontrol__add-course-button-container {
-  text-align: right;
+.coursecontrol__add-button-container {
+  display: flex;
+  justify-content: flex-end;
   margin-top: 24px;
 }
 
-.coursecontrol__add-course-button {
+.coursecontrol__add-button {
   border-radius: 3px;
   background-color: #30b6dd;
   border: none;
@@ -52,24 +51,24 @@
   width: 138px;
   padding-left: 18px;
   padding-right: 24px;
-}
-
-.coursecontrol__add-course-button-content {
   display: flex;
+  justify-content: space-evenly;
 }
 
-.rectangle {
+.coursecontrol__add-button-plus {
   width: 2px;
   height: 16px;
+  border-radius: 1px;
+  background-color: #ffffff;
   transform: rotate(90deg);
-  border-radius: 1px;
-  background-color: #ffffff;
 }
 
-.rec {
+.coursecontrol__add-button-plus--horizontal {
   width: 2px;
   height: 16px;
-  transform: rotate(0deg);
   border-radius: 1px;
   background-color: #ffffff;
+  transform: rotate(180deg);
+  position: relative;
+  left: -8px;
 }

@@ -10,6 +10,7 @@ import { BreadcrumbsComponent } from './components/layout/breadcrumbs/breadcrumb
 import { CourseComponent } from './components/pages/courses/course/course.component';
 import { CourselistComponent } from './components/pages/courses/courselist/courselist.component';
 import { CoursescontrolComponent } from './components/pages/courses/coursescontrol/coursescontrol.component';
+import { DurationPipe } from './shared/pipes/duration.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CoursescontrolComponent } from './components/pages/courses/coursescontr
     BreadcrumbsComponent,
     CourseComponent,
     CourselistComponent,
-    CoursescontrolComponent
+    CoursescontrolComponent,
+    DurationPipe
   ],
   imports: [
     BrowserModule,
