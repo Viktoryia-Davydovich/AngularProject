@@ -4,8 +4,15 @@
       type="text"
       placeholder="type to search"
       class="coursecontrol__search-field"
+      [(ngModel)]="searchedCourse"
     />
-    <button type="button" class="coursecontrol__search-button">Search</button>
+    <button
+      type="button"
+      class="coursecontrol__search-button"
+      (click)="searchCourse()"
+    >
+      Search
+    </button>
   </div>
   <div class="coursecontrol__add-button-container">
     <button class="coursecontrol__add-button" type="button">

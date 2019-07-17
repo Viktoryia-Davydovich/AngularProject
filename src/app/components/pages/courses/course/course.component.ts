@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 
 import { Course } from "../../../../models/Course";
 
@@ -9,7 +9,13 @@ import { Course } from "../../../../models/Course";
 })
 export class CourseComponent implements OnInit {
   @Input() course: Course;
+  @Output() deleted = new EventEmitter<number>();
+
   constructor() {}
 
   ngOnInit() {}
+
+  delete(courseId: number) {
+    this.deleted.emit(courseId);
+  }
 }
