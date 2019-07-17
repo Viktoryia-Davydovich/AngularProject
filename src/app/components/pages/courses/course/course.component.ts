@@ -13,6 +13,11 @@ export class CourseComponent implements OnInit {
 
   constructor() {}
 
+  // 1st
+  ngOnChanges() {
+    console.log("1 - OnChanges hook from COURSE component");
+  }
+
   ngOnInit() {}
 
   delete(courseId: number) {

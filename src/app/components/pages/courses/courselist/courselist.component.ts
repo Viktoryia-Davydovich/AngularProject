@@ -12,7 +12,15 @@ export class CourselistComponent implements OnInit {
 
   constructor() {}
 
+  // 1st
+  ngOnChanges() {
+    console.log("1 - OnChanges hook");
+  }
+
+  //2nd
   ngOnInit() {
+    console.log("2 - OnInit hook");
+
     this.courses = [
       {
         id: 1,
@@ -39,6 +47,36 @@ export class CourselistComponent implements OnInit {
           "Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester."
       }
     ];
+  }
+
+  //3d
+  ngDoCheck() {
+    console.log("3 - DoCheck hook");
+  }
+
+  //4th
+  ngAfterContentInit() {
+    console.log("4 - AfterContentInit hook");
+  }
+
+  //5th
+  ngAfterContentChecked() {
+    console.log("5 - AfterContentChecked hook");
+  }
+
+  //6th
+  ngAfterViewInit() {
+    console.log("6 - AfterViewInit hook");
+  }
+
+  //7th
+  ngAfterViewChecked() {
+    console.log("7 - AfterViewChecked hook");
+  }
+
+  //8th
+  ngOnDestroy() {
+    console.log("8 - OnDestroy hook");
   }
 
   onDeleted = (deletedCourseId: number) => {

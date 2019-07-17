@@ -14,17 +14,18 @@
   cursor: pointer;
 }
 
-.header__log-buttons {
+.header__log-items {
   display: flex;
   text-decoration: none;
   font-size: 14px;
   color: #ffffff;
 }
 
-.header__log-buttons--icon-space {
+.header__log-items--icon-space {
   padding-left: 9px;
 }
 
-.header__log-buttons--items-space {
+.header__log-items--logoff {
   padding-left: 25px;
+  cursor: pointer;
 }
