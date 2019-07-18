@@ -1,9 +1,9 @@
 .footer {
   background-color: #414452;
-  padding: 20px 84px 20px;
+  padding: 1.25rem 5.25rem 1.25rem;
   color: #ffffff;
   text-align: right;
-  font-size: 14px;
-  line-height: 1.71;
+  font-size: 0.875rem;
+  line-height: 1.71rem;
   color: #c0c3ce;
 }

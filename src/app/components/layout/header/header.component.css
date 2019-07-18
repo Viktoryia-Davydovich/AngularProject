@@ -1,7 +1,7 @@
 .header {
   background-color: #414452;
-  padding-left: 85px;
-  padding-right: 39px;
+  padding-left: 5.3125rem;
+  padding-right: 2.4375rem;
   justify-content: space-between;
   align-items: center;
   display: flex;
@@ -9,23 +9,23 @@
 }
 
 .header__logo {
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   cursor: pointer;
 }
 
 .header__log-items {
   display: flex;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #ffffff;
 }
 
 .header__log-items--icon-space {
-  padding-left: 9px;
+  padding-left: 0.5625rem;
 }
 
 .header__log-items--logoff {
-  padding-left: 25px;
+  padding-left: 1.5625rem;
   cursor: pointer;
 }
