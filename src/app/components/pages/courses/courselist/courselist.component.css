@@ -1,10 +1,10 @@
-.coursesbackgroud {
+.courses-backgroud {
   background-color: #f2f3f7;
   padding-left: 5.3125rem;
   padding-right: 5.3125rem;
 }
 
-.loadmorebtn {
+.load-more-btn {
   width: 100%;
   margin-bottom: 4.9375rem;
   border-radius: 0.375rem;
@@ -20,6 +20,6 @@
   cursor: pointer;
 }
 
-.loadmorebtn::content {
+.load-more-btn::content {
   padding: 0.625rem;
 }

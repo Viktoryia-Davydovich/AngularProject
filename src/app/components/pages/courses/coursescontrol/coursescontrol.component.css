@@ -1,8 +1,8 @@
-.coursecontrol {
+.course-control {
   padding: 1.5rem 0 0.75rem;
 }
 
-.coursecontrol__search-field {
+.course-control__search-field {
   width: 22.5rem;
   height: 3rem;
   border-radius: 0.1875rem;
@@ -14,13 +14,13 @@
   padding: 0 0 0 2.625rem;
 }
 
-.coursecontrol__search-field::placeholder {
+.course-control__search-field::placeholder {
   font-size: 0.875rem;
   letter-spacing: 0.01375rem;
   color: #c0c3ce;
 }
 
-.coursecontrol__search-button {
+.course-control__search-button {
   border: none;
   cursor: pointer;
   background-color: transparent;
@@ -35,13 +35,13 @@
   border: none;
 }
 
-.coursecontrol__add-button-container {
+.course-control__add-button-container {
   display: flex;
   justify-content: flex-end;
   margin-top: 1.5rem;
 }
 
-.coursecontrol__add-button {
+.course-control__add-button {
   border-radius: 0.1875rem;
   background-color: #30b6dd;
   border: none;
@@ -55,7 +55,7 @@
   justify-content: space-evenly;
 }
 
-.coursecontrol__add-button-plus {
+.course-control__add-button-plus {
   width: 0.125rem;
   height: 1rem;
   border-radius: 0.0625rem;
@@ -63,7 +63,7 @@
   transform: rotate(90deg);
 }
 
-.coursecontrol__add-button-plus--horizontal {
+.course-control__add-button-plus--horizontal {
   width: 0.125rem;
   height: 1rem;
   border-radius: 0.0625rem;
