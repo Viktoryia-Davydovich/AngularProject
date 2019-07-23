@@ -22,7 +22,6 @@
 
 .course-control__search-button {
   border: none;
-  cursor: pointer;
   background-color: transparent;
   margin-left: 6px;
   width: 6.25rem;
@@ -45,7 +44,6 @@
   border-radius: 3px;
   background-color: #30b6dd;
   border: none;
-  cursor: pointer;
   color: white;
   height: 2.25rem;
   width: 138px;
