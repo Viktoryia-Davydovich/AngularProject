@@ -5,18 +5,18 @@
 .course-control__search-field {
   width: 22.5rem;
   height: 3rem;
-  border-radius: 0.1875rem;
-  border: solid 0.0625rem #d9dbe3;
+  border-radius: 3px;
+  border: solid 1px #d9dbe3;
   background-color: #ffffff;
   background-image: url(../../../../../assets//ic-search.svg);
   background-repeat: no-repeat;
   background-position: 0.75rem center;
-  padding: 0 0 0 2.625rem;
+  padding: 0 0 0 42px;
 }
 
 .course-control__search-field::placeholder {
   font-size: 0.875rem;
-  letter-spacing: 0.01375rem;
+  letter-spacing: 0.22px;
   color: #c0c3ce;
 }
 
@@ -24,10 +24,10 @@
   border: none;
   cursor: pointer;
   background-color: transparent;
-  margin-left: 0.375rem;
+  margin-left: 6px;
   width: 6.25rem;
   height: 3rem;
-  border-radius: 0.1875rem;
+  border-radius: 3px;
   background-color: #9bc837;
   font-size: 1.125rem;
   font-weight: 600;
@@ -42,13 +42,13 @@
 }
 
 .course-control__add-button {
-  border-radius: 0.1875rem;
+  border-radius: 3px;
   background-color: #30b6dd;
   border: none;
   cursor: pointer;
   color: white;
   height: 2.25rem;
-  width: 8.652rem;
+  width: 138px;
   padding-left: 1.125rem;
   padding-right: 1.5rem;
   display: flex;
@@ -58,7 +58,7 @@
 .course-control__add-button-plus {
   width: 0.125rem;
   height: 1rem;
-  border-radius: 0.0625rem;
+  border-radius: 1px;
   background-color: #ffffff;
   transform: rotate(90deg);
 }
@@ -66,7 +66,7 @@
 .course-control__add-button-plus--horizontal {
   width: 0.125rem;
   height: 1rem;
-  border-radius: 0.0625rem;
+  border-radius: 1px;
   background-color: #ffffff;
   transform: rotate(180deg);
   position: relative;

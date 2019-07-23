@@ -1,8 +1,7 @@
 .breadcrumbs {
-  padding: 1.25rem 5.3125rem;
+  padding: 1.25rem 85px;
   font-size: 0.875rem;
   font-weight: 600;
-  line-height: 1.71;
   cursor: pointer;
   background-color: white;
 }
