@@ -1,7 +1,6 @@
-.courses-backgroud {
-  background-color: #f2f3f7;
-  padding-left: 5.3125rem;
-  padding-right: 5.3125rem;
+.courses-list {
+  padding-left: 85px;
+  padding-right: 85px;
 }
 
 .load-more-btn {

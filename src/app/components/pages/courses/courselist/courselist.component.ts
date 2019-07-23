@@ -10,11 +10,13 @@ import { Course } from "../../../../models/Course";
 export class CourselistComponent implements OnInit {
   courses: Course[];
 
-  constructor() {}
+  constructor() {
+    console.log("that's constructor");
+  }
 
   // 1st
   ngOnChanges() {
-    console.log("1 - OnChanges hook");
+    console.log("1 - OnChanges hook FROM LIST");
   }
 
   //2nd
