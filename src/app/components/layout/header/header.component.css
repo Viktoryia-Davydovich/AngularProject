@@ -16,6 +16,7 @@
 
 .header__log-items {
   display: flex;
+  align-items: center;
   text-decoration: none;
   font-size: 0.875rem;
   color: #ffffff;
@@ -28,4 +29,20 @@
 .header__log-items--logoff {
   padding-left: 25px;
   cursor: pointer;
+}
+
+.icon {
+  display: block;
+}
+
+.user-icon {
+  background: url("../../../../assets/ic-user.svg");
+  height: 12px;
+  width: 10px;
+}
+
+.exit-icon {
+  background: url("../../../../assets/ic-exit.svg");
+  height: 12px;
+  width: 16px;
 }
