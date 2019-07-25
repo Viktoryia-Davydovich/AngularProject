@@ -2,6 +2,16 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
+/*Font awesome*/
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faCalendarAlt,
+  faPencilAlt,
+  faTrash
+} from "@fortawesome/free-solid-svg-icons";
+import { faClock } from "@fortawesome/free-regular-svg-icons";
+
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { LogoComponent } from "./components/logo/logo.component";
@@ -25,8 +35,12 @@ import { DurationPipe } from "./shared/pipes/duration.pipe";
     CoursescontrolComponent,
     DurationPipe
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, FontAwesomeModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    library.add(faCalendarAlt, faPencilAlt, faTrash, faClock);
+  }
+}
