@@ -1,5 +1,10 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { NO_ERRORS_SCHEMA, DebugElement, Component } from "@angular/core";
+import {
+  NO_ERRORS_SCHEMA,
+  DebugElement,
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA
+} from "@angular/core";
 
 import { CourseComponent } from "./course.component";
 import { DurationPipe } from "src/app/shared/pipes/duration.pipe";
@@ -37,7 +42,7 @@ describe("CourseComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [CourseComponent, TestHostComponent, DurationPipe],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
   }));
 
