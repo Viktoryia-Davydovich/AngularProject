@@ -1,9 +1,12 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { NO_ERRORS_SCHEMA, DebugElement, Component } from "@angular/core";
 
 import { CourseComponent } from "./course.component";
-import { NO_ERRORS_SCHEMA, DebugElement, Component } from "@angular/core";
 import { DurationPipe } from "src/app/shared/pipes/duration.pipe";
 import { Course } from "src/app/models/Course";
+import { click } from "../../../../shared/testingHelpers/clickHelper";
+
+/******************** CREATING HOST COMPONENT ********************/
 
 @Component({
   template: `
@@ -23,11 +26,13 @@ class TestHostComponent {
     this.deleted = course;
   }
 }
+/************************************************************** */
 
 describe("CourseComponent", () => {
   let fixture: ComponentFixture<TestHostComponent>;
   let testHost: TestHostComponent;
   let courseEl: any;
+  let courseElDelBtn: any;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -40,11 +45,22 @@ describe("CourseComponent", () => {
     fixture = TestBed.createComponent(TestHostComponent);
     testHost = fixture.componentInstance;
     courseEl = fixture.nativeElement.querySelector(".card");
+    courseElDelBtn = fixture.nativeElement.querySelector(".card__button--del");
 
     fixture.detectChanges();
   });
 
   it("should create", () => {
     expect(testHost.course).toBeTruthy();
+  });
+
+  it("should display course title", () => {
+    const expectedCourseTitle = testHost.course.title;
+    expect(courseEl.textContent).toContain(expectedCourseTitle);
+  });
+
+  it("should raise selected event when clicked", () => {
+    click(courseElDelBtn);
+    expect(console.log);
   });
 });
