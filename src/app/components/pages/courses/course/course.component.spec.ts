@@ -30,7 +30,9 @@ describe("CourseComponent", () => {
     component = fixture.componentInstance;
     component.course = testCourse;
 
-    courseEl = fixture.debugElement.nativeElement;
+    courseEl = fixture.debugElement.nativeElement.querySelector(
+      "card__button--del"
+    );
 
     fixture.detectChanges();
   });
