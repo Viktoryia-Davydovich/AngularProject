@@ -5,47 +5,46 @@ import { NO_ERRORS_SCHEMA, DebugElement, Component } from "@angular/core";
 import { DurationPipe } from "src/app/shared/pipes/duration.pipe";
 import { Course } from "src/app/models/Course";
 
-describe("CourseComponent", () => {
-  let component: CourseComponent;
-  let fixture: ComponentFixture<CourseComponent>;
-  let courseEl: any;
-
-  const testCourse: Course = {
-    id: 100,
-    title: "Title",
+@Component({
+  template: `
+    <app-course [course]="course" (deleted)="onDeleted($event)"></app-course>
+  `
+})
+class TestHostComponent {
+  course: Course = {
+    id: 1,
+    title: "TEST TITLE",
     creationDate: new Date(2000, 1, 1),
-    duration: 100,
-    description: "Description"
+    duration: 1,
+    description: "TEST DESCR"
   };
+  deleted: Course;
+  onDeleted(course: Course) {
+    this.deleted = course;
+  }
+}
+
+describe("CourseComponent", () => {
+  let fixture: ComponentFixture<TestHostComponent>;
+  let testHost: TestHostComponent;
+  let courseEl: any;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CourseComponent, DurationPipe],
+      declarations: [CourseComponent, TestHostComponent, DurationPipe],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CourseComponent);
-    component = fixture.componentInstance;
-    component.course = testCourse;
-
-    courseEl = fixture.debugElement.nativeElement.querySelector(
-      "card__button--del"
-    );
+    fixture = TestBed.createComponent(TestHostComponent);
+    testHost = fixture.componentInstance;
+    courseEl = fixture.nativeElement.querySelector(".card");
 
     fixture.detectChanges();
   });
 
   it("should create", () => {
-    expect(component.course).toBeTruthy();
-  });
-
-  it("should raise selected event when clicked (element.click)", () => {
-    let selectedCourse: Course;
-    component.deleted.subscribe((course: Course) => (selectedCourse = course));
-
-    courseEl.click();
-    expect(selectedCourse).toEqual(testCourse);
+    expect(testHost.course).toBeTruthy();
   });
 });
