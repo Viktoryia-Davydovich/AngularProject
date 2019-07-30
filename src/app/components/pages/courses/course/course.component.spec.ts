@@ -9,7 +9,7 @@ import {
 import { CourseComponent } from "./course.component";
 import { DurationPipe } from "src/app/shared/pipes/duration.pipe";
 import { Course } from "src/app/models/Course";
-import { click } from "../../../../shared/testingHelpers/clickHelper";
+import { click } from "src/app/shared/testingHelpers/clickHelper";
 
 /******************** CREATING HOST COMPONENT ********************/
 
