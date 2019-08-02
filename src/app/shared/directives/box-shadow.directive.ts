@@ -4,17 +4,18 @@ import { Directive, Input, ElementRef } from "@angular/core";
   selector: "[appBoxShadow]"
 })
 export class BoxShadowDirective {
-  @Input() courseDate: Date;
+  @Input("appBoxShadow") creationDate: Date;
 
   constructor(private el: ElementRef) {
+    console.log(this.creationDate + " DTAE");
     const today: Date = new Date();
     if (
-      this.courseDate < today &&
-      this.courseDate >= new Date(today.setDate(today.getDate() - 14))
+      this.creationDate < today &&
+      this.creationDate >= new Date(today.setDate(today.getDate() - 14))
     ) {
-      el.nativeElement.style.color = "green";
-    } else if (this.courseDate > today) {
-      el.nativeElement.style.color = "blue";
+      el.nativeElement.style.boxShadow = "0 1px 24px 0 green";
+    } else if (this.creationDate > today) {
+      el.nativeElement.style.boxShadow = "0 1px 24px 0 blue";
     }
   }
 }
