@@ -8,7 +8,8 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faCalendarAlt,
   faPencilAlt,
-  faTrash
+  faTrash,
+  faStar
 } from "@fortawesome/free-solid-svg-icons";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 
@@ -22,7 +23,7 @@ import { CourseComponent } from "./components/pages/courses/course/course.compon
 import { CourselistComponent } from "./components/pages/courses/courselist/courselist.component";
 import { CoursescontrolComponent } from "./components/pages/courses/coursescontrol/coursescontrol.component";
 import { DurationPipe } from "./shared/pipes/duration.pipe";
-import { BoxShadowDirective } from './shared/directives/box-shadow.directive';
+import { BoxShadowDirective } from "./shared/directives/box-shadow.directive";
 
 @NgModule({
   declarations: [
@@ -43,6 +44,6 @@ import { BoxShadowDirective } from './shared/directives/box-shadow.directive';
 })
 export class AppModule {
   constructor() {
-    library.add(faCalendarAlt, faPencilAlt, faTrash, faClock);
+    library.add(faCalendarAlt, faPencilAlt, faTrash, faClock, faStar);
   }
 }

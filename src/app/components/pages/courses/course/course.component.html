@@ -1,6 +1,17 @@
-<div class="card" [appBoxShadow]="course.creationDate">
+<div
+  class="card"
+  [appBoxShadow]="course.creationDate"
+  [ngClass]="{ 'card-background': course.topRated }"
+>
   <div class="card__row">
-    <div class="card__title">{{ course.title }}</div>
+    <div class="card__title">
+      {{ course.title }}
+      <fa-icon
+        *ngIf="course.topRated"
+        [icon]="['fas', 'star']"
+        class="font-icon-padding"
+      ></fa-icon>
+    </div>
     <div class="card__row card__time-info">
       <div>
         <fa-icon [icon]="['far', 'clock']" class="font-icon-padding"></fa-icon>

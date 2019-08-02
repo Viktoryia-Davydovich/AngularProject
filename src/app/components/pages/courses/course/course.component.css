@@ -50,3 +50,7 @@
 .card__button--del {
   margin-left: 12px;
 }
+
+.card-background {
+  background-color: rgb(245, 242, 233);
+}
