@@ -24,6 +24,7 @@ import { CourselistComponent } from "./components/pages/courses/courselist/cours
 import { CoursescontrolComponent } from "./components/pages/courses/coursescontrol/coursescontrol.component";
 import { DurationPipe } from "./shared/pipes/duration.pipe";
 import { BoxShadowDirective } from "./shared/directives/box-shadow.directive";
+import { FilterPipe } from './shared/pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { BoxShadowDirective } from "./shared/directives/box-shadow.directive";
     CourselistComponent,
     CoursescontrolComponent,
     DurationPipe,
-    BoxShadowDirective
+    BoxShadowDirective,
+    FilterPipe
   ],
   imports: [BrowserModule, FontAwesomeModule, AppRoutingModule, FormsModule],
   providers: [],

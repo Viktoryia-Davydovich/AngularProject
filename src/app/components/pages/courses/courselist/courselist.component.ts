@@ -1,6 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 
 import { Course } from "../../../../models/Course";
+import { CoursescontrolComponent } from "../coursescontrol/coursescontrol.component";
 
 @Component({
   selector: "app-courselist",
@@ -37,7 +38,7 @@ export class CourselistComponent implements OnInit {
       },
       {
         id: 2,
-        title: "Video Course 1. Name tag",
+        title: "Video Course 2. Name tag",
         creationDate: new Date(2019, 8, 31),
         duration: 88,
         topRated: true,
@@ -46,7 +47,7 @@ export class CourselistComponent implements OnInit {
       },
       {
         id: 3,
-        title: "Video Course 1. Name tag",
+        title: "Video Course 3. Name tag",
         creationDate: new Date(2018, 10, 9),
         duration: 88,
         topRated: false,

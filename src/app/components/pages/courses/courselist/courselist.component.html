@@ -1,7 +1,7 @@
 <div class="courses-list">
-  <app-coursescontrol></app-coursescontrol>
+  <app-coursescontrol #control></app-coursescontrol>
   <app-course
-    *ngFor="let course of courses"
+    *ngFor="let course of courses | filter: control.searchedCourse"
     [course]="course"
     (deleted)="onDeleted($event)"
   ></app-course>
