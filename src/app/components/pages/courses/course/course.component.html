@@ -5,7 +5,7 @@
 >
   <div class="card__row">
     <div class="card__title">
-      {{ course.title }}
+      {{ course.title | uppercase }}
       <fa-icon
         *ngIf="course.topRated"
         [icon]="['fas', 'star']"
