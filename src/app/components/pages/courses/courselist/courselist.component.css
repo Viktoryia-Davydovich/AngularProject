@@ -21,3 +21,8 @@
 .load-more-btn::content {
   padding: 10px;
 }
+
+.course-no-data-msg {
+  padding: 50px 0 50px 0;
+  text-align: center;
+}

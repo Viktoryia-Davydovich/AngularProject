@@ -23,6 +23,8 @@ export class CourselistComponent implements OnInit {
   ngOnInit() {
     console.log("2 - OnInit hook");
 
+    /* COMMENT ASSIGMENT OUT TO SEE NG IF WORKING */
+
     this.courses = [
       {
         id: 1,
