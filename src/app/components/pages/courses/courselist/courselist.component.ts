@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 
 import { Course } from "../../../../models/Course";
-import { CoursescontrolComponent } from "../coursescontrol/coursescontrol.component";
+import { FilterPipe } from "src/app/shared/pipes/filter.pipe";
 
 @Component({
   selector: "app-courselist",
@@ -10,6 +10,7 @@ import { CoursescontrolComponent } from "../coursescontrol/coursescontrol.compon
 })
 export class CourselistComponent implements OnInit {
   courses: Course[];
+  searchedCourse: string;
 
   constructor() {
     console.log("that's constructor");
@@ -55,6 +56,12 @@ export class CourselistComponent implements OnInit {
           "Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester."
       }
     ];
+  }
+
+  onSearchCourse(text: string) {
+    const filterPipe = new FilterPipe();
+    this.searchedCourse = text;
+    this.courses = filterPipe.transform(this.courses, this.searchedCourse);
   }
 
   //3d
