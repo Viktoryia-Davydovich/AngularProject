@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 
 import { Course } from "../../../../models/Course";
 import { FilterPipe } from "src/app/shared/pipes/filter.pipe";
+import { CourseServiceService } from "src/app/shared/services/course-service.service";
 
 @Component({
   selector: "app-courselist",
@@ -12,7 +13,7 @@ export class CourselistComponent implements OnInit {
   courses: Course[];
   searchedCourse: string;
 
-  constructor() {
+  constructor(private courseService: CourseServiceService) {
     console.log("that's constructor");
   }
 
@@ -24,38 +25,7 @@ export class CourselistComponent implements OnInit {
   //2nd
   ngOnInit() {
     console.log("2 - OnInit hook");
-
-    /* COMMENT ASSIGMENT OUT TO SEE NG IF WORKING */
-
-    this.courses = [
-      {
-        id: 1,
-        title: "Video Course 1. Name tag",
-        creationDate: new Date(2019, 7, 1),
-        duration: 88,
-        topRated: true,
-        description:
-          "Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester."
-      },
-      {
-        id: 2,
-        title: "Video Course 2. Name tag",
-        creationDate: new Date(2019, 8, 31),
-        duration: 88,
-        topRated: true,
-        description:
-          "Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester."
-      },
-      {
-        id: 3,
-        title: "Video Course 3. Name tag",
-        creationDate: new Date(2018, 10, 9),
-        duration: 88,
-        topRated: false,
-        description:
-          "Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester."
-      }
-    ];
+    this.courses = this.courseService.getCourseList();
   }
 
   onSearchCourse(text: string) {
@@ -96,6 +66,10 @@ export class CourselistComponent implements OnInit {
 
   onDeleted = (deletedCourseId: number) => {
     console.log(`You have deleted course number ${deletedCourseId}`);
+    let c = confirm("Are you sure you want to delete this item?");
+    if (c) {
+      this.courses = this.courseService.deleteCourse(deletedCourseId);
+    }
   };
 
   loadmore = () => console.log("Loading more...");
