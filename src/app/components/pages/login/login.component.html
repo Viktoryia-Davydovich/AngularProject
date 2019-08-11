@@ -5,6 +5,8 @@
       <div class="form-group">
         <label class="login-label">E-mail</label>
         <input
+          name="login"
+          [(ngModel)]="login"
           type="text"
           class="form-control login-input-field"
           placeholder="Enter e-mail"
@@ -14,6 +16,8 @@
       <div class="form-group">
         <label class="login-label">Password:</label>
         <input
+          name="password"
+          [(ngModel)]="password"
           type="password"
           class="form-control login-input-field"
           placeholder="Enter password"
@@ -25,7 +29,12 @@
           <a href="#" class="login-forgor-pass">Forgot Password?</a>
         </div>
         <div>
-          <input type="submit" class="login-submit-btn" value="Login" />
+          <input
+            type="submit"
+            class="login-submit-btn"
+            value="Login"
+            (click)="onLogin()"
+          />
         </div>
       </div>
     </form>

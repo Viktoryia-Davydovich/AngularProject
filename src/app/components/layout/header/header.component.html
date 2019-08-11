@@ -1,15 +1,20 @@
 <div class="header">
   <app-logo class="header__logo"></app-logo>
-  <div class="header__log-items">
+  <div *ngIf="isLoggedIn" class="header__log-items">
     <div class="header__log-items">
       <i class="icon user-icon"></i>
       <p class="header__log-items--icon-space">
         User login
       </p>
     </div>
-    <a class="header__log-items header__log-items--logoff">
+    <a class="header__log-items header__log-items--logoff" (click)="onLogOff()">
       <i class="icon exit-icon"></i>
       <p class="header__log-items--icon-space">Log off</p>
+    </a>
+  </div>
+  <div *ngIf="!isLoggedIn" class="header__log-items">
+    <a class="header__log-items header__log-items--logoff" routerLink="/login">
+      <p class="header__log-items--icon-space">Log in</p>
     </a>
   </div>
 </div>
