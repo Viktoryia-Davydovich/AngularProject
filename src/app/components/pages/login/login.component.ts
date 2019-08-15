@@ -15,9 +15,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   onLogin() {
-    this.loginService.Login(this.login, this.password);
-    if (this.loginService.IsAuthenticated()) {
-      let user = JSON.parse(this.loginService.GetUserInfo());
+    this.loginService.login(this.login, this.password);
+    if (this.loginService.isAuthenticated()) {
+      let user = JSON.parse(this.loginService.getUserInfo());
       console.log(`${user.user} IS LOGGED IN`);
     }
   }

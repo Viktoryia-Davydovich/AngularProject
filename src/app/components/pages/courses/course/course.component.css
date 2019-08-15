@@ -54,3 +54,13 @@
 .card-background {
   background-color: rgb(247, 246, 242);
 }
+
+.star-icon-background-not-top {
+  color: rgb(219, 219, 219);
+  padding-right: 8px;
+  padding-left: 16px;
+}
+
+.star-icon-background {
+  color: #ffcc00;
+}

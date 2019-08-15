@@ -6,27 +6,27 @@ import { Injectable } from "@angular/core";
 export class AuthService {
   constructor() {}
 
-  Login(username, password) {
+  login(username: string, password: string) {
     const user = {
       user: username,
       password: password,
       token: "fake-token"
     };
-    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("user", JSON.stringify(user.token));
   }
 
-  Logout() {
+  logout() {
     localStorage.removeItem("user");
   }
 
-  IsAuthenticated() {
+  isAuthenticated() {
     if (localStorage.getItem("user")) {
       return true;
     }
     return false;
   }
 
-  GetUserInfo() {
+  getUserInfo() {
     const user = localStorage.getItem("user");
     return user;
   }

@@ -14,12 +14,12 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {}
 
   ngAfterContentChecked() {
-    this.isLoggedIn = this.loginService.IsAuthenticated();
+    this.isLoggedIn = this.loginService.isAuthenticated();
   }
 
   onLogOff() {
-    if (this.loginService.IsAuthenticated()) {
-      this.loginService.Logout();
+    if (this.loginService.isAuthenticated()) {
+      this.loginService.logout();
       console.log("LOGGED OUT");
     }
   }

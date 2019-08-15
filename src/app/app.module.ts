@@ -27,6 +27,7 @@ import { BoxShadowDirective } from "./shared/directives/box-shadow.directive";
 import { FilterPipe } from './shared/pipes/filter.pipe';
 import { LoginComponent } from './components/pages/login/login.component';
 import { AddCourseComponent } from './components/pages/courses/add-course/add-course.component';
+import { OrderByDatePipe } from './shared/pipes/order-by-date.pipe';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { AddCourseComponent } from './components/pages/courses/add-course/add-co
     BoxShadowDirective,
     FilterPipe,
     LoginComponent,
-    AddCourseComponent
+    AddCourseComponent,
+    OrderByDatePipe
   ],
   imports: [BrowserModule, FontAwesomeModule, AppRoutingModule, FormsModule],
   providers: [],

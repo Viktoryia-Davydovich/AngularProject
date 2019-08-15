@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 
 import { Course } from "../../../../models/Course";
 import { FilterPipe } from "src/app/shared/pipes/filter.pipe";
+import { OrderByDatePipe } from "src/app/shared/pipes/order-by-date.pipe";
 import { CourseServiceService } from "src/app/shared/services/course-service.service";
 
 @Component({
@@ -11,6 +12,7 @@ import { CourseServiceService } from "src/app/shared/services/course-service.ser
 })
 export class CourselistComponent implements OnInit {
   courses: Course[];
+  filteredCourses: Course[];
   searchedCourse: string;
 
   constructor(private courseService: CourseServiceService) {
@@ -26,12 +28,23 @@ export class CourselistComponent implements OnInit {
   ngOnInit() {
     console.log("2 - OnInit hook");
     this.courses = this.courseService.getCourseList();
+    this.filterByDate();
+    console.log(this.courses);
+  }
+
+  filterByDate() {
+    const orderByPipe = new OrderByDatePipe();
+    this.courses = orderByPipe.transform(this.courses);
+    console.log("ORDERED");
   }
 
   onSearchCourse(text: string) {
     const filterPipe = new FilterPipe();
     this.searchedCourse = text;
-    this.courses = filterPipe.transform(this.courses, this.searchedCourse);
+    this.filteredCourses = filterPipe.transform(
+      this.courses,
+      this.searchedCourse
+    );
   }
 
   //3d
@@ -67,7 +80,7 @@ export class CourselistComponent implements OnInit {
   onDeleted = (deletedCourseId: number) => {
     console.log(`You have deleted course number ${deletedCourseId}`);
     let c = confirm("Are you sure you want to delete this item?");
-    if (c) {
+    if (c === true) {
       this.courses = this.courseService.deleteCourse(deletedCourseId);
     }
   };

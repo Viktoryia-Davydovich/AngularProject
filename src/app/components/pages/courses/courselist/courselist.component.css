@@ -25,4 +25,6 @@
 .course-no-data-msg {
   padding: 50px 0 50px 0;
   text-align: center;
+  color: #525462;
+  font-size: 14px;
 }

@@ -42,20 +42,7 @@ export class CourseServiceService {
   }
 
   getCourseById(courseId: number) {
-    const courses = this.getCourseList();
-    for (var i = 0; i < courses.length; i++) {
-      if (courses[i].id === courseId) {
-        return courses[i];
-      }
-    }
-  }
-
-  getLastId(courses: Course[]) {
-    let ids: number[];
-    for (var i = 0; i < courses.length; i++) {
-      ids.push(courses[i].id);
-    }
-    return Math.max.apply(Math, ids);
+    return this.courses.find(c => c.id === courseId);
   }
 
   createCourse(
@@ -64,11 +51,10 @@ export class CourseServiceService {
     topRated: boolean,
     description: string
   ) {
-    let courses = this.getCourseList();
-    let id = this.getLastId(courses);
+    let courses = this.courses;
 
     const newCourse = {
-      id: id + 1,
+      id: courses.length - 1,
       title: title,
       duration: duration,
       topRated: topRated,
