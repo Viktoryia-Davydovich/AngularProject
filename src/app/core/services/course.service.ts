@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Course } from "src/app/models/Course";
+import { Course, NewCourse, UpdatedCourse } from "src/app/models/course";
 
 @Injectable({
   providedIn: "root"
@@ -37,58 +37,38 @@ export class CourseServiceService {
 
   constructor() {}
 
-  getCourseList() {
+  getCourseList(): Course[] {
     return this.courses;
   }
 
-  getCourseById(courseId: number) {
+  getCourseById(courseId: number): Course {
     return this.courses.find(c => c.id === courseId);
   }
 
-  createCourse(
-    title: string,
-    duration: number,
-    topRated: boolean,
-    description: string
-  ) {
-    let courses = this.courses;
-
+  createCourse(addedCourse: NewCourse) {
     const newCourse = {
-      id: courses.length - 1,
-      title: title,
-      duration: duration,
-      topRated: topRated,
+      id: this.courses.length,
+      title: addedCourse.title,
+      duration: addedCourse.duration,
+      topRated: addedCourse.topRated,
       creationDate: new Date(),
-      description: description
+      description: addedCourse.description
     };
-    courses.push(newCourse);
+    this.courses.push(newCourse);
   }
 
-  deleteCourse(courseId: number) {
-    let courses = this.getCourseList();
-    for (var i = 0; i < courses.length; i++) {
-      if (courses[i].id === courseId) {
-        courses.splice(i, 1);
-      }
-    }
-    return courses;
+  deleteCourse(courseId: number): void {
+    this.courses.splice(
+      this.courses.indexOf(this.courses.find(c => c.id === courseId)),
+      1
+    );
   }
 
-  updateCourse(
-    courseId: number,
-    title?: string,
-    duration?: number,
-    topRated?: boolean,
-    description?: string
-  ) {
-    let courses = this.getCourseList();
-    for (var i = 0; i < courses.length; i++) {
-      if (courses[i].id === courseId) {
-        courses[i].description = description;
-        courses[i].title = title;
-        courses[i].duration = duration;
-        courses[i].topRated = topRated;
-      }
-    }
+  updateCourse(updatedCourse: UpdatedCourse) {
+    let updCourse = this.courses.find(c => c.id === updatedCourse.id);
+    updCourse.title = updatedCourse.title;
+    updCourse.description = updatedCourse.description;
+    updCourse.topRated = updatedCourse.topRated;
+    updCourse.duration = updatedCourse.duration;
   }
 }

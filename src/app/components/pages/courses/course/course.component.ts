@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 
-import { Course } from "../../../../models/Course";
+import { Course } from "../../../../models/course";
 import { ChangeDetectionStrategy } from "@angular/compiler/src/core";
 
 @Component({

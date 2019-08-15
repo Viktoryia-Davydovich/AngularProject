@@ -14,3 +14,18 @@ export class Course implements ICourse {
   topRated: boolean;
   description?: string;
 }
+
+export class UpdatedCourse {
+  id: number;
+  title?: string;
+  duration?: number;
+  topRated?: boolean;
+  description?: string;
+}
+
+export class NewCourse {
+  title: string;
+  duration: number;
+  topRated: boolean;
+  description?: string;
+}

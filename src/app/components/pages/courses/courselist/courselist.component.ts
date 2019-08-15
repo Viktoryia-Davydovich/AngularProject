@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 
-import { Course } from "../../../../models/Course";
+import { Course } from "src/app/models/Course";
 import { FilterPipe } from "src/app/shared/pipes/filter.pipe";
 import { OrderByDatePipe } from "src/app/shared/pipes/order-by-date.pipe";
-import { CourseServiceService } from "src/app/shared/services/course-service.service";
+import { CourseServiceService } from "src/app/core/services/course.service";
 
 @Component({
   selector: "app-courselist",
@@ -81,7 +81,7 @@ export class CourselistComponent implements OnInit {
     console.log(`You have deleted course number ${deletedCourseId}`);
     let c = confirm("Are you sure you want to delete this item?");
     if (c === true) {
-      this.courses = this.courseService.deleteCourse(deletedCourseId);
+      this.courseService.deleteCourse(deletedCourseId);
     }
   };
 
