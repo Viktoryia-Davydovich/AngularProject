@@ -1,13 +1,17 @@
+<app-breadcrumbs></app-breadcrumbs>
 <div class="courses-list">
   <app-coursescontrol
     (searchText)="onSearchCourse($event)"
   ></app-coursescontrol>
   <app-course
-    *ngFor="let course of courses"
+    *ngFor="let course of searchedCourse ? filteredCourses : courses"
     [course]="course"
     (deleted)="onDeleted($event)"
   ></app-course>
-  <div *ngIf="!courses" class="course-no-data-msg">
+  <div
+    *ngIf="searchedCourse && filteredCourses.length === 0"
+    class="course-no-data-msg"
+  >
     No data. Feel free to add new course
   </div>
   <button type="button" class="load-more-btn" (click)="loadmore()">

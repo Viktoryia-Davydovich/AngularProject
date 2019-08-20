@@ -7,9 +7,9 @@
     <div class="card__title">
       {{ course.title | uppercase }}
       <fa-icon
-        *ngIf="course.topRated"
         [icon]="['fas', 'star']"
-        class="font-icon-padding"
+        class="star-icon-background-not-top"
+        [ngClass]="{ 'star-icon-background': course.topRated }"
       ></fa-icon>
     </div>
     <div class="card__row card__time-info">
