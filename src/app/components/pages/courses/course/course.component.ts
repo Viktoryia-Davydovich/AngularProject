@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 
 import { Course } from "../../../../models/course";
-import { ChangeDetectionStrategy } from "@angular/compiler/src/core";
+import { ChangeDetectionStrategy } from "@angular/core";
 
 @Component({
   selector: "app-course",
