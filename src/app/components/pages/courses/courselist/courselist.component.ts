@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { Course } from "src/app/models/Course";
 import { FilterPipe } from "src/app/shared/pipes/filter.pipe";
 import { OrderByDatePipe } from "src/app/shared/pipes/order-by-date.pipe";
-import { CourseServiceService } from "src/app/core/services/course.service";
+import { CourseService } from "src/app/core/services/course.service";
 
 @Component({
   selector: "app-courselist",
@@ -15,7 +15,7 @@ export class CourselistComponent implements OnInit {
   filteredCourses: Course[];
   searchedCourse: string;
 
-  constructor(private courseService: CourseServiceService) {
+  constructor(private courseService: CourseService) {
     console.log("that's constructor");
   }
 

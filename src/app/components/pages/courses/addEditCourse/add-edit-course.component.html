@@ -10,7 +10,7 @@
         type="text"
         class="form-control"
         placeholder="Text Input"
-        value=""
+        [value]="editedCourse.title"
       />
     </div>
     <div class="form-group form-control--long">
@@ -18,21 +18,26 @@
         <p class="input-label">Description:</p>
         <p class="input-label-required">*required</p>
       </div>
-      <input
+      <textarea
         type="text"
-        class="form-control form-control--description"
+        class="form-control form-control--description description-input"
         placeholder="Add description"
-        value=""
-      />
+        [value]="editedCourse.description"
+      ></textarea>
     </div>
     <div class="form-group form-control--short">
       <div class="label-group">
         <p class="input-label">Duration:</p>
         <p class="input-label-required">*required</p>
       </div>
-      <input type="text" class="form-control " placeholder="Minutes" value="" />
+      <input
+        type="text"
+        class="form-control "
+        placeholder="Minutes"
+        [value]="editedCourse.duration | duration"
+      />
     </div>
-    <div class="form-group form-control--short">
+    <div class="form-group form-control--short" *ngIf="!editedCourse">
       <div class="label-group">
         <p class="input-label">Date:</p>
         <p class="input-label-required">*required</p>
@@ -66,6 +71,7 @@
         type="submit"
         class="add-course-button add-course__save-btn"
         value="Save"
+        (click)="updateCourse()"
       />
     </div>
   </form>

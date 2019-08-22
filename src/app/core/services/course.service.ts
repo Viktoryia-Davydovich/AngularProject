@@ -4,7 +4,7 @@ import { Course, NewCourse, UpdatedCourse } from "src/app/models/course";
 @Injectable({
   providedIn: "root"
 })
-export class CourseServiceService {
+export class CourseService {
   courses: Course[] = [
     {
       id: 1,
@@ -50,7 +50,7 @@ export class CourseServiceService {
       id: this.courses.length,
       title: addedCourse.title,
       duration: addedCourse.duration,
-      topRated: addedCourse.topRated,
+      authors: addedCourse.authors,
       creationDate: new Date(),
       description: addedCourse.description
     };
@@ -68,7 +68,7 @@ export class CourseServiceService {
     let updCourse = this.courses.find(c => c.id === updatedCourse.id);
     updCourse.title = updatedCourse.title;
     updCourse.description = updatedCourse.description;
-    updCourse.topRated = updatedCourse.topRated;
     updCourse.duration = updatedCourse.duration;
+    updCourse.authors = updatedCourse.authors;
   }
 }

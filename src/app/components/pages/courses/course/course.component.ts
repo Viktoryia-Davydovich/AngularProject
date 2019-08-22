@@ -25,4 +25,5 @@ export class CourseComponent implements OnInit {
   delete(courseId: number) {
     this.deleted.emit(courseId);
   }
+
 }
