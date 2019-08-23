@@ -1,5 +1,6 @@
 <div class="add-course-form">
-  <h3 class="add-course-heading">New course</h3>
+  <h3 class="add-course-heading" *ngIf="editedCourse">Edit course</h3>
+  <h3 class="add-course-heading" *ngIf="!editedCourse">New course</h3>
   <form>
     <div class="form-group form-control--long">
       <div class="label-group">
@@ -10,7 +11,8 @@
         type="text"
         class="form-control"
         placeholder="Text Input"
-        [value]="editedCourse.title"
+        [(ngModel)]="editedCourse? editedCourse.title : addedCourse.title"
+        name="title"
       />
     </div>
     <div class="form-group form-control--long">
@@ -22,7 +24,8 @@
         type="text"
         class="form-control form-control--description description-input"
         placeholder="Add description"
-        [value]="editedCourse.description"
+        [(ngModel)]="editedCourse? editedCourse.description : addedCourse.description"
+        name="description"
       ></textarea>
     </div>
     <div class="form-group form-control--short">
@@ -34,10 +37,11 @@
         type="text"
         class="form-control "
         placeholder="Minutes"
-        [value]="editedCourse.duration | duration"
+        [(ngModel)]="editedCourse? editedCourse.duration : addedCourse.duration"
+        name="duration"
       />
     </div>
-    <div class="form-group form-control--short" *ngIf="!editedCourse">
+    <div class="form-group form-control--short">
       <div class="label-group">
         <p class="input-label">Date:</p>
         <p class="input-label-required">*required</p>
@@ -46,7 +50,6 @@
         type="date"
         class="form-control form-control--date"
         placeholder="mm-dd-yyyy"
-        value=""
       />
     </div>
     <div class="form-group form-control--medium">
@@ -58,7 +61,8 @@
         type="text"
         class="form-control"
         placeholder="Start typing"
-        value=""
+        [(ngModel)]="editedCourse? editedCourse.authors : addedCourse.authors"
+        name="authors"
       />
     </div>
     <div class="add-course-buttons">
@@ -71,7 +75,7 @@
         type="submit"
         class="add-course-button add-course__save-btn"
         value="Save"
-        (click)="updateCourse()"
+        (click)="editedCourse? updateCourse() : addCourse()"
       />
     </div>
   </form>

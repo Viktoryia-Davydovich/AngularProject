@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { Course } from "src/app/models/Course";
+import { Course, NewCourse, ICourse } from "src/app/models/Course";
 import { ActivatedRoute } from "@angular/router";
 import { CourseService } from "src/app/core/services/course.service";
 
@@ -10,6 +10,7 @@ import { CourseService } from "src/app/core/services/course.service";
 })
 export class AddCourseComponent implements OnInit {
   editedCourse: Course;
+  @Input() addedCourse: NewCourse;
 
   constructor(
     private route: ActivatedRoute,
@@ -18,12 +19,20 @@ export class AddCourseComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      let id = +params.get("id");
-      this.editedCourse = this.courseService.getCourseById(id);
+      if(typeof +params.get("id") === 'number'){
+        let id = +params.get("id");
+        this.editedCourse = this.courseService.getCourseById(id);
+      }
     });
   }
 
+  addCourse(){
+    console.log(this.addedCourse)
+    this.courseService.createCourse(this.addedCourse)   
+  }
+  
   updateCourse() {
     this.courseService.updateCourse(this.editedCourse);
+    console.log(this.editedCourse)
   }
 }
