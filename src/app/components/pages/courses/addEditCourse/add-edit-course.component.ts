@@ -10,7 +10,11 @@ import { CourseService } from "src/app/core/services/course.service";
 })
 export class AddCourseComponent implements OnInit {
   editedCourse: Course;
-  @Input() addedCourse: NewCourse;
+  addedCourse: NewCourse = {
+    title: "",
+    duration: 0,
+    authors: ""
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -30,7 +34,7 @@ export class AddCourseComponent implements OnInit {
     console.log(this.addedCourse)
     this.courseService.createCourse(this.addedCourse)   
   }
-  
+
   updateCourse() {
     this.courseService.updateCourse(this.editedCourse);
     console.log(this.editedCourse)
