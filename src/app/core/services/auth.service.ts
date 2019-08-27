@@ -8,9 +8,9 @@ import { Router } from "@angular/router";
 export class AuthService {
   redirectUrl: string;
   users: User[] = [
-    { id: 1, login: "qwerty1@gmail.com", password: "qwerty2" },
-    { id: 1, login: "qwerty2@gmail.com", password: "qwerty2" },
-    { id: 1, login: "qwerty2@gmail.com", password: "qwerty2" }
+    { id: 1, login: "qwerty1@gmail.com", password: "qwerty1" },
+    { id: 2, login: "qwerty2@gmail.com", password: "qwerty2" },
+    { id: 3, login: "qwerty3@gmail.com", password: "qwerty3" }
   ];
 
   constructor(private router: Router) {}
@@ -24,7 +24,7 @@ export class AuthService {
         user: username,
         token: "fake-token"
       };
-      localStorage.setItem("this_user", JSON.stringify(this_user.token));
+      localStorage.setItem("this_user", JSON.stringify(this_user));
       this.router.navigateByUrl("/courses");
     }
   }

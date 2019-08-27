@@ -6,11 +6,11 @@
   list-style: none;
 }
 
-.breadcrumb{
-  text-decoration: none;
-  display: inline-block
+.breadcrumb {
+  display: inline-block;
 }
-
-.breadcrumb-link{
- color: black
+.breadcrumb-link {
+  color: black;
+  display: inline-block;
+  text-decoration: none;
 }

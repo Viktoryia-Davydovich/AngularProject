@@ -7,20 +7,22 @@ import { AuthService } from "src/app/core/services/auth.service";
   styleUrls: ["./header.component.css"]
 })
 export class HeaderComponent implements OnInit {
+  username: string = "User login";
   isLoggedIn: boolean;
-
   constructor(private loginService: AuthService) {}
 
   ngOnInit() {}
 
   ngAfterContentChecked() {
+    console.log(this.username);
     this.isLoggedIn = this.loginService.isAuthenticated();
+    this.username = JSON.parse(this.loginService.getUserInfo())
+      ? JSON.parse(this.loginService.getUserInfo()).user
+      : "User login";
   }
 
   onLogOff() {
-    if (this.loginService.isAuthenticated()) {
-      this.loginService.logout();
-      console.log("LOGGED OUT");
-    }
+    this.loginService.logout();
+    console.log("LOGGED OUT");
   }
 }

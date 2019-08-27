@@ -1,5 +1,7 @@
+import { Params } from "@fortawesome/fontawesome-svg-core";
+
 export interface IBreadcrumb {
-    name: string,
-    url: string,
-    id: number
-  }
+  label: string;
+  params?: Params;
+  url: string;
+}
