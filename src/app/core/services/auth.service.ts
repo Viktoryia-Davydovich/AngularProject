@@ -7,32 +7,30 @@ import { Router } from "@angular/router";
 })
 export class AuthService {
   redirectUrl: string;
-  users: User[];
+  users: User[] = [
+    { id: 1, login: "qwerty1@gmail.com", password: "qwerty2" },
+    { id: 1, login: "qwerty2@gmail.com", password: "qwerty2" },
+    { id: 1, login: "qwerty2@gmail.com", password: "qwerty2" }
+  ];
 
-  constructor(private router: Router) {
-    this.users = [
-      { id: 1, login: "qwerty1@gmail.com", password: "qwerty2" },
-      { id: 1, login: "qwerty2@gmail.com", password: "qwerty2" },
-      { id: 1, login: "qwerty2@gmail.com", password: "qwerty2" }
-    ];
-  }
+  constructor(private router: Router) {}
 
   login(username: string, password: string) {
     if (
-      this.users.find(c => c.login === username) &&
-      this.users.find(c => c.password === password)
+      this.users.find(user => user.login === username) &&
+      this.users.find(user => user.password === password)
     ) {
       const this_user = {
         user: username,
         token: "fake-token"
       };
-      localStorage.setItem("user", JSON.stringify(this_user.token));
+      localStorage.setItem("this_user", JSON.stringify(this_user.token));
       this.router.navigateByUrl("/courses");
     }
   }
 
   logout() {
-    localStorage.removeItem("user");
+    localStorage.removeItem("this_user");
   }
 
   isAuthenticated() {
@@ -43,7 +41,7 @@ export class AuthService {
   }
 
   getUserInfo() {
-    const user = localStorage.getItem("user");
+    const user = localStorage.getItem("this_user");
     return user;
   }
 }
