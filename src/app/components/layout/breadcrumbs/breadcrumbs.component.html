@@ -1,3 +1,5 @@
-<div class="breadcrumbs">
-  Courses
-</div>
+<ul class="breadcrumbs">
+  <li *ngFor="let bc of breadcrumbs" class="breadcrumb">
+    <a [routerLink]="[bc.url, bc.params]" class="breadcrumb-link">{{ bc.name + " / "}}</a>
+  </li>
+</ul>

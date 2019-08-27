@@ -7,10 +7,10 @@ import { AddCourseComponent } from "./components/pages/courses/addEditCourse/add
 import { NotFoundComponent } from "./components/pages/not-found/not-found.component";
 
 const routes: Routes = [
-  { path: "login", component: LoginComponent },
-  { path: "courses/:id", component: AddCourseComponent },
-  { path: "courses/new", component: AddCourseComponent },
-  { path: "courses", component: CourselistComponent },
+  { path: "login", component: LoginComponent, data: {breadcrumb: "login"} },
+  { path: "courses/:id", component: AddCourseComponent, data: {breadcrumb: "edit course"}  },
+  { path: "courses/new", component: AddCourseComponent, data: {breadcrumb: "new course"}  },
+  { path: "courses", component: CourselistComponent, data: {breadcrumb: "courses"}  },
   { path: "404", component: NotFoundComponent },
   { path: "**", redirectTo: "/courses" }
 ];
