@@ -24,7 +24,8 @@ const routes: Routes = [
   {
     path: "courses",
     component: CourselistComponent,
-    data: { breadcrumb: "courses" }
+    data: { breadcrumb: "courses" },
+    canActivate: [AuthGuard]
   },
   { path: "404", component: NotFoundComponent },
   { path: "**", redirectTo: "/courses" }
