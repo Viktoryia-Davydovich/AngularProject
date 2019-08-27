@@ -11,9 +11,11 @@ export class BreadcrumbsComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getBreadcrumbs();
+  }
 
-  ngOnChange() {
+  ngAfterViewChecked() {
     this.getBreadcrumbs();
   }
 
@@ -25,6 +27,7 @@ export class BreadcrumbsComponent implements OnInit {
         1,
         this.breadcrumbList.length
       );
+      console.log(this.breadcrumbList);
     }
   }
 }
