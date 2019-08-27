@@ -11,7 +11,7 @@
         type="text"
         class="form-control"
         placeholder="Text Input"
-        [(ngModel)]="editedCourse? editedCourse.title : addedCourse.title"
+        [(ngModel)]="editedCourse ? editedCourse.title : addedCourse.title"
         name="title"
       />
     </div>
@@ -24,7 +24,9 @@
         type="text"
         class="form-control form-control--description description-input"
         placeholder="Add description"
-        [(ngModel)]="editedCourse? editedCourse.description : addedCourse.description"
+        [(ngModel)]="
+          editedCourse ? editedCourse.description : addedCourse.description
+        "
         name="description"
       ></textarea>
     </div>
@@ -37,7 +39,9 @@
         type="text"
         class="form-control "
         placeholder="Minutes"
-        [(ngModel)]="editedCourse? editedCourse.duration : addedCourse.duration"
+        [(ngModel)]="
+          editedCourse ? editedCourse.duration : addedCourse.duration
+        "
         name="duration"
       />
     </div>
@@ -61,7 +65,7 @@
         type="text"
         class="form-control"
         placeholder="Start typing"
-        [(ngModel)]="editedCourse? editedCourse.authors : addedCourse.authors"
+        [(ngModel)]="editedCourse ? editedCourse.authors : addedCourse.authors"
         name="authors"
       />
     </div>
@@ -70,12 +74,14 @@
         type="button"
         class="add-course-button add-course__cancel-btn"
         value="Cancel"
+        routerLink="/courses"
       />
       <input
         type="submit"
         class="add-course-button add-course__save-btn"
         value="Save"
-        (click)="editedCourse? updateCourse() : addCourse()"
+        (click)="editedCourse ? updateCourse() : addCourse()"
+        routerLink="/courses"
       />
     </div>
   </form>
