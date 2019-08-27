@@ -1,20 +1,29 @@
 import { Injectable } from "@angular/core";
+import { User } from "src/app/models/User";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
   redirectUrl: string;
+  users: User[];
 
-  constructor() {}
+  constructor() {
+    this.users = [
+      { id: 1, login: "qwerty1@gmail.com", password: "qwerty2" },
+      { id: 1, login: "qwerty2@gmail.com", password: "qwerty2" },
+      { id: 1, login: "qwerty2@gmail.com", password: "qwerty2" }
+    ];
+  }
 
   login(username: string, password: string) {
-    const user = {
-      user: username,
-      password: password,
-      token: "fake-token"
-    };
-    localStorage.setItem("user", JSON.stringify(user.token));
+    if (this.users.find(c => c.login === username && this.users.find(c => c.password === password)){
+      const this_user = {
+        user: username,
+        token: "fake-token"
+      };
+      localStorage.setItem("user", JSON.stringify(this_user.token));
+    }
   }
 
   logout() {
@@ -22,7 +31,7 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    if (localStorage.getItem("user")) {
+    if (localStorage.getItem("this_user")) {
       return true;
     }
     return false;
