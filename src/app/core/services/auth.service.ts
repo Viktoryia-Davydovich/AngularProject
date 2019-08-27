@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { User } from "src/app/models/User";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root"
@@ -8,7 +9,7 @@ export class AuthService {
   redirectUrl: string;
   users: User[];
 
-  constructor() {
+  constructor(private router: Router) {
     this.users = [
       { id: 1, login: "qwerty1@gmail.com", password: "qwerty2" },
       { id: 1, login: "qwerty2@gmail.com", password: "qwerty2" },
@@ -26,6 +27,7 @@ export class AuthService {
         token: "fake-token"
       };
       localStorage.setItem("user", JSON.stringify(this_user.token));
+      this.router.navigateByUrl("/courses");
     }
   }
 
