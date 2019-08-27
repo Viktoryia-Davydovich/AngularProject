@@ -17,7 +17,10 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-    if (this.users.find(c => c.login === username && this.users.find(c => c.password === password)){
+    if (
+      this.users.find(c => c.login === username) &&
+      this.users.find(c => c.password === password)
+    ) {
       const this_user = {
         user: username,
         token: "fake-token"
