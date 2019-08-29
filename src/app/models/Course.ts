@@ -31,3 +31,13 @@ export class NewCourse {
   authors: string;
   description?: string;
 }
+
+export class EditableCourse {
+  id?: number;
+  title: string;
+  description: string;
+  duration: number;
+  date?: Date;
+  authors: string;
+  header: string;
+}

@@ -1,4 +1,4 @@
-import { Params } from "@fortawesome/fontawesome-svg-core";
+import { Params } from "@angular/router";
 
 export interface IBreadcrumb {
   label: string;

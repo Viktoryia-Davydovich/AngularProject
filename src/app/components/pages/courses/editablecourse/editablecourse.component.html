@@ -1,6 +1,5 @@
 <div class="add-course-form">
-  <h3 class="add-course-heading" *ngIf="editedCourse">Edit course</h3>
-  <h3 class="add-course-heading" *ngIf="!editedCourse">New course</h3>
+  <h3 class="add-course-heading">{{ header }}</h3>
   <form>
     <div class="form-group form-control--long">
       <div class="label-group">
@@ -11,7 +10,8 @@
         type="text"
         class="form-control"
         placeholder="Text Input"
-        [(ngModel)]="editedCourse ? editedCourse.title : addedCourse.title"
+        [(ngModel)]="course.title"
+        value="course.title"
         name="title"
       />
     </div>
@@ -24,9 +24,8 @@
         type="text"
         class="form-control form-control--description description-input"
         placeholder="Add description"
-        [(ngModel)]="
-          editedCourse ? editedCourse.description : addedCourse.description
-        "
+        [(ngModel)]="course.description"
+        value="course.description"
         name="description"
       ></textarea>
     </div>
@@ -39,9 +38,8 @@
         type="text"
         class="form-control "
         placeholder="Minutes"
-        [(ngModel)]="
-          editedCourse ? editedCourse.duration : addedCourse.duration
-        "
+        [(ngModel)]="course.duration"
+        value="course.duration"
         name="duration"
       />
     </div>
@@ -54,6 +52,9 @@
         type="date"
         class="form-control form-control--date"
         placeholder="mm-dd-yyyy"
+        [(ngModel)]="course.date"
+        value="course.date"
+        name="date"
       />
     </div>
     <div class="form-group form-control--medium">
@@ -65,7 +66,8 @@
         type="text"
         class="form-control"
         placeholder="Start typing"
-        [(ngModel)]="editedCourse ? editedCourse.authors : addedCourse.authors"
+        [(ngModel)]="course.authors"
+        value="course.authors"
         name="authors"
       />
     </div>
@@ -80,7 +82,7 @@
         type="submit"
         class="add-course-button add-course__save-btn"
         value="Save"
-        (click)="editedCourse ? updateCourse() : addCourse()"
+        (click)="handleSubmit()"
       />
     </div>
   </form>

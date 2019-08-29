@@ -4,26 +4,30 @@ import { AuthGuard } from "../app/auth/auth.guard";
 
 import { CourselistComponent } from "./components/pages/courses/courselist/courselist.component";
 import { LoginComponent } from "./components/pages/login/login.component";
-import { AddEditCourseComponent } from "./components/pages/courses/addEditCourse/add-edit-course.component";
 import { NotFoundComponent } from "./components/pages/not-found/not-found.component";
+import { EditablecourseComponent } from "./components/pages/courses/editablecourse/editablecourse.component";
 
 const routes: Routes = [
   { path: "login", component: LoginComponent, data: { breadcrumb: "login" } },
   {
     path: "courses",
-    component: CourselistComponent,
-    data: { breadcrumb: "courses" },
     canActivate: [AuthGuard],
+    data: { breadcrumb: "courses" },
     children: [
       {
-        path: ":id",
-        component: AddEditCourseComponent,
-        data: { breadcrumb: "edit course" }
+        path: "",
+        component: CourselistComponent,
+        data: { breadcrumb: "" }
       },
       {
         path: "new",
-        component: AddEditCourseComponent,
+        component: EditablecourseComponent,
         data: { breadcrumb: "new course" }
+      },
+      {
+        path: ":id",
+        component: EditablecourseComponent,
+        data: { breadcrumb: "edit course" }
       }
     ]
   },

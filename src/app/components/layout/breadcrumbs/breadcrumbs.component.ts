@@ -4,7 +4,6 @@ import {
   Router,
   ActivatedRoute,
   NavigationEnd,
-  Params,
   PRIMARY_OUTLET
 } from "@angular/router";
 import { filter } from "rxjs/operators";
@@ -38,7 +37,6 @@ export class BreadcrumbsComponent implements OnInit {
     breadcrumbs: IBreadcrumb[] = []
   ): IBreadcrumb[] {
     let children: ActivatedRoute[] = route.children;
-
     if (children.length === 0) {
       return breadcrumbs;
     }

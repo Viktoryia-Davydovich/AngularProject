@@ -1,7 +1,8 @@
 <ul class="breadcrumbs">
   <li *ngFor="let breadcrumb of breadcrumbs" class="breadcrumb">
     <a
-      [routerLink]="[breadcrumb.url, breadcrumb.params]"
+      [routerLink]="[breadcrumb.url]"
+      [queryParams]="[breadcrumb.params]"
       class="breadcrumb-link"
     >
       / {{ breadcrumb.label }}</a

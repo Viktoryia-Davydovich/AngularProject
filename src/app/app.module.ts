@@ -26,9 +26,9 @@ import { DurationPipe } from "./shared/pipes/duration.pipe";
 import { BoxShadowDirective } from "./shared/directives/box-shadow.directive";
 import { FilterPipe } from "./shared/pipes/filter.pipe";
 import { LoginComponent } from "./components/pages/login/login.component";
-import { AddEditCourseComponent } from "./components/pages/courses/addEditCourse/add-edit-course.component";
 import { OrderByDatePipe } from "./shared/pipes/order-by-date.pipe";
 import { NotFoundComponent } from "./components/pages/not-found/not-found.component";
+import { EditablecourseComponent } from "./components/pages/courses/editablecourse/editablecourse.component";
 
 @NgModule({
   declarations: [
@@ -44,9 +44,9 @@ import { NotFoundComponent } from "./components/pages/not-found/not-found.compon
     BoxShadowDirective,
     FilterPipe,
     LoginComponent,
-    AddEditCourseComponent,
     OrderByDatePipe,
-    NotFoundComponent
+    NotFoundComponent,
+    EditablecourseComponent
   ],
   imports: [BrowserModule, FontAwesomeModule, AppRoutingModule, FormsModule],
   providers: [],

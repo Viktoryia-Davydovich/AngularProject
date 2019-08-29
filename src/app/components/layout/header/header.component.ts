@@ -1,5 +1,6 @@
 import { Component, OnInit, NgModule } from "@angular/core";
 import { AuthService } from "src/app/core/services/auth.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-header",
@@ -9,12 +10,11 @@ import { AuthService } from "src/app/core/services/auth.service";
 export class HeaderComponent implements OnInit {
   username: string = "User login";
   isLoggedIn: boolean;
-  constructor(private loginService: AuthService) {}
+  constructor(private loginService: AuthService, private router: Router) {}
 
   ngOnInit() {}
 
   ngAfterContentChecked() {
-    console.log(this.username);
     this.isLoggedIn = this.loginService.isAuthenticated();
     this.username = JSON.parse(this.loginService.getUserInfo())
       ? JSON.parse(this.loginService.getUserInfo()).user
@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit {
 
   onLogOff() {
     this.loginService.logout();
+    this.router.navigate(["/login"]);
     console.log("LOGGED OUT");
   }
 }

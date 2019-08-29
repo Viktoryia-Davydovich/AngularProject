@@ -1,5 +1,10 @@
 import { Injectable } from "@angular/core";
-import { Course, NewCourse, UpdatedCourse } from "src/app/models/course";
+import {
+  Course,
+  NewCourse,
+  UpdatedCourse,
+  EditableCourse
+} from "src/app/models/course";
 
 @Injectable({
   providedIn: "root"
