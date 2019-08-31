@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from "@angular/core";
 import { UpdatedCourse, EditableCourse } from "src/app/models/Course";
 import { DataBindingService } from "src/app/core/services/data-binding.service";
 import { CourseService } from "src/app/core/services/course.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-editablecourse",
@@ -20,7 +21,8 @@ export class EditablecourseComponent implements OnInit {
 
   constructor(
     private dataBinding: DataBindingService,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private router: Router
   ) {}
 
   ngOnChanges() {}
@@ -37,8 +39,10 @@ export class EditablecourseComponent implements OnInit {
       let updatedCourse = new UpdatedCourse();
       updatedCourse = Object.assign(updatedCourse, this.course);
       this.courseService.updateCourse(updatedCourse);
+      this.router.navigate(["/courses"]);
     } else {
       this.courseService.createCourse(this.course);
+      this.router.navigate(["/courses"]);
     }
   }
 }
