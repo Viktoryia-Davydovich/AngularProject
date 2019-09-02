@@ -14,6 +14,8 @@ export class CourselistComponent implements OnInit {
   courses: Course[];
   filteredCourses: Course[];
   searchedCourse: string;
+  showCoursesStart: number = 0;
+  showCoursesFinish: number = 3;
 
   constructor(private courseService: CourseService) {}
 
@@ -43,5 +45,7 @@ export class CourselistComponent implements OnInit {
     }
   };
 
-  loadmore = () => console.log("Loading more...");
+  loadmore = () => {
+    this.showCoursesFinish += 3;
+  };
 }

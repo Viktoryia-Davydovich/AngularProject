@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { UpdatedCourse, EditableCourse } from "src/app/models/Course";
-import { DataBindingService } from "src/app/core/services/data-binding.service";
 import { CourseService } from "src/app/core/services/course.service";
 import { Router } from "@angular/router";
 
@@ -19,19 +18,17 @@ export class EditablecourseComponent implements OnInit {
     header: ""
   };
 
-  constructor(
-    private dataBinding: DataBindingService,
-    private courseService: CourseService,
-    private router: Router
-  ) {}
-
-  ngOnChanges() {}
+  constructor(private courseService: CourseService, private router: Router) {}
 
   ngOnInit() {
-    this.dataBinding.courseToEdit$.subscribe(course => {
-      Object.assign(this.course, course);
-      console.log("OBSERVABLE " + this.course);
-    });
+    const course_id = +this.router.url.split("/courses/")[1];
+    if (!Number.isNaN(course_id) && typeof course_id === "number") {
+      console.log(course_id);
+      const course_edited = this.courseService.getCourseById(course_id);
+      this.course = { ...course_edited, header: "Edit Course" };
+    } else if (Number.isNaN(course_id)) {
+      this.course.header = "New Course";
+    }
   }
 
   handleSubmit() {

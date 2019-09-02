@@ -12,22 +12,22 @@ const routes: Routes = [
   {
     path: "courses",
     canActivate: [AuthGuard],
-    data: { breadcrumb: "courses" },
+    data: { breadcrumb: " / courses" },
     children: [
       {
         path: "",
         component: CourselistComponent,
-        data: { breadcrumb: "" }
+        data: { breadcrumb: undefined }
       },
       {
         path: "new",
         component: EditablecourseComponent,
-        data: { breadcrumb: "new course" }
+        data: { breadcrumb: " / new course" }
       },
       {
         path: ":id",
         component: EditablecourseComponent,
-        data: { breadcrumb: "edit course" }
+        data: { breadcrumb: " / edit course" }
       }
     ]
   },

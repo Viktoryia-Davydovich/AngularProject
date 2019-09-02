@@ -16,7 +16,6 @@ import { filter } from "rxjs/operators";
 export class BreadcrumbsComponent implements OnInit {
   route: string;
   breadcrumbs: IBreadcrumb[] = [];
-  breadcrumbList: string[];
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
 
@@ -26,10 +25,9 @@ export class BreadcrumbsComponent implements OnInit {
       .subscribe(event => {
         let root: ActivatedRoute = this.activatedRoute.root;
         this.breadcrumbs = this.getBreadcrumbs(root);
+        console.log(this.breadcrumbs);
       });
   }
-
-  ngAfterViewChecked() {}
 
   private getBreadcrumbs(
     route: ActivatedRoute,

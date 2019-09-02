@@ -13,7 +13,7 @@ export class Course implements ICourse {
   creationDate: Date;
   duration: number;
   topRated?: boolean;
-  description?: string;
+  description: string;
   authors?: string;
 }
 
@@ -28,7 +28,7 @@ export class UpdatedCourse {
 export class NewCourse {
   title: string;
   duration: number;
-  authors: string;
+  authors?: string;
   description?: string;
 }
 
@@ -38,6 +38,6 @@ export class EditableCourse {
   description: string;
   duration: number;
   date?: Date;
-  authors: string;
+  authors?: string;
   header: string;
 }
