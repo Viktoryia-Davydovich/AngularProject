@@ -28,7 +28,8 @@ import { FilterPipe } from "./shared/pipes/filter.pipe";
 import { LoginComponent } from "./components/pages/login/login.component";
 import { OrderByDatePipe } from "./shared/pipes/order-by-date.pipe";
 import { NotFoundComponent } from "./components/pages/not-found/not-found.component";
-import { EditablecourseComponent } from "./components/pages/courses/editablecourse/editablecourse.component";
+import { AddcourseComponent } from "./components/pages/courses/addcourse/addcourse.component";
+import { EditcourseComponent } from "./components/pages/courses/editcourse/editcourse.component";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { EditablecourseComponent } from "./components/pages/courses/editablecour
     LoginComponent,
     OrderByDatePipe,
     NotFoundComponent,
-    EditablecourseComponent
+    AddcourseComponent,
+    EditcourseComponent
   ],
   imports: [BrowserModule, FontAwesomeModule, AppRoutingModule, FormsModule],
   providers: [],

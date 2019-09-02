@@ -5,7 +5,8 @@ import { AuthGuard } from "../app/auth/auth.guard";
 import { CourselistComponent } from "./components/pages/courses/courselist/courselist.component";
 import { LoginComponent } from "./components/pages/login/login.component";
 import { NotFoundComponent } from "./components/pages/not-found/not-found.component";
-import { EditablecourseComponent } from "./components/pages/courses/editablecourse/editablecourse.component";
+import { EditcourseComponent } from "./components/pages/courses/editcourse/editcourse.component";
+import { AddcourseComponent } from "./components/pages/courses/addcourse/addcourse.component";
 
 const routes: Routes = [
   { path: "login", component: LoginComponent, data: { breadcrumb: "login" } },
@@ -21,12 +22,12 @@ const routes: Routes = [
       },
       {
         path: "new",
-        component: EditablecourseComponent,
+        component: AddcourseComponent,
         data: { breadcrumb: " / new course" }
       },
       {
         path: ":id",
-        component: EditablecourseComponent,
+        component: EditcourseComponent,
         data: { breadcrumb: " / edit course" }
       }
     ]
