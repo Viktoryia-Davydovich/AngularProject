@@ -20,7 +20,7 @@
   <button
     type="button"
     class="load-more-btn"
-    *ngIf="courses.length < showCoursesFinish"
+    *ngIf="courses.length >= showCoursesFinish"
     (click)="loadmore()"
   >
     LOAD MORE
