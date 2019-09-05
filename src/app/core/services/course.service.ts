@@ -1,10 +1,15 @@
 import { Injectable } from "@angular/core";
-import { Course, NewCourse, UpdatedCourse } from "src/app/models/course";
+import {
+  Course,
+  NewCourse,
+  UpdatedCourse,
+  EditableCourse
+} from "src/app/models/course";
 
 @Injectable({
   providedIn: "root"
 })
-export class CourseServiceService {
+export class CourseService {
   courses: Course[] = [
     {
       id: 1,
@@ -32,6 +37,15 @@ export class CourseServiceService {
       topRated: false,
       description:
         "Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester."
+    },
+    {
+      id: 4,
+      title: "Video Course 4. Name tag",
+      creationDate: new Date(2018, 10, 9),
+      duration: 88,
+      topRated: false,
+      description:
+        "Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester."
     }
   ];
 
@@ -50,7 +64,7 @@ export class CourseServiceService {
       id: this.courses.length,
       title: addedCourse.title,
       duration: addedCourse.duration,
-      topRated: addedCourse.topRated,
+      authors: addedCourse.authors,
       creationDate: new Date(),
       description: addedCourse.description
     };
@@ -68,7 +82,7 @@ export class CourseServiceService {
     let updCourse = this.courses.find(c => c.id === updatedCourse.id);
     updCourse.title = updatedCourse.title;
     updCourse.description = updatedCourse.description;
-    updCourse.topRated = updatedCourse.topRated;
     updCourse.duration = updatedCourse.duration;
+    updCourse.authors = updatedCourse.authors;
   }
 }

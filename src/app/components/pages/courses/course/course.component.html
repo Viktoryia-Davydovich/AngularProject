@@ -29,7 +29,7 @@
   <div class="card__row">
     <div class="card__content">{{ course.description }}</div>
     <div class="card__row">
-      <button type="button" class="card__button">
+      <button type="button" class="card__button" (click)="editCourse(course)">
         <fa-icon
           [icon]="['fas', 'pencil-alt']"
           class="font-icon-padding"

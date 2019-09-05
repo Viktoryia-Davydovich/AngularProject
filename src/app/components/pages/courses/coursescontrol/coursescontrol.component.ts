@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { EditableCourse } from "src/app/models/Course";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-coursescontrol",
@@ -9,12 +11,15 @@ export class CoursescontrolComponent implements OnInit {
   @Input() searchedCourse: string;
   @Output() searchText = new EventEmitter<string>();
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {}
 
   searchCourse = () => {
-    console.log(this.searchedCourse);
     this.searchText.emit(this.searchedCourse);
   };
+
+  addCourse() {
+    this.router.navigateByUrl("/courses/new");
+  }
 }

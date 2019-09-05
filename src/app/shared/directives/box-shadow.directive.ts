@@ -16,7 +16,6 @@ export class BoxShadowDirective {
   }
 
   setBoxShadow() {
-    console.log(this.creationDate);
     const today: Date = new Date();
     if (
       this.creationDate < today &&

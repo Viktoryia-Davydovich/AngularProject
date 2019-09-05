@@ -1,5 +1,5 @@
 <div class="add-course-form">
-  <h3 class="add-course-heading">New course</h3>
+  <h3 class="add-course-heading">{{ course.header }}</h3>
   <form>
     <div class="form-group form-control--long">
       <div class="label-group">
@@ -10,7 +10,9 @@
         type="text"
         class="form-control"
         placeholder="Text Input"
-        value=""
+        [(ngModel)]="course.title"
+        value="course.title"
+        name="title"
       />
     </div>
     <div class="form-group form-control--long">
@@ -18,19 +20,28 @@
         <p class="input-label">Description:</p>
         <p class="input-label-required">*required</p>
       </div>
-      <input
+      <textarea
         type="text"
-        class="form-control form-control--description"
+        class="form-control form-control--description description-input"
         placeholder="Add description"
-        value=""
-      />
+        [(ngModel)]="course.description"
+        value="course.description"
+        name="description"
+      ></textarea>
     </div>
     <div class="form-group form-control--short">
       <div class="label-group">
         <p class="input-label">Duration:</p>
         <p class="input-label-required">*required</p>
       </div>
-      <input type="text" class="form-control " placeholder="Minutes" value="" />
+      <input
+        type="text"
+        class="form-control "
+        placeholder="Minutes"
+        [(ngModel)]="course.duration"
+        value="course.duration"
+        name="duration"
+      />
     </div>
     <div class="form-group form-control--short">
       <div class="label-group">
@@ -41,7 +52,9 @@
         type="date"
         class="form-control form-control--date"
         placeholder="mm-dd-yyyy"
-        value=""
+        [(ngModel)]="course.date"
+        value="course.date"
+        name="date"
       />
     </div>
     <div class="form-group form-control--medium">
@@ -53,7 +66,9 @@
         type="text"
         class="form-control"
         placeholder="Start typing"
-        value=""
+        [(ngModel)]="course.authors"
+        value="course.authors"
+        name="authors"
       />
     </div>
     <div class="add-course-buttons">
@@ -61,11 +76,13 @@
         type="button"
         class="add-course-button add-course__cancel-btn"
         value="Cancel"
+        routerLink="/courses"
       />
       <input
         type="submit"
         class="add-course-button add-course__save-btn"
         value="Save"
+        (click)="handleSubmit()"
       />
     </div>
   </form>

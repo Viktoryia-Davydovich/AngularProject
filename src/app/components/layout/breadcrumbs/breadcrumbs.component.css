@@ -3,4 +3,14 @@
   font-size: 0.875rem;
   font-weight: 600;
   background-color: white;
+  list-style: none;
+}
+
+.breadcrumb {
+  display: inline-block;
+}
+.breadcrumb-link {
+  color: black;
+  display: inline-block;
+  text-decoration: none;
 }
