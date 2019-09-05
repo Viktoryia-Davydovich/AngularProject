@@ -17,7 +17,12 @@
   >
     No data. Feel free to add new course
   </div>
-  <button type="button" class="load-more-btn" (click)="loadmore()">
+  <button
+    type="button"
+    class="load-more-btn"
+    *ngIf="courses.length < showCoursesFinish"
+    (click)="loadmore()"
+  >
     LOAD MORE
   </button>
 </div>
