@@ -16,9 +16,9 @@ export class AddcourseComponent implements OnInit {
     this.course = {
       title: "",
       description: "",
-      duration: 0,
+      length: 0,
       date: null,
-      authors: "",
+      authors: [],
       header: "New Course"
     };
   }

@@ -4,6 +4,7 @@ import { Course } from "src/app/models/Course";
 import { FilterPipe } from "src/app/shared/pipes/filter.pipe";
 import { OrderByDatePipe } from "src/app/shared/pipes/order-by-date.pipe";
 import { CourseService } from "src/app/core/services/course.service";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-courselist",
@@ -20,9 +21,11 @@ export class CourselistComponent implements OnInit {
   constructor(private courseService: CourseService) {}
 
   ngOnInit() {
-    this.courses = this.courseService.getCourseList();
-    this.filterByDate();
-    this.filteredCourses = [...this.courses];
+    this.courseService.getCourseList().subscribe((data: Course[]) => {
+      this.courses = data;
+      this.filterByDate();
+      this.filteredCourses = [...this.courses];
+    });
   }
 
   filterByDate() {

@@ -1,6 +1,6 @@
 <div
   class="card"
-  [appBoxShadow]="course.creationDate"
+  [appBoxShadow]="course.date"
   [ngClass]="{ 'card-background': course.topRated }"
 >
   <div class="card__row">
@@ -22,7 +22,7 @@
           [icon]="['fas', 'calendar-alt']"
           class="font-icon-padding"
         ></fa-icon>
-        {{ course.creationDate | date: "d MMM, y" }}
+        {{ course.date | date: "d MMM, y" }}
       </div>
     </div>
   </div>

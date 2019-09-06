@@ -22,8 +22,8 @@ class TestHostComponent {
   course: Course = {
     id: 1,
     title: "TEST TITLE",
-    creationDate: new Date(2000, 1, 1),
-    duration: 1,
+    date: new Date(2000, 1, 1),
+    length: 1,
     topRated: true,
     description: "TEST DESCR"
   };

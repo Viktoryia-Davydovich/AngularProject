@@ -1,32 +1,29 @@
 import { Injectable } from "@angular/core";
 import { User } from "src/app/models/User";
 import { Router } from "@angular/router";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
   redirectUrl: string;
-  users: User[] = [
-    { id: 1, login: "qwerty1@gmail.com", password: "qwerty1" },
-    { id: 2, login: "qwerty2@gmail.com", password: "qwerty2" },
-    { id: 3, login: "qwerty3@gmail.com", password: "qwerty3" }
-  ];
+  token: any;
+  private baseUrl: string = "http://localhost:3004/auth";
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private http: HttpClient) {}
 
   login(username: string, password: string) {
-    if (
-      this.users.find(user => user.login === username) &&
-      this.users.find(user => user.password === password)
-    ) {
-      const this_user = {
-        user: username,
-        token: "fake-token"
-      };
-      localStorage.setItem("this_user", JSON.stringify(this_user));
-      this.router.navigateByUrl("/courses");
-    }
+    this.http
+      .post(this.baseUrl + "/login", {
+        login: username,
+        password: password
+      })
+      .subscribe(token => {
+        this.token = token;
+        localStorage.setItem("this_user", this.token);
+        this.router.navigateByUrl("/courses");
+      });
   }
 
   logout() {
@@ -41,7 +38,13 @@ export class AuthService {
   }
 
   getUserInfo() {
-    const user = localStorage.getItem("this_user");
-    return user;
+    const header = {
+      headers: new HttpHeaders().set(
+        "Authorization",
+        `Basic ${btoa(localStorage.getItem("this_user"))}`
+      )
+    };
+
+    return this.http.post(this.baseUrl + "/userinfo", header);
   }
 }

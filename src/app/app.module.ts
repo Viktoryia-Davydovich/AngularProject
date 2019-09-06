@@ -1,6 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 
 /*Font awesome*/
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
@@ -50,7 +51,13 @@ import { EditcourseComponent } from "./components/pages/courses/editcourse/editc
     AddcourseComponent,
     EditcourseComponent
   ],
-  imports: [BrowserModule, FontAwesomeModule, AppRoutingModule, FormsModule],
+  imports: [
+    BrowserModule,
+    FontAwesomeModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
