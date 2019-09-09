@@ -14,7 +14,7 @@ export class AddcourseComponent implements OnInit {
 
   ngOnInit() {
     this.course = {
-      title: "",
+      name: "",
       description: "",
       length: 0,
       date: null,

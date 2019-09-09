@@ -1,21 +1,21 @@
 <div
   class="card"
   [appBoxShadow]="course.date"
-  [ngClass]="{ 'card-background': course.topRated }"
+  [ngClass]="{ 'card-background': course.isTopRated }"
 >
   <div class="card__row">
     <div class="card__title">
-      {{ course.title | uppercase }}
+      {{ course.name | uppercase }}
       <fa-icon
         [icon]="['fas', 'star']"
         class="star-icon-background-not-top"
-        [ngClass]="{ 'star-icon-background': course.topRated }"
+        [ngClass]="{ 'star-icon-background': course.isTopRated }"
       ></fa-icon>
     </div>
     <div class="card__row card__time-info">
       <div>
         <fa-icon [icon]="['far', 'clock']" class="font-icon-padding"></fa-icon>
-        {{ course.duration | duration }}
+        {{ course.length | duration }}
       </div>
       <div>
         <fa-icon

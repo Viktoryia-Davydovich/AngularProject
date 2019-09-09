@@ -21,10 +21,10 @@ import { click } from "src/app/shared/testingHelpers/clickHelper";
 class TestHostComponent {
   course: Course = {
     id: 1,
-    title: "TEST TITLE",
+    name: "TEST NAME",
     date: new Date(2000, 1, 1),
     length: 1,
-    topRated: true,
+    isTopRated: true,
     description: "TEST DESCR"
   };
   deleted: Course;
@@ -60,9 +60,9 @@ describe("CourseComponent", () => {
     expect(testHost.course).toBeTruthy();
   });
 
-  it("should display course title", () => {
-    const expectedCourseTitle = testHost.course.title;
-    expect(courseEl.textContent).toContain(expectedCourseTitle);
+  it("should display course name", () => {
+    const expectedCourseName = testHost.course.name;
+    expect(courseEl.textContent).toContain(expectedCourseName);
   });
 
   it("should raise selected event when clicked", () => {

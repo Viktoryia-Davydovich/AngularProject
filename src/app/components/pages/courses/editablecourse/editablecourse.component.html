@@ -10,9 +10,9 @@
         type="text"
         class="form-control"
         placeholder="Text Input"
-        [(ngModel)]="course.title"
-        value="course.title"
-        name="title"
+        [(ngModel)]="course.name"
+        value="course.name"
+        name="name"
       />
     </div>
     <div class="form-group form-control--long">
@@ -38,9 +38,9 @@
         type="text"
         class="form-control "
         placeholder="Minutes"
-        [(ngModel)]="course.duration"
-        value="course.duration"
-        name="duration"
+        [(ngModel)]="course.length"
+        value="course.length"
+        name="length"
       />
     </div>
     <div class="form-group form-control--short">
@@ -67,7 +67,6 @@
         class="form-control"
         placeholder="Start typing"
         [(ngModel)]="course.authors"
-        value="course.authors"
         name="authors"
       />
     </div>

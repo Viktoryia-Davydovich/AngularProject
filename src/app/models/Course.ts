@@ -2,7 +2,7 @@ import { Author } from "./Author";
 
 export interface ICourse {
   id: number;
-  title: string;
+  name: string;
   date: Date;
   length: number;
   description?: string;
@@ -11,24 +11,24 @@ export interface ICourse {
 
 export class Course implements ICourse {
   id: number;
-  title: string;
+  name: string;
   date: Date;
   length: number;
-  topRated?: boolean;
+  isTopRated?: boolean;
   description: string;
   authors?: Author[];
 }
 
 export class UpdatedCourse {
   id: number;
-  title?: string;
+  name?: string;
   length?: number;
   authors?: Author[];
   description?: string;
 }
 
 export class NewCourse {
-  title: string;
+  name: string;
   length: number;
   authors?: Author[];
   description?: string;
@@ -36,7 +36,7 @@ export class NewCourse {
 
 export class EditableCourse {
   id?: number;
-  title: string;
+  name: string;
   description: string;
   length: number;
   date?: Date;

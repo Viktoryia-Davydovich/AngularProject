@@ -19,10 +19,11 @@ export class EditcourseComponent implements OnInit {
   ngOnInit() {
     const course_id = +this.route.snapshot.paramMap.get("id");
     let course_edited;
-    this.courseService
-      .getCourseById(course_id)
-      .subscribe(course => (course_edited = course));
-    this.course = { ...course_edited, header: "Edit Course" };
+    this.courseService.getCourseById(course_id).subscribe(course => {
+      course_edited = course;
+      console.log(course_edited.date);
+      this.course = { ...course_edited, header: "Edit Course" };
+    });
   }
 
   handleSubmit() {

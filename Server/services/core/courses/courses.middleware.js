@@ -30,6 +30,8 @@ module.exports = server => {
     res.json(courses);
   });
 
+  /*
+
   router.post("/courses/new", (req, res, next) => {
     newCourse = req.body;
     courses = server.db.getState().courses;
@@ -63,6 +65,6 @@ module.exports = server => {
       1
     );
   });
-
+*/
   return router;
 };

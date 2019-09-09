@@ -7,6 +7,7 @@ import {
   EditableCourse
 } from "src/app/models/course";
 import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
@@ -28,7 +29,7 @@ export class CourseService {
   createCourse(addedCourse: NewCourse) {
     const newCourse = {
       id: this.courses.length,
-      title: addedCourse.title,
+      name: addedCourse.name,
       length: addedCourse.length,
       authors: addedCourse.authors,
       date: new Date(),

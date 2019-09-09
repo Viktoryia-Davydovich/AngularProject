@@ -22,9 +22,15 @@ export class CourselistComponent implements OnInit {
 
   ngOnInit() {
     this.courseService.getCourseList().subscribe((data: Course[]) => {
+      data = data.map(course => {
+        course.date = new Date(course.date);
+        return course;
+      });
+      console.log(typeof data[0].length);
       this.courses = data;
       this.filterByDate();
       this.filteredCourses = [...this.courses];
+      console.log(typeof data[0].length);
     });
   }
 

@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { User } from "src/app/models/User";
 import { Router } from "@angular/router";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -13,17 +14,11 @@ export class AuthService {
 
   constructor(private router: Router, private http: HttpClient) {}
 
-  login(username: string, password: string) {
-    this.http
-      .post(this.baseUrl + "/login", {
-        login: username,
-        password: password
-      })
-      .subscribe(token => {
-        this.token = token;
-        localStorage.setItem("this_user", this.token);
-        this.router.navigateByUrl("/courses");
-      });
+  login(username: string, password: string): Observable<any> {
+    return this.http.post(this.baseUrl + "/login", {
+      login: username,
+      password: password
+    });
   }
 
   logout() {
@@ -37,7 +32,7 @@ export class AuthService {
     return false;
   }
 
-  getUserInfo() {
+  getUserInfo(): Observable<any> {
     const header = {
       headers: new HttpHeaders().set(
         "Authorization",
@@ -46,5 +41,11 @@ export class AuthService {
     };
 
     return this.http.post(this.baseUrl + "/userinfo", header);
+  }
+
+  returnUsername() {
+    this.getUserInfo().subscribe(user => {
+      return user;
+    });
   }
 }
