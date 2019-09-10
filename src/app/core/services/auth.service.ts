@@ -32,20 +32,7 @@ export class AuthService {
     return false;
   }
 
-  getUserInfo(): Observable<any> {
-    const header = {
-      headers: new HttpHeaders().set(
-        "Authorization",
-        `Basic ${btoa(localStorage.getItem("this_user"))}`
-      )
-    };
-
-    return this.http.post(this.baseUrl + "/userinfo", header);
-  }
-
-  returnUsername() {
-    this.getUserInfo().subscribe(user => {
-      return user;
-    });
+  getUserInfo() {
+    return this.http.get(this.baseUrl + "/userinfo");
   }
 }

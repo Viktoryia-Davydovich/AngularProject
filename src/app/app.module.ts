@@ -2,6 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
 
 /*Font awesome*/
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
@@ -31,6 +32,7 @@ import { OrderByDatePipe } from "./shared/pipes/order-by-date.pipe";
 import { NotFoundComponent } from "./components/pages/not-found/not-found.component";
 import { AddcourseComponent } from "./components/pages/courses/addcourse/addcourse.component";
 import { EditcourseComponent } from "./components/pages/courses/editcourse/editcourse.component";
+import { TokenInterceptor } from "./auth/http-interceptor.service";
 
 @NgModule({
   declarations: [
@@ -58,7 +60,13 @@ import { EditcourseComponent } from "./components/pages/courses/editcourse/editc
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
