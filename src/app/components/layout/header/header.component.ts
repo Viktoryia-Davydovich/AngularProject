@@ -22,14 +22,11 @@ export class HeaderComponent implements OnInit {
 
   ngAfterContentChecked() {
     this.isLoggedIn = this.loginService.isAuthenticated();
-
-    if (this.isLoggedIn === true) {
-      //this.loginService.getUserInfo().subscribe(user => (this.username = user));
-    }
   }
 
   onLogOff() {
     this.loginService.logout();
+    this.username = "User login";
     this.router.navigate(["/login"]);
     console.log("LOGGED OUT");
   }

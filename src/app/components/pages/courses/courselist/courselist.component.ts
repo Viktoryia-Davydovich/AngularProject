@@ -15,23 +15,27 @@ export class CourselistComponent implements OnInit {
   courses: Course[];
   filteredCourses: Course[];
   searchedCourse: string;
-  showCoursesStart: number = 0;
-  showCoursesFinish: number = 3;
+  start: number = 0;
+  end: number = 3;
 
   constructor(private courseService: CourseService) {}
 
   ngOnInit() {
-    this.courseService.getCourseList().subscribe((data: Course[]) => {
-      data = data.map(course => {
-        course.date = new Date(course.date);
-        return course;
+    this.updateCourselist();
+  }
+
+  updateCourselist() {
+    this.courseService
+      .getCourseList(this.start, this.end)
+      .subscribe((data: Course[]) => {
+        data = data.map(course => {
+          course.date = new Date(course.date);
+          return course;
+        });
+        this.courses = data;
+        this.filterByDate();
+        this.filteredCourses = [...this.courses];
       });
-      console.log(typeof data[0].length);
-      this.courses = data;
-      this.filterByDate();
-      this.filteredCourses = [...this.courses];
-      console.log(typeof data[0].length);
-    });
   }
 
   filterByDate() {
@@ -42,10 +46,9 @@ export class CourselistComponent implements OnInit {
   onSearchCourse(text: string) {
     const filterPipe = new FilterPipe();
     this.searchedCourse = text;
-    this.filteredCourses = filterPipe.transform(
-      this.courses,
-      this.searchedCourse
-    );
+    this.courseService
+      .searchCourses(text)
+      .subscribe(filteredCourses => (this.filteredCourses = filteredCourses));
   }
   onDeleted = (deletedCourseId: number) => {
     console.log(`You have deleted course number ${deletedCourseId}`);
@@ -56,6 +59,7 @@ export class CourselistComponent implements OnInit {
   };
 
   loadmore = () => {
-    this.showCoursesFinish += 3;
+    this.end += 3;
+    this.updateCourselist();
   };
 }

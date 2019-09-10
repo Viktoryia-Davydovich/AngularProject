@@ -6,8 +6,8 @@ import {
   UpdatedCourse,
   EditableCourse
 } from "src/app/models/course";
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { Observable, of } from "rxjs";
+import { map, tap, catchError } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
@@ -18,8 +18,19 @@ export class CourseService {
 
   constructor(private http: HttpClient) {}
 
-  getCourseList(): any {
-    return this.http.get<Course[]>(this.baseUrl);
+  getCourseList(start: number, end: number): any {
+    return this.http.get<Course[]>(
+      `${this.baseUrl}?start=${start}&count=${end}`
+    );
+  }
+
+  searchCourses(searchedCourse: string): any {
+    if (!searchedCourse.trim()) {
+      return of([]);
+    }
+    return this.http.get<Course[]>(
+      `${this.baseUrl}?textFragment=${searchedCourse}`
+    );
   }
 
   getCourseById(id: number) {
