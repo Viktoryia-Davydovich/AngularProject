@@ -31,6 +31,16 @@ module.exports = server => {
   });
 
   /*
+  router.delete("/courses/:id", (req, res, next) => {
+    let courses = server.db.getState().courses;
+
+    server.db.delete(
+      courses.find(course => {
+        course.id === req.params.id;
+      })
+    
+    )})
+
 
   router.post("/courses/new", (req, res, next) => {
     newCourse = req.body;
@@ -49,22 +59,7 @@ module.exports = server => {
     updCourse.length = req.body.length;
     updCourse.authors = req.body.authors;
   });
-
-  router.delete("/courses/delete/:id", (req, res, next) => {
-    let courses = server.db.getState().courses;
-    deletedCourse = courses.find(course => {
-      course.id === req.body;
-    });
-
-    courses.splice(
-      this.courses.indexOf(
-        courses.find(course => {
-          course.id === req.params;
-        })
-      ),
-      1
-    );
-  });
 */
+
   return router;
 };

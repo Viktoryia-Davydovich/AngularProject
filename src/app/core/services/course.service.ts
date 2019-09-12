@@ -49,11 +49,11 @@ export class CourseService {
     return this.http.post(`${this.baseUrl}/new`, newCourse);
   }
 
-  deleteCourse(courseId: number): void {
-    this.http.delete(`${this.baseUrl}/delete/${courseId}`);
+  deleteCourse(courseId: number) {
+    return this.http.delete(`${this.baseUrl}/${courseId}`);
   }
 
-  updateCourse(updatedCourse: UpdatedCourse) {
-    return this.http.put(`${this.baseUrl}/edit`, updatedCourse);
+  updateCourse(courseId: number, updatedCourse: UpdatedCourse) {
+    return this.http.put(`${this.baseUrl}/${courseId}`, updatedCourse);
   }
 }

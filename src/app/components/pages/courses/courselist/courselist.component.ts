@@ -51,9 +51,9 @@ export class CourselistComponent implements OnInit {
       .subscribe(filteredCourses => (this.filteredCourses = filteredCourses));
   }
   onDeleted = (deletedCourseId: number) => {
-    console.log(`You have deleted course number ${deletedCourseId}`);
     let c = confirm("Are you sure you want to delete this item?");
     if (c === true) {
+      console.log(`You have deleted course number ${deletedCourseId}`);
       this.courseService.deleteCourse(deletedCourseId);
     }
   };
