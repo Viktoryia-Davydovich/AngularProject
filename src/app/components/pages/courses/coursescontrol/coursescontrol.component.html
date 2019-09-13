@@ -3,16 +3,9 @@
     <input
       type="text"
       placeholder="type to search"
+      #searchedCourse
       class="course-control__search-field"
-      [(ngModel)]="searchedCourse"
     />
-    <button
-      type="button"
-      class="course-control__search-button"
-      (click)="searchCourse()"
-    >
-      Search
-    </button>
   </div>
   <div class="course-control__add-button-container">
     <button

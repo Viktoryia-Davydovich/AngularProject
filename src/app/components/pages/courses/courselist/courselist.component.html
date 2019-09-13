@@ -1,6 +1,6 @@
 <div class="courses-list">
   <app-coursescontrol
-    (searchText)="onSearchCourse($event)"
+    (apiFiltered)="onApiSearchResponse($event)"
   ></app-coursescontrol>
   <app-course
     *ngFor="let course of filteredCourses"

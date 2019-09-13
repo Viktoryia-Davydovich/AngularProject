@@ -32,7 +32,7 @@ export class AuthService {
     return false;
   }
 
-  getUserInfo() {
+  getUserInfo(): any {
     return this.http.get(this.baseUrl + "/userinfo");
   }
 }

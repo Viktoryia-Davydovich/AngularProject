@@ -43,13 +43,10 @@ export class CourselistComponent implements OnInit {
     this.courses = orderByPipe.transform(this.courses);
   }
 
-  onSearchCourse(text: string) {
-    const filterPipe = new FilterPipe();
-    this.searchedCourse = text;
-    this.courseService
-      .searchCourses(text)
-      .subscribe(filteredCourses => (this.filteredCourses = filteredCourses));
+  onApiSearchResponse(apiResp: any) {
+    this.filteredCourses = apiResp;
   }
+
   onDeleted = (deletedCourseId: number) => {
     let c = confirm("Are you sure you want to delete this item?");
     if (c === true) {
