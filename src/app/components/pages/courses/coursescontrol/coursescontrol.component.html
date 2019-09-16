@@ -3,7 +3,7 @@
     <input
       type="text"
       placeholder="type to search"
-      #searchedCourse
+      (keyup)="keyUp.next($event)"
       class="course-control__search-field"
     />
   </div>

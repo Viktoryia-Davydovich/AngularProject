@@ -33,6 +33,8 @@ import { NotFoundComponent } from "./components/pages/not-found/not-found.compon
 import { AddcourseComponent } from "./components/pages/courses/addcourse/addcourse.component";
 import { EditcourseComponent } from "./components/pages/courses/editcourse/editcourse.component";
 import { TokenInterceptor } from "./auth/http-interceptor.service";
+import { LoaderComponent } from "./components/layout/loader/loader.component";
+import { LoaderService } from "./core/services/loader.service";
 
 @NgModule({
   declarations: [
@@ -51,7 +53,8 @@ import { TokenInterceptor } from "./auth/http-interceptor.service";
     OrderByDatePipe,
     NotFoundComponent,
     AddcourseComponent,
-    EditcourseComponent
+    EditcourseComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +64,7 @@ import { TokenInterceptor } from "./auth/http-interceptor.service";
     HttpClientModule
   ],
   providers: [
+    LoaderService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

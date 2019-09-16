@@ -24,7 +24,7 @@ export class AddcourseComponent implements OnInit {
   }
 
   handleSubmit() {
-    this.courseService.createCourse(this.course);
+    this.courseService.createCourse(this.course).subscribe();
     this.router.navigate(["/courses"]);
   }
 }

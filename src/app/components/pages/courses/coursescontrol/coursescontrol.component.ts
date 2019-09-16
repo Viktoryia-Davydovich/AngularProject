@@ -10,7 +10,7 @@ import {
 } from "@angular/core";
 import { EditableCourse } from "src/app/models/Course";
 import { Router } from "@angular/router";
-import { fromEvent } from "rxjs";
+import { fromEvent, Subject } from "rxjs";
 import {
   map,
   filter,
@@ -29,14 +29,14 @@ export class CoursescontrolComponent implements OnInit {
   @Output() apiFiltered = new EventEmitter<any>();
   apiResponse: any;
   isSearching: boolean;
+  keyUp = new Subject<KeyboardEvent>();
 
   constructor(private router: Router, private courseService: CourseService) {
     this.isSearching = false;
-    this.apiResponse = [];
   }
 
   ngOnInit() {
-    fromEvent(this.searchedCourse.nativeElement, "keyup")
+    this.keyUp
       .pipe(
         map((event: any) => {
           return event.target.value;
@@ -52,8 +52,7 @@ export class CoursescontrolComponent implements OnInit {
           res => {
             console.log("res", res);
             this.isSearching = false;
-            this.apiResponse = res;
-            this.apiFiltered.emit(this.apiResponse);
+            this.apiFiltered.emit(res);
           },
           err => {
             this.isSearching = false;

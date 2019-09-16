@@ -6,18 +6,21 @@ import {
   HttpInterceptor
 } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { LoaderService } from "../core/services/loader.service";
+import { finalize } from "rxjs/operators";
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  constructor() {}
+  constructor(public loaderService: LoaderService) {}
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    this.loaderService.show();
     request = request.clone({
       setHeaders: {
         Authorization: `${localStorage.getItem("this_user")}`
       }
     });
-    return next.handle(request);
+    return next.handle(request).pipe(finalize(() => this.loaderService.hide()));
   }
 }

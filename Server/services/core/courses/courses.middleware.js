@@ -30,36 +30,5 @@ module.exports = server => {
     res.json(courses);
   });
 
-  /*
-  router.delete("/courses/:id", (req, res, next) => {
-    let courses = server.db.getState().courses;
-
-    server.db.delete(
-      courses.find(course => {
-        course.id === req.params.id;
-      })
-    
-    )})
-
-
-  router.post("/courses/new", (req, res, next) => {
-    newCourse = req.body;
-    courses = server.db.getState().courses;
-    courses.push(newCourse);
-    courses.res.json(courses);
-  });
-
-  router.put("/courses/edit", (req, res, next) => {
-    let courses = server.db.getState().courses;
-    updCourse = courses.find(course => {
-      course.id === req.body.id;
-    });
-    updCourse.title = req.body.title;
-    updCourse.description = req.body.description;
-    updCourse.length = req.body.length;
-    updCourse.authors = req.body.authors;
-  });
-*/
-
   return router;
 };
