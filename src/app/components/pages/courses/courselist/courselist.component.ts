@@ -48,6 +48,22 @@ export class CourselistComponent implements OnInit {
     this.courses = orderByPipe.transform(this.courses);
   }
 
+  onSearchCourse(searchText: string) {
+    this.courseService.searchCourses(searchText).subscribe(
+      res => {
+        console.log("res", res);
+        if (res.length === 0) {
+          this.updateCourselist();
+        } else {
+          this.filteredCourses = res;
+        }
+      },
+      err => {
+        console.log("error", err);
+      }
+    );
+  }
+
   onApiSearchResponse(apiResp: any) {
     this.filteredCourses = apiResp;
   }

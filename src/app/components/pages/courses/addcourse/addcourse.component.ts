@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { EditableCourse } from "src/app/models/Course";
+import { EditableCourse, NewCourse } from "src/app/models/Course";
 import { CourseService } from "src/app/core/services/course.service";
 import { Router } from "@angular/router";
 import { LoaderService } from "src/app/core/services/loader.service";
@@ -31,6 +31,7 @@ export class AddcourseComponent implements OnInit {
   }
 
   handleSubmit() {
+    console.log(this.course);
     this.courseService.createCourse(this.course).subscribe();
     this.router.navigate(["/courses"]);
   }

@@ -15,7 +15,6 @@ import { LoaderService } from "./loader.service";
 })
 export class CourseService {
   private baseUrl: string = "http://localhost:3004/courses";
-  courses: Course[];
 
   constructor(private http: HttpClient, private loaderService: LoaderService) {}
 
@@ -46,7 +45,6 @@ export class CourseService {
   createCourse(addedCourse: NewCourse) {
     this.loaderService.show();
     const newCourse = {
-      id: this.courses.length,
       name: addedCourse.name,
       length: addedCourse.length,
       authors: addedCourse.authors,
@@ -54,7 +52,7 @@ export class CourseService {
       description: addedCourse.description
     };
     return this.http
-      .post(`${this.baseUrl}/new`, newCourse)
+      .post(`${this.baseUrl}`, newCourse)
       .pipe(finalize(() => this.loaderService.hide()));
   }
 

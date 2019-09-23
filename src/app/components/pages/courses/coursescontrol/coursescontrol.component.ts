@@ -27,19 +27,10 @@ import { LoaderService } from "src/app/core/services/loader.service";
   styleUrls: ["./coursescontrol.component.css"]
 })
 export class CoursescontrolComponent implements OnInit {
-  @ViewChild("searchedCourse", { static: false }) searchedCourse: ElementRef;
-  @Output() apiFiltered = new EventEmitter<any>();
-  apiResponse: any;
-  isSearching: boolean;
+  @Output() searchText = new EventEmitter<string>();
   keyUp = new Subject<KeyboardEvent>();
 
-  constructor(
-    private router: Router,
-    private courseService: CourseService,
-    private loaderService: LoaderService
-  ) {
-    this.isSearching = false;
-  }
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.keyUp
@@ -47,23 +38,12 @@ export class CoursescontrolComponent implements OnInit {
         map((event: any) => {
           return event.target.value;
         }),
-        filter(res => res.length > 3),
+        filter(res => res.length > 3 || res.length === 0),
         debounceTime(1000),
         distinctUntilChanged()
       )
-      .subscribe((searchText: string) => {
-        console.log("searching for the course...");
-        this.courseService.searchCourses(searchText).subscribe(
-          res => {
-            console.log("res", res);
-            this.isSearching = false;
-            this.apiFiltered.emit(res);
-          },
-          err => {
-            this.isSearching = false;
-            console.log("error", err);
-          }
-        );
+      .subscribe((searchedCourse: string) => {
+        this.searchText.emit(searchedCourse);
       });
   }
 
