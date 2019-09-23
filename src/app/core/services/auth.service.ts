@@ -3,6 +3,8 @@ import { User } from "src/app/models/User";
 import { Router } from "@angular/router";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { finalize } from "rxjs/operators";
+import { LoaderService } from "./loader.service";
 
 @Injectable({
   providedIn: "root"
@@ -12,13 +14,20 @@ export class AuthService {
   token: any;
   private baseUrl: string = "http://localhost:3004/auth";
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private loaderService: LoaderService
+  ) {}
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post(this.baseUrl + "/login", {
-      login: username,
-      password: password
-    });
+    this.loaderService.show();
+    return this.http
+      .post(this.baseUrl + "/login", {
+        login: username,
+        password: password
+      })
+      .pipe(finalize(() => this.loaderService.hide()));
   }
 
   logout() {
@@ -33,6 +42,9 @@ export class AuthService {
   }
 
   getUserInfo(): any {
-    return this.http.get(this.baseUrl + "/userinfo");
+    this.loaderService.show();
+    return this.http
+      .get(this.baseUrl + "/userinfo")
+      .pipe(finalize(() => this.loaderService.hide()));
   }
 }

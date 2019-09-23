@@ -4,7 +4,9 @@ import { Course } from "src/app/models/Course";
 import { FilterPipe } from "src/app/shared/pipes/filter.pipe";
 import { OrderByDatePipe } from "src/app/shared/pipes/order-by-date.pipe";
 import { CourseService } from "src/app/core/services/course.service";
-import { Observable } from "rxjs";
+import { Observable, pipe } from "rxjs";
+import { finalize } from "rxjs/operators";
+import { LoaderService } from "src/app/core/services/loader.service";
 
 @Component({
   selector: "app-courselist",
@@ -12,13 +14,16 @@ import { Observable } from "rxjs";
   styleUrls: ["./courselist.component.css"]
 })
 export class CourselistComponent implements OnInit {
-  courses: Course[];
-  filteredCourses: Course[];
+  courses: Course[] = [];
+  filteredCourses: Course[] = [];
   searchedCourse: string;
   start: number = 0;
   end: number = 3;
 
-  constructor(private courseService: CourseService) {}
+  constructor(
+    private courseService: CourseService,
+    private loaderService: LoaderService
+  ) {}
 
   ngOnInit() {
     this.updateCourselist();

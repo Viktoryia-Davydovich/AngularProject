@@ -64,7 +64,6 @@ import { LoaderService } from "./core/services/loader.service";
     HttpClientModule
   ],
   providers: [
-    LoaderService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

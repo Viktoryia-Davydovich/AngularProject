@@ -15,9 +15,11 @@ import {
   map,
   filter,
   debounceTime,
-  distinctUntilChanged
+  distinctUntilChanged,
+  finalize
 } from "rxjs/operators";
 import { CourseService } from "src/app/core/services/course.service";
+import { LoaderService } from "src/app/core/services/loader.service";
 
 @Component({
   selector: "app-coursescontrol",
@@ -31,7 +33,11 @@ export class CoursescontrolComponent implements OnInit {
   isSearching: boolean;
   keyUp = new Subject<KeyboardEvent>();
 
-  constructor(private router: Router, private courseService: CourseService) {
+  constructor(
+    private router: Router,
+    private courseService: CourseService,
+    private loaderService: LoaderService
+  ) {
     this.isSearching = false;
   }
 
@@ -46,7 +52,6 @@ export class CoursescontrolComponent implements OnInit {
         distinctUntilChanged()
       )
       .subscribe((searchText: string) => {
-        this.isSearching = true;
         console.log("searching for the course...");
         this.courseService.searchCourses(searchText).subscribe(
           res => {
