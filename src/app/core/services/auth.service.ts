@@ -20,12 +20,12 @@ export class AuthService {
     private loaderService: LoaderService
   ) {}
 
-  login(username: string, password: string): Observable<any> {
+  login(user: User): Observable<any> {
     this.loaderService.show();
     return this.http
       .post(this.baseUrl + "/login", {
-        login: username,
-        password: password
+        login: user.login,
+        password: user.password
       })
       .pipe(finalize(() => this.loaderService.hide()));
   }

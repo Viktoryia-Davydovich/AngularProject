@@ -1,11 +1,21 @@
 export interface IUser {
-  id: number;
   login: string;
   password: string;
 }
 
 export class User implements IUser {
-  id: number;
   login: string;
   password: string;
+}
+
+
+export class LoggedUser implements IUser {
+  "id": number
+  "fakeToken": string
+  "name": {
+    "first": string
+    "last": string
+  }
+  "login": string
+  "password": string
 }

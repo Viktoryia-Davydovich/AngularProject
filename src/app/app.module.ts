@@ -3,6 +3,8 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './store/reducers/app.reducer';
 
 /*Font awesome*/
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
@@ -35,6 +37,8 @@ import { EditcourseComponent } from "./components/pages/courses/editcourse/editc
 import { TokenInterceptor } from "./auth/http-interceptor.service";
 import { LoaderComponent } from "./components/layout/loader/loader.component";
 import { LoaderService } from "./core/services/loader.service";
+import { EffectsModule } from '@ngrx/effects';
+import { CoursesEffects } from './store/effects/courses.effects';
 
 @NgModule({
   declarations: [
@@ -61,7 +65,11 @@ import { LoaderService } from "./core/services/loader.service";
     FontAwesomeModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    EffectsModule.forRoot([CoursesEffects]), 
+    StoreModule.forRoot({
+      appState: reducer
+    })
   ],
   providers: [
     {

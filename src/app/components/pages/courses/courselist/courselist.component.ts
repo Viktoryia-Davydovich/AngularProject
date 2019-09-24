@@ -7,6 +7,9 @@ import { CourseService } from "src/app/core/services/course.service";
 import { Observable, pipe } from "rxjs";
 import { finalize } from "rxjs/operators";
 import { LoaderService } from "src/app/core/services/loader.service";
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../../../store/reducers/app.reducer'
+import * as coursesActions from "../../../../store/actions/courses.actions"
 
 @Component({
   selector: "app-courselist",
@@ -14,15 +17,17 @@ import { LoaderService } from "src/app/core/services/loader.service";
   styleUrls: ["./courselist.component.css"]
 })
 export class CourselistComponent implements OnInit {
-  courses: Course[] = [];
-  filteredCourses: Course[] = [];
+  //courses: Course[] = [];
+  //filteredCourses: Course[] = [];
+  filteredCourses: Observable<Course[]> = this.store.select(state => state.courses)
   searchedCourse: string;
   start: number = 0;
   end: number = 3;
 
   constructor(
     private courseService: CourseService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private store: Store<fromRoot.State>
   ) {}
 
   ngOnInit() {
@@ -30,6 +35,8 @@ export class CourselistComponent implements OnInit {
   }
 
   updateCourselist() {
+    this.store.dispatch(new coursesActions.ListCourses(this.start, this.end));
+    /*
     this.courseService
       .getCourseList(this.start, this.end)
       .subscribe((data: Course[]) => {
@@ -41,13 +48,15 @@ export class CourselistComponent implements OnInit {
         this.filterByDate();
         this.filteredCourses = [...this.courses];
       });
-  }
+      */
 
+  }
+/*
   filterByDate() {
     const orderByPipe = new OrderByDatePipe();
     this.courses = orderByPipe.transform(this.courses);
   }
-
+*/
   onSearchCourse(searchText: string) {
     this.courseService.searchCourses(searchText).subscribe(
       res => {

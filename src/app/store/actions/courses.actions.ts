@@ -1,4 +1,3 @@
-// Section 1
 import { Injectable } from "@angular/core";
 import { Action } from "@ngrx/store";
 import { Course, NewCourse, EditableCourse } from "../../models/Course";
@@ -9,6 +8,7 @@ export const UPDATE_COURSE = "Update course";
 export const LIST_COURSES = "List courses";
 export const FIND_COURSE = "Find course";
 export const GET_COURSE_BY_ID = "Get course by id";
+export const COURSES_LOADED = "Courses loaded"
 
 export class AddCourse implements Action {
   readonly type = NEW_COURSE;
@@ -31,7 +31,7 @@ export class UpdateCourse implements Action {
 export class ListCourses implements Action {
   readonly type = LIST_COURSES;
 
-  constructor() {}
+  constructor(public start: number, public end: number) {}
 }
 
 export class FindCourse implements Action {
@@ -46,10 +46,17 @@ export class GetCourseById implements Action {
   constructor(public payload: number) {}
 }
 
+export class CoursesLoaded implements Action {
+  readonly type = COURSES_LOADED;
+
+  constructor(public payload: Course[]) {}
+}
+
 export type Actions =
   | AddCourse
   | DeleteCourse
   | UpdateCourse
   | ListCourses
   | FindCourse
-  | GetCourseById;
+  | GetCourseById
+  |CoursesLoaded;
