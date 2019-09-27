@@ -4,6 +4,8 @@ import { Router } from "@angular/router";
 import { User } from 'src/app/models/User';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { finalize } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { login } from 'src/app/store/actions/auth.actions';
 
 @Component({
   selector: "app-login",
@@ -13,11 +15,13 @@ import { finalize } from 'rxjs/operators';
 export class LoginComponent implements OnInit {
   @Input() user: User = {login: "", password : ""};
 
-  constructor(private loginService: AuthService, private router: Router, private loaderService: LoaderService) {}
+  constructor(private loginService: AuthService, private router: Router, private loaderService: LoaderService, private store: Store<{appState}>) {}
 
   ngOnInit() {}
 
   onLogin() {
+    this.store.dispatch(login(this.user))
+    /*
     this.loaderService.show()
     this.loginService.login(this.user)
     .pipe(finalize(() => this.loaderService.hide()))
@@ -26,5 +30,6 @@ export class LoginComponent implements OnInit {
       this.router.navigate(["/courses"]);
     }, error => console.log(error)
     )
+    */
   }
 }

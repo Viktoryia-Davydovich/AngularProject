@@ -1,62 +1,36 @@
 import { Injectable } from "@angular/core";
-import { Action } from "@ngrx/store";
-import { Course, NewCourse, EditableCourse } from "../../models/Course";
+import { Action, createAction, props } from "@ngrx/store";
+import { Course, NewCourse, EditableCourse, UpdatedCourse } from "../../models/Course";
 
-export const NEW_COURSE = "New course";
-export const DELETE_COURSE = "Delete course";
-export const UPDATE_COURSE = "Update course";
-export const LIST_COURSES = "List courses";
-export const FIND_COURSE = "Find course";
-export const GET_COURSE_BY_ID = "Get course by id";
-export const COURSES_LOADED = "Courses loaded"
 
-export class AddCourse implements Action {
-  readonly type = NEW_COURSE;
+export const addCourse = createAction(
+  '[Courselist Page] Add',
+  props<{course: NewCourse}>()
+);
 
-  constructor(public payload: EditableCourse) {}
-}
+export const deleteCourse = createAction(
+  '[Courselist Page] Delete',
+  props<{id: number}>()
+);
 
-export class DeleteCourse implements Action {
-  readonly type = DELETE_COURSE;
 
-  constructor(public payload: number) {}
-}
+export const updateCourse = createAction(
+  '[Courselist Page] Update',
+  props<{course: UpdatedCourse}>()
+);
 
-export class UpdateCourse implements Action {
-  readonly type = UPDATE_COURSE;
+export const listCourses = createAction(
+  '[Courselist Page] List',
+  props<{courses: Course[]}>()
+);
 
-  constructor(public payloadId: number, public payload: EditableCourse) {}
-}
 
-export class ListCourses implements Action {
-  readonly type = LIST_COURSES;
+export const findCourse = createAction(
+  '[Courselist Page] Find',
+  props<{searchString: string}>()
+);
 
-  constructor(public start: number, public end: number) {}
-}
-
-export class FindCourse implements Action {
-  readonly type = FIND_COURSE;
-
-  constructor(public payload: string) {}
-}
-
-export class GetCourseById implements Action {
-  readonly type = GET_COURSE_BY_ID;
-
-  constructor(public payload: number) {}
-}
-
-export class CoursesLoaded implements Action {
-  readonly type = COURSES_LOADED;
-
-  constructor(public payload: Course[]) {}
-}
-
-export type Actions =
-  | AddCourse
-  | DeleteCourse
-  | UpdateCourse
-  | ListCourses
-  | FindCourse
-  | GetCourseById
-  |CoursesLoaded;
+export const getCourseById = createAction(
+  '[Courselist Page] By id',
+  props<{id: number}>()
+);

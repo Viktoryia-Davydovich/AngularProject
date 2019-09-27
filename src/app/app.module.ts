@@ -38,7 +38,6 @@ import { TokenInterceptor } from "./auth/http-interceptor.service";
 import { LoaderComponent } from "./components/layout/loader/loader.component";
 import { LoaderService } from "./core/services/loader.service";
 import { EffectsModule } from '@ngrx/effects';
-import { CoursesEffects } from './store/effects/courses.effects';
 
 @NgModule({
   declarations: [
@@ -66,7 +65,6 @@ import { CoursesEffects } from './store/effects/courses.effects';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    EffectsModule.forRoot([CoursesEffects]), 
     StoreModule.forRoot({
       appState: reducer
     })

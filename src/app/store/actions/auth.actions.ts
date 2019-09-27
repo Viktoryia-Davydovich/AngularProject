@@ -1,23 +1,14 @@
 import { Injectable } from "@angular/core";
-import { Action } from "@ngrx/store";
+import { Action, createAction, props } from "@ngrx/store";
 import { Course, NewCourse, EditableCourse } from "../../models/Course";
 import { User } from 'src/app/models/User';
 
-export const LOGIN = "Login";
-export const LOGOUT = "Logout";
 
-export class login implements Action {
-  readonly type = LOGIN;
+export const login = createAction(
+  '[Login Page] Login',
+  props<{login: string, password: string}>()
+);
 
-  constructor(public payload: User) {}
-}
-
-export class logout implements Action {
-  readonly type = LOGOUT;
-
-  constructor() {}
-}
-
-export type Actions =
-  | login
-  | logout;
+export const logout = createAction(
+  '[Login Page] Login'
+);

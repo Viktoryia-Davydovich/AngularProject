@@ -7,7 +7,7 @@ import { CourseService } from "src/app/core/services/course.service";
 import { Observable, pipe } from "rxjs";
 import { finalize } from "rxjs/operators";
 import { LoaderService } from "src/app/core/services/loader.service";
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import * as fromRoot from '../../../../store/reducers/app.reducer'
 import * as coursesActions from "../../../../store/actions/courses.actions"
 
@@ -19,7 +19,7 @@ import * as coursesActions from "../../../../store/actions/courses.actions"
 export class CourselistComponent implements OnInit {
   //courses: Course[] = [];
   //filteredCourses: Course[] = [];
-  filteredCourses: Observable<Course[]> = this.store.select(state => state.courses)
+  filteredCourses: Observable<Course[]> 
   searchedCourse: string;
   start: number = 0;
   end: number = 3;
@@ -27,16 +27,16 @@ export class CourselistComponent implements OnInit {
   constructor(
     private courseService: CourseService,
     private loaderService: LoaderService,
-    private store: Store<fromRoot.State>
-  ) {}
+    private store: Store<{appState}>
+  ) {
+    this.filteredCourses = store.select(state => state.appState.courses)
+  }
 
   ngOnInit() {
     this.updateCourselist();
   }
 
   updateCourselist() {
-    this.store.dispatch(new coursesActions.ListCourses(this.start, this.end));
-    /*
     this.loaderService.show()
     this.courseService
       .getCourseList(this.start, this.end)
@@ -46,11 +46,12 @@ export class CourselistComponent implements OnInit {
           course.date = new Date(course.date);
           return course;
         });
-        this.courses = data;
-        this.filterByDate();
-        this.filteredCourses = [...this.courses];
+        console.log(data)
+        this.store.dispatch(coursesActions.listCourses({courses: data}))
       });
-      */
+
+
+;
 
   }
 /*
