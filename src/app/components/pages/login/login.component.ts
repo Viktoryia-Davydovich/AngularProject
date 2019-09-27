@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
     .subscribe(data => {
       localStorage.setItem("this_user", data.token);
       this.router.navigate(["/courses"]);
-    });
+    }, error => console.log(error)
+    )
   }
 }

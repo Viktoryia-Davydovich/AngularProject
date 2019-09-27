@@ -3,7 +3,7 @@ import { User } from "src/app/models/User";
 import { Router } from "@angular/router";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { finalize } from "rxjs/operators";
+import { finalize, share, publish, refCount } from "rxjs/operators";
 import { LoaderService } from "./loader.service";
 
 @Injectable({
