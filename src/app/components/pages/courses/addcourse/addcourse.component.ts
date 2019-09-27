@@ -32,7 +32,8 @@ export class AddcourseComponent implements OnInit {
 
   handleSubmit() {
     console.log(this.course);
-    this.courseService.createCourse(this.course).subscribe();
+    this.loaderService.show()
+    this.courseService.createCourse(this.course).pipe(finalize(() => this.loaderService.hide())).subscribe();
     this.router.navigate(["/courses"]);
   }
 }

@@ -15,19 +15,15 @@ export class AuthService {
   private baseUrl: string = "http://localhost:3004/auth";
 
   constructor(
-    private router: Router,
     private http: HttpClient,
-    private loaderService: LoaderService
   ) {}
 
   login(user: User): Observable<any> {
-    this.loaderService.show();
     return this.http
       .post(this.baseUrl + "/login", {
         login: user.login,
         password: user.password
       })
-      .pipe(finalize(() => this.loaderService.hide()));
   }
 
   logout() {
@@ -42,9 +38,7 @@ export class AuthService {
   }
 
   getUserInfo(): any {
-    this.loaderService.show();
     return this.http
       .get(this.baseUrl + "/userinfo")
-      .pipe(finalize(() => this.loaderService.hide()));
   }
 }

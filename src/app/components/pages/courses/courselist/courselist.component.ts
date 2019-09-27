@@ -37,8 +37,10 @@ export class CourselistComponent implements OnInit {
   updateCourselist() {
     this.store.dispatch(new coursesActions.ListCourses(this.start, this.end));
     /*
+    this.loaderService.show()
     this.courseService
       .getCourseList(this.start, this.end)
+      .pipe(finalize(() => this.loaderService.hide()))
       .subscribe((data: Course[]) => {
         data = data.map(course => {
           course.date = new Date(course.date);
@@ -58,7 +60,10 @@ export class CourselistComponent implements OnInit {
   }
 */
   onSearchCourse(searchText: string) {
-    this.courseService.searchCourses(searchText).subscribe(
+    this.loaderService.show()
+    this.courseService.searchCourses(searchText)
+    .pipe(finalize(() => this.loaderService.hide()))
+    .subscribe(
       res => {
         console.log("res", res);
         if (res.length === 0) {
@@ -78,10 +83,13 @@ export class CourselistComponent implements OnInit {
   }
 
   onDeleted = (deletedCourseId: number) => {
+    this.loaderService.show()
     const confirmation = confirm("Are you sure you want to delete this item?");
     if (confirmation === true) {
       console.log(`You have deleted course number ${deletedCourseId}`);
-      this.courseService.deleteCourse(deletedCourseId).subscribe();
+      this.courseService.deleteCourse(deletedCourseId)
+      .pipe(finalize(() => this.loaderService.hide()))
+      .subscribe();
     }
   };
 

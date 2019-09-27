@@ -1,6 +1,8 @@
 import { Component, OnInit, NgModule } from "@angular/core";
 import { AuthService } from "src/app/core/services/auth.service";
 import { Router } from "@angular/router";
+import { LoaderService } from 'src/app/core/services/loader.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: "app-header",
@@ -12,12 +14,15 @@ export class HeaderComponent implements OnInit {
   isLoggedIn: boolean;
   constructor(
     private loginService: AuthService,
-    private router: Router
+    private router: Router,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit() {
+    this.loaderService.show()
     this.loginService
       .getUserInfo()
+      .pipe(finalize(() => this.loaderService.hide()))
       .subscribe(
         user => {
           console.log(user);          
