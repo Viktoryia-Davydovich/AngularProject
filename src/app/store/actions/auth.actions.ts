@@ -18,9 +18,9 @@ export const assignLoggedUser = createAction(
 export const logout = createAction("[Login Page] Login");
 
 const all = union({
-  login, 
+  login,
   logout,
   assignLoggedUser
-})
+});
 
 export type AuthActions = typeof all;

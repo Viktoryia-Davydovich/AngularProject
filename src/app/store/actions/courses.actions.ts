@@ -16,7 +16,7 @@ export const deleteCourse = createAction(
 
 export const updateCourse = createAction(
   "[Courselist Page] Update",
-  props<{ id: number, course: UpdatedCourse }>()
+  props<{ id: number; course: UpdatedCourse }>()
 );
 
 export const getCourseById = createAction(
@@ -47,7 +47,7 @@ export const onFoundCourseById = createAction(
 );
 
 const all = union({
-  addCourse, 
+  addCourse,
   deleteCourse,
   updateCourse,
   getCourseById,
@@ -55,6 +55,6 @@ const all = union({
   getCourselist,
   listCourses,
   onFoundCourseById
-})
+});
 
 export type CoursesActions = typeof all;

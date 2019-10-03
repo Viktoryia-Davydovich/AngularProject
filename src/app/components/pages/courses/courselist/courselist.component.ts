@@ -1,17 +1,14 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
 import { Course } from "src/app/models/Course";
-import { FilterPipe } from "src/app/shared/pipes/filter.pipe";
-import { OrderByDatePipe } from "src/app/shared/pipes/order-by-date.pipe";
 import { CourseService } from "src/app/core/services/course.service";
 import { Observable, pipe } from "rxjs";
-import { finalize } from "rxjs/operators";
+import { finalize, map } from "rxjs/operators";
 import { LoaderService } from "src/app/core/services/loader.service";
 import { Store, select } from "@ngrx/store";
-import * as fromRoot from "../../../../store/reducers/app.reducer";
-import * as coursesActions from "../../../../store/actions/courses.actions";
 import { IAppState } from "src/app/store/state/app.state";
-import { getCourselist } from '../../../../store/actions/courses.actions';
+import { getCourselist } from "../../../../store/actions/courses.actions";
+import { selectCourses } from "src/app/store/selectors/app.selector";
 
 @Component({
   selector: "app-courselist",
@@ -19,7 +16,8 @@ import { getCourselist } from '../../../../store/actions/courses.actions';
   styleUrls: ["./courselist.component.css"]
 })
 export class CourselistComponent implements OnInit {
-  //courses: Course[] = [];
+  private subscription;
+  courses: Course[] = [];
   //filteredCourses: Course[] = [];
   filteredCourses: Observable<Course[]>;
   searchedCourse: string;
@@ -30,27 +28,20 @@ export class CourselistComponent implements OnInit {
     private courseService: CourseService,
     private loaderService: LoaderService,
     private store: Store<IAppState>
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.updateCourselist();
-
   }
 
   updateCourselist() {
     this.loaderService.show();
-    this.store.dispatch(getCourselist({start: this.start, end: this.end}));
-    this.filteredCourses = this.store.select(state => state.courses);
+    this.store.dispatch(getCourselist({ start: this.start, end: this.end }));
+    this.filteredCourses = this.store.pipe(select(selectCourses));
     console.log(this.filteredCourses);
     this.loaderService.hide();
   }
 
-  /*
-  filterByDate() {
-    const orderByPipe = new OrderByDatePipe();
-    this.courses = orderByPipe.transform(this.courses);
-  }
-*/
   onSearchCourse(searchText: string) {
     this.loaderService.show();
     this.courseService
