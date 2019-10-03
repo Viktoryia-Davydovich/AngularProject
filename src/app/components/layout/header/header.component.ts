@@ -1,8 +1,17 @@
 import { Component, OnInit, NgModule } from "@angular/core";
 import { AuthService } from "src/app/core/services/auth.service";
 import { Router } from "@angular/router";
-import { LoaderService } from 'src/app/core/services/loader.service';
-import { finalize } from 'rxjs/operators';
+import { LoaderService } from "src/app/core/services/loader.service";
+import { finalize } from "rxjs/operators";
+import { IAppState } from "src/app/store/state/app.state";
+import { Store, select } from "@ngrx/store";
+import { getUserInfo } from "src/app/store/actions/auth.actions";
+import {
+  selectActiveUser,
+  selectUserInfo
+} from "src/app/store/selectors/app.selector";
+import { Observable } from "rxjs";
+import { LoggedUser } from "src/app/models/User";
 
 @Component({
   selector: "app-header",
@@ -11,23 +20,20 @@ import { finalize } from 'rxjs/operators';
 })
 export class HeaderComponent implements OnInit {
   username: string = "User login";
+  userInfo: Observable<LoggedUser>;
   isLoggedIn: boolean;
   constructor(
     private loginService: AuthService,
     private router: Router,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private store: Store<IAppState>
   ) {}
 
   ngOnInit() {
-    this.loaderService.show()
-    this.loginService
-      .getUserInfo()
-      .pipe(finalize(() => this.loaderService.hide()))
-      .subscribe(
-        user => {
-          console.log(user);          
-          return this.username = user.name.first + " " + user.name.last}
-      )
+    this.loaderService.show();
+    this.store.dispatch(getUserInfo());
+    this.userInfo = this.store.pipe(select(selectUserInfo));
+    this.loaderService.hide();
   }
 
   ngAfterContentChecked() {

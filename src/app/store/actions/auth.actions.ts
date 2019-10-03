@@ -9,13 +9,20 @@ export const login = createAction(
   props<{ loggingUser: User }>()
 );
 
+export const getUserInfo = createAction("[Login Page] Get user info");
+
 // these are handled by reducer
 export const assignLoggedUser = createAction(
   "[Login Page] Assign logged user",
-  props<{ loggedUser: LoggedUser }>()
+  props<{ loggedUser: User }>()
 );
 
-export const logout = createAction("[Login Page] Login");
+export const assignUserInfo = createAction(
+  "[Login Page] Assign user info",
+  props<{ userInfo: LoggedUser }>()
+);
+
+export const logout = createAction("[Login Page] Logout");
 
 const all = union({
   login,

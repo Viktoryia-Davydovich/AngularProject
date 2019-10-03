@@ -7,7 +7,11 @@ import { finalize, map } from "rxjs/operators";
 import { LoaderService } from "src/app/core/services/loader.service";
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "src/app/store/state/app.state";
-import { getCourselist } from "../../../../store/actions/courses.actions";
+import {
+  getCourselist,
+  findCourses,
+  deleteCourse
+} from "../../../../store/actions/courses.actions";
 import { selectCourses } from "src/app/store/selectors/app.selector";
 
 @Component({
@@ -17,7 +21,7 @@ import { selectCourses } from "src/app/store/selectors/app.selector";
 })
 export class CourselistComponent implements OnInit {
   private subscription;
-  courses: Course[] = [];
+  //courses: Observable<Course[]>;
   //filteredCourses: Course[] = [];
   filteredCourses: Observable<Course[]>;
   searchedCourse: string;
@@ -44,26 +48,9 @@ export class CourselistComponent implements OnInit {
 
   onSearchCourse(searchText: string) {
     this.loaderService.show();
-    this.courseService
-      .searchCourses(searchText)
-      .pipe(finalize(() => this.loaderService.hide()))
-      .subscribe(
-        res => {
-          console.log("res", res);
-          if (res.length === 0) {
-            this.updateCourselist();
-          } else {
-            this.filteredCourses = res;
-          }
-        },
-        err => {
-          console.log("error", err);
-        }
-      );
-  }
-
-  onApiSearchResponse(apiResp: any) {
-    this.filteredCourses = apiResp;
+    this.store.dispatch(findCourses({ searchString: searchText }));
+    this.filteredCourses = this.store.pipe(select(selectCourses));
+    this.loaderService.hide();
   }
 
   onDeleted = (deletedCourseId: number) => {
@@ -71,10 +58,10 @@ export class CourselistComponent implements OnInit {
     const confirmation = confirm("Are you sure you want to delete this item?");
     if (confirmation === true) {
       console.log(`You have deleted course number ${deletedCourseId}`);
-      this.courseService
-        .deleteCourse(deletedCourseId)
-        .pipe(finalize(() => this.loaderService.hide()))
-        .subscribe();
+      this.loaderService.show();
+      this.store.dispatch(deleteCourse({ id: deletedCourseId }));
+      this.filteredCourses = this.store.pipe(select(selectCourses));
+      this.loaderService.hide();
     }
   };
 

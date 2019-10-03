@@ -25,19 +25,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   onLogin() {
-    /*
-    this.store.dispatch(login(this.user))
-*/
     this.loaderService.show();
-    this.loginService
-      .login(this.user)
-      .pipe(finalize(() => this.loaderService.hide()))
-      .subscribe(
-        data => {
-          localStorage.setItem("this_user", data.token);
-          this.router.navigate(["/courses"]);
-        },
-        error => console.log(error)
-      );
+    this.store.dispatch(login({ loggingUser: this.user }));
+    this.loaderService.hide();
   }
 }

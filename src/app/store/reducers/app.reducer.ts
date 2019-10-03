@@ -1,5 +1,10 @@
 import { listCourses, onFoundCourseById } from "../actions/courses.actions";
-import { login, logout, assignLoggedUser } from "../actions/auth.actions";
+import {
+  login,
+  logout,
+  assignLoggedUser,
+  assignUserInfo
+} from "../actions/auth.actions";
 import { createReducer, on, State } from "@ngrx/store";
 import { initialAppState } from "../state/app.state";
 
@@ -8,6 +13,10 @@ const _reducer = createReducer(
   on(assignLoggedUser, (state, { loggedUser }) => ({
     ...state,
     activeUser: loggedUser
+  })),
+  on(assignUserInfo, (state, { userInfo }) => ({
+    ...state,
+    userInfo: userInfo
   })),
   on(logout, state => ({ ...state, activeUser: null })),
   on(listCourses, (state, { courses }) => ({

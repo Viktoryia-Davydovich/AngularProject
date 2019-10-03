@@ -1,5 +1,6 @@
 import { createSelector } from "@ngrx/store";
 import { IAppState } from "../state/app.state";
+import { userInfo } from "os";
 
 export const activeUser = (state: IAppState) => state.activeUser;
 export const isAuthenticated = (state: IAppState) => state.isAuthenticated;
@@ -8,6 +9,11 @@ export const selectedCourse = (state: IAppState) => state.selectedCourse;
 
 export const selectActiveUser = createSelector(
   activeUser,
+  state => state
+);
+
+export const selectUserInfo = createSelector(
+  userInfo,
   state => state
 );
 

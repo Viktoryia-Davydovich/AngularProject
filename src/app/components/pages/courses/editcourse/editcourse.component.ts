@@ -2,8 +2,15 @@ import { Component, OnInit } from "@angular/core";
 import { CourseService } from "src/app/core/services/course.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { EditableCourse, UpdatedCourse } from "src/app/models/Course";
-import { LoaderService } from 'src/app/core/services/loader.service';
-import { finalize } from 'rxjs/operators';
+import { LoaderService } from "src/app/core/services/loader.service";
+import { finalize } from "rxjs/operators";
+import { IAppState } from "src/app/store/state/app.state";
+import { Store, select } from "@ngrx/store";
+import {
+  updateCourse,
+  getCourseById
+} from "src/app/store/actions/courses.actions";
+import { selectSelectedCourse } from "src/app/store/selectors/app.selector";
 
 @Component({
   selector: "app-editcourse",
@@ -12,34 +19,34 @@ import { finalize } from 'rxjs/operators';
 })
 export class EditcourseComponent implements OnInit {
   course: EditableCourse;
+  courseEdited;
+
   constructor(
     private courseService: CourseService,
     private router: Router,
     private route: ActivatedRoute,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private store: Store<IAppState>
   ) {}
 
   ngOnInit() {
-    this.loaderService.show()
+    this.loaderService.show();
     const course_id = +this.route.snapshot.paramMap.get("id");
-    let course_edited;
-    this.courseService.getCourseById(course_id)
-    .pipe(finalize(() => this.loaderService.hide()))
-    .subscribe(course => {
-      course_edited = course;
-      console.log(course_edited.date);
-      this.course = { ...course_edited, header: "Edit Course" };
-    });
+    this.store.dispatch(getCourseById({ id: course_id }));
+    this.courseEdited = this.store.pipe(select(selectSelectedCourse));
+    this.course = { ...this.courseEdited, header: "Edit Course" };
+    this.loaderService.hide();
   }
 
   handleSubmit() {
-    this.loaderService.show()
+    this.loaderService.show();
     let updatedCourse = new UpdatedCourse();
     updatedCourse = Object.assign(updatedCourse, this.course);
-    this.courseService
-      .updateCourse(updatedCourse.id, updatedCourse)
-      .pipe(finalize(() => this.loaderService.hide()))
-      .subscribe();
+
+    this.store.dispatch(
+      updateCourse({ id: updatedCourse.id, course: updatedCourse })
+    );
+    this.loaderService.hide();
     this.router.navigate(["/courses"]);
   }
 }
