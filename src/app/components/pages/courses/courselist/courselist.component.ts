@@ -11,6 +11,7 @@ import { Store, select } from "@ngrx/store";
 import * as fromRoot from "../../../../store/reducers/app.reducer";
 import * as coursesActions from "../../../../store/actions/courses.actions";
 import { IAppState } from "src/app/store/state/app.state";
+import { getCourselist } from '../../../../store/actions/courses.actions';
 
 @Component({
   selector: "app-courselist",
@@ -29,30 +30,21 @@ export class CourselistComponent implements OnInit {
     private courseService: CourseService,
     private loaderService: LoaderService,
     private store: Store<IAppState>
-  ) {
-    this.filteredCourses = this.store.select(state => state.courses);
-  }
+  ) { }
 
   ngOnInit() {
     this.updateCourselist();
+
   }
 
   updateCourselist() {
     this.loaderService.show();
-    this.store.dispatch({ type: "[Movies Page] Load Movies" });
-    /*
-    this.courseService
-      .getCourseList(this.start, this.end)
-      .pipe(finalize(() => this.loaderService.hide()))
-      .subscribe((data: Course[]) => {
-        data = data.map(course => {
-          course.date = new Date(course.date);
-          return course;
-        });
-        console.log(data);
-        this.store.dispatch(coursesActions.listCourses({ courses: data }));
-      });*/
+    this.store.dispatch(getCourselist({start: this.start, end: this.end}));
+    this.filteredCourses = this.store.select(state => state.courses);
+    console.log(this.filteredCourses);
+    this.loaderService.hide();
   }
+
   /*
   filterByDate() {
     const orderByPipe = new OrderByDatePipe();

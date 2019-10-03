@@ -13,7 +13,7 @@
   <button
     type="button"
     class="load-more-btn"
-    *ngIf="courses.length >= end"
+    *ngIf="filteredCourses.length >= end"
     (click)="loadmore()"
   >
     LOAD MORE

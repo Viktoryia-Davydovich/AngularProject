@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Action, createAction, props } from "@ngrx/store";
+import { Action, createAction, props, union } from "@ngrx/store";
 import { Course, NewCourse, EditableCourse } from "../../models/Course";
 import { User, LoggedUser } from "src/app/models/User";
 
@@ -16,3 +16,11 @@ export const assignLoggedUser = createAction(
 );
 
 export const logout = createAction("[Login Page] Login");
+
+const all = union({
+  login, 
+  logout,
+  assignLoggedUser
+})
+
+export type AuthActions = typeof all;

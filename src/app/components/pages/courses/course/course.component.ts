@@ -16,6 +16,10 @@ export class CourseComponent implements OnInit {
 
   constructor(private router: Router) {}
 
+  ngOnChanges(){
+    
+  }
+
   ngOnInit() {}
 
   delete(courseId: number) {

@@ -38,6 +38,9 @@ import { TokenInterceptor } from "./auth/http-interceptor.service";
 import { LoaderComponent } from "./components/layout/loader/loader.component";
 import { LoaderService } from "./core/services/loader.service";
 import { EffectsModule } from '@ngrx/effects';
+import { CoursesEffects } from './store/effects/courses.effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -65,9 +68,14 @@ import { EffectsModule } from '@ngrx/effects';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    EffectsModule.forRoot([CoursesEffects]),
     StoreModule.forRoot({
       appState: reducer
-    })
+    }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+    }),
   ],
   providers: [
     {

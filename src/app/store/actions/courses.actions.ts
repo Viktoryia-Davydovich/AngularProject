@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Action, createAction, props } from "@ngrx/store";
+import { Action, createAction, props, union } from "@ngrx/store";
 import { Course, NewCourse, UpdatedCourse } from "../../models/Course";
 
 // these are handled by effects
@@ -16,7 +16,7 @@ export const deleteCourse = createAction(
 
 export const updateCourse = createAction(
   "[Courselist Page] Update",
-  props<{ course: UpdatedCourse }>()
+  props<{ id: number, course: UpdatedCourse }>()
 );
 
 export const getCourseById = createAction(
@@ -45,3 +45,16 @@ export const onFoundCourseById = createAction(
   "[Courselist Page] On course found by id",
   props<{ foundCourseById: Course }>()
 );
+
+const all = union({
+  addCourse, 
+  deleteCourse,
+  updateCourse,
+  getCourseById,
+  findCourses,
+  getCourselist,
+  listCourses,
+  onFoundCourseById
+})
+
+export type CoursesActions = typeof all;
