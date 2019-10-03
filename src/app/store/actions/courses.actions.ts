@@ -30,7 +30,7 @@ export const findCourses = createAction(
 );
 
 export const getCourselist = createAction(
-  "[Courselist Page] Get list",
+  "[Courselist Page] Get courselist",
   props<{ start: number; end: number }>()
 );
 

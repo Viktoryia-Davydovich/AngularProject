@@ -10,6 +10,7 @@ import { LoaderService } from "src/app/core/services/loader.service";
 import { Store, select } from "@ngrx/store";
 import * as fromRoot from "../../../../store/reducers/app.reducer";
 import * as coursesActions from "../../../../store/actions/courses.actions";
+import { IAppState } from "src/app/store/state/app.state";
 
 @Component({
   selector: "app-courselist",
@@ -27,9 +28,9 @@ export class CourselistComponent implements OnInit {
   constructor(
     private courseService: CourseService,
     private loaderService: LoaderService,
-    private store: Store<{ appState }>
+    private store: Store<IAppState>
   ) {
-    this.filteredCourses = store.select(state => state.appState.courses);
+    this.filteredCourses = this.store.select(state => state.courses);
   }
 
   ngOnInit() {
@@ -38,6 +39,8 @@ export class CourselistComponent implements OnInit {
 
   updateCourselist() {
     this.loaderService.show();
+    this.store.dispatch({ type: "[Movies Page] Load Movies" });
+    /*
     this.courseService
       .getCourseList(this.start, this.end)
       .pipe(finalize(() => this.loaderService.hide()))
@@ -48,7 +51,7 @@ export class CourselistComponent implements OnInit {
         });
         console.log(data);
         this.store.dispatch(coursesActions.listCourses({ courses: data }));
-      });
+      });*/
   }
   /*
   filterByDate() {
