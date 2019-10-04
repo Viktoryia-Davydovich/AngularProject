@@ -29,8 +29,8 @@ export class AuthEffects {
       ofType("[Login Page] Login"),
       exhaustMap(action =>
         this.authService.login(action.loggingUser).pipe(
-          map(data => {
-            localStorage.setItem("this_user", data.token);
+          map((data: LoggedUser )  => {
+            localStorage.setItem("this_user", data.fakeToken);
             assignLoggedUser({ loggedUser: data });
             this.router.navigate(["/courses"]);
           })

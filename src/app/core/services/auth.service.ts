@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { User } from "src/app/models/User";
+import { User, LoggedUser } from "src/app/models/User";
 import { Router } from "@angular/router";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
@@ -18,7 +18,7 @@ export class AuthService {
     private http: HttpClient,
   ) {}
 
-  login(user: User): Observable<any> {
+  login(user: User): any {
     return this.http
       .post(this.baseUrl + "/login", {
         login: user.login,
