@@ -12,17 +12,21 @@ export class HeaderComponent implements OnInit {
   isLoggedIn: boolean;
   constructor(private loginService: AuthService, private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loginService
+      .getUserInfo()
+      .subscribe(
+        user => (this.username = user.name.first + " " + user.name.last)
+      );
+  }
 
   ngAfterContentChecked() {
     this.isLoggedIn = this.loginService.isAuthenticated();
-    this.username = JSON.parse(this.loginService.getUserInfo())
-      ? JSON.parse(this.loginService.getUserInfo()).user
-      : "User login";
   }
 
   onLogOff() {
     this.loginService.logout();
+    this.username = "User login";
     this.router.navigate(["/login"]);
     console.log("LOGGED OUT");
   }

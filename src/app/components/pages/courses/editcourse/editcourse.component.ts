@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { CourseService } from "src/app/core/services/course.service";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { EditableCourse, UpdatedCourse } from "src/app/models/Course";
 
 @Component({
@@ -10,12 +10,20 @@ import { EditableCourse, UpdatedCourse } from "src/app/models/Course";
 })
 export class EditcourseComponent implements OnInit {
   course: EditableCourse;
-  constructor(private courseService: CourseService, private router: Router) {}
+  constructor(
+    private courseService: CourseService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    const course_id = +this.router.url.split("/courses/")[1];
-    const course_edited = this.courseService.getCourseById(course_id);
-    this.course = { ...course_edited, header: "Edit Course" };
+    const course_id = +this.route.snapshot.paramMap.get("id");
+    let course_edited;
+    this.courseService.getCourseById(course_id).subscribe(course => {
+      course_edited = course;
+      console.log(course_edited.date);
+      this.course = { ...course_edited, header: "Edit Course" };
+    });
   }
 
   handleSubmit() {

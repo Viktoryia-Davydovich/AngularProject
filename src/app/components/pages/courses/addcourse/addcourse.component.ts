@@ -14,11 +14,11 @@ export class AddcourseComponent implements OnInit {
 
   ngOnInit() {
     this.course = {
-      title: "",
+      name: "",
       description: "",
-      duration: 0,
+      length: 0,
       date: null,
-      authors: "",
+      authors: [],
       header: "New Course"
     };
   }

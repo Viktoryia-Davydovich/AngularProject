@@ -7,7 +7,7 @@ import { Course } from "src/app/models/course";
 export class OrderByDatePipe implements PipeTransform {
   transform(items: Course[]): any[] {
     return items.sort(function(a, b) {
-      return b.creationDate.getTime() - a.creationDate.getTime();
+      return b.date.getTime() - a.date.getTime();
     });
   }
 }

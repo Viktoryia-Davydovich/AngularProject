@@ -1,43 +1,45 @@
+import { Author } from "./Author";
+
 export interface ICourse {
   id: number;
-  title: string;
-  creationDate: Date;
-  duration: number;
+  name: string;
+  date: Date;
+  length: number;
   description?: string;
-  authors?: string;
+  authors?: Author[];
 }
 
 export class Course implements ICourse {
   id: number;
-  title: string;
-  creationDate: Date;
-  duration: number;
-  topRated?: boolean;
+  name: string;
+  date: Date;
+  length: number;
+  isTopRated?: boolean;
   description: string;
-  authors?: string;
+  authors?: Author[];
 }
 
 export class UpdatedCourse {
   id: number;
-  title?: string;
-  duration?: number;
-  authors?: string;
+  name?: string;
+  length?: number;
+  authors?: Author[];
   description?: string;
 }
 
 export class NewCourse {
-  title: string;
-  duration: number;
-  authors?: string;
+  name: string;
+  length: number;
+  authors?: Author[];
   description?: string;
 }
 
 export class EditableCourse {
   id?: number;
-  title: string;
+  name: string;
   description: string;
-  duration: number;
+  length: number;
   date?: Date;
-  authors?: string;
+  authors?: Author[];
   header: string;
 }

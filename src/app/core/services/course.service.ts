@@ -1,88 +1,59 @@
 import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import {
   Course,
   NewCourse,
   UpdatedCourse,
   EditableCourse
 } from "src/app/models/course";
+import { Observable, of } from "rxjs";
+import { map, tap, catchError } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
 })
 export class CourseService {
-  courses: Course[] = [
-    {
-      id: 1,
-      title: "Video Course 1. Name tag",
-      creationDate: new Date(2019, 7, 1),
-      duration: 88,
-      topRated: true,
-      description:
-        "Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester."
-    },
-    {
-      id: 2,
-      title: "Video Course 2. Name tag",
-      creationDate: new Date(2019, 8, 31),
-      duration: 88,
-      topRated: true,
-      description:
-        "Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester."
-    },
-    {
-      id: 3,
-      title: "Video Course 3. Name tag",
-      creationDate: new Date(2018, 10, 9),
-      duration: 88,
-      topRated: false,
-      description:
-        "Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester."
-    },
-    {
-      id: 4,
-      title: "Video Course 4. Name tag",
-      creationDate: new Date(2018, 10, 9),
-      duration: 88,
-      topRated: false,
-      description:
-        "Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester."
-    }
-  ];
+  private baseUrl: string = "http://localhost:3004/courses";
+  courses: Course[];
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  getCourseList(): Course[] {
-    return this.courses;
+  getCourseList(start: number, end: number): any {
+    return this.http.get<Course[]>(
+      `${this.baseUrl}?start=${start}&count=${end}`
+    );
   }
 
-  getCourseById(courseId: number): Course {
-    return this.courses.find(c => c.id === courseId);
+  searchCourses(searchedCourse: string): any {
+    if (!searchedCourse.trim()) {
+      return of([]);
+    }
+    return this.http.get<Course[]>(
+      `${this.baseUrl}?textFragment=${searchedCourse}`
+    );
+  }
+
+  getCourseById(id: number) {
+    return this.http.get(`${this.baseUrl}/${id}`);
   }
 
   createCourse(addedCourse: NewCourse) {
     const newCourse = {
       id: this.courses.length,
-      title: addedCourse.title,
-      duration: addedCourse.duration,
+      name: addedCourse.name,
+      length: addedCourse.length,
       authors: addedCourse.authors,
-      creationDate: new Date(),
+      date: new Date(),
       description: addedCourse.description
     };
-    this.courses.push(newCourse);
+    return this.http.post(`${this.baseUrl}/new`, newCourse);
   }
 
   deleteCourse(courseId: number): void {
-    this.courses.splice(
-      this.courses.indexOf(this.courses.find(c => c.id === courseId)),
-      1
-    );
+    this.http.delete(`${this.baseUrl}/delete/${courseId}`);
   }
 
   updateCourse(updatedCourse: UpdatedCourse) {
-    let updCourse = this.courses.find(c => c.id === updatedCourse.id);
-    updCourse.title = updatedCourse.title;
-    updCourse.description = updatedCourse.description;
-    updCourse.duration = updatedCourse.duration;
-    updCourse.authors = updatedCourse.authors;
+    return this.http.put(`${this.baseUrl}/edit`, updatedCourse);
   }
 }
