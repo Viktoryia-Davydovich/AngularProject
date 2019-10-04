@@ -1,10 +1,11 @@
-<div class="add-course-form" [formGroup]="form">
+<div class="add-course-form" >
   <h3 class="add-course-heading">{{ form.header }}</h3>
-  <form>
+  <form [formGroup]="form">
     <div class="form-group form-control--long">
       <div class="label-group">
         <p class="input-label">Title:</p>
-        <p class="input-label-required">*required</p>
+        <p class="input-error" *ngIf="name.errors?.maxLength && name.touched">Title length must not exceed 50</p>
+        <p class="input-label-required" *ngIf="name.touched && name.errors?.required">*required</p>
       </div>
       <input
         type="text"
@@ -17,7 +18,8 @@
     <div class="form-group form-control--long">
       <div class="label-group">
         <p class="input-label">Description:</p>
-        <p class="input-label-required">*required</p>
+        <p class="input-error" *ngIf="description.errors?.maxLength && description.touched">Description length must not exceed 500</p>
+        <p class="input-label-required" *ngIf="description.touched && description.errors?.required">*required</p>
       </div>
       <textarea
         type="text"
@@ -30,7 +32,8 @@
     <div class="form-group form-control--short">
       <div class="label-group">
         <p class="input-label">Duration:</p>
-        <p class="input-label-required">*required</p>
+        <p class="input-error" *ngIf="length.errors?.pattern && length.touched">Duration must be a number</p>
+        <p class="input-label-required" *ngIf="length.touched && length.errors?.required">*required</p>
       </div>
       <input
         type="text"
@@ -43,7 +46,7 @@
     <div class="form-group form-control--short">
       <div class="label-group">
         <p class="input-label">Date:</p>
-        <p class="input-label-required">*required</p>
+        <p class="input-label-required" *ngIf="date.touched && date.errors?.required">*required</p>
       </div>
       <input
         type="date"
@@ -57,7 +60,7 @@
     <div class="form-group form-control--medium">
       <div class="label-group">
         <p class="input-label">Authors:</p>
-        <p class="input-label-required">*required</p>
+        <p class="input-label-required" *ngIf="authors.touched && authors.errors?.required">*required</p>
       </div>
       <input
         type="text"
@@ -75,6 +78,7 @@
         routerLink="/courses"
       />
       <input
+        [disabled] = "form.invalid"
         type="submit"
         class="add-course-button add-course__save-btn"
         value="Save"

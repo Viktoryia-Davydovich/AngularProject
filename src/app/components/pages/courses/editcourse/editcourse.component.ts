@@ -11,7 +11,7 @@ import {
   getCourseById
 } from "src/app/store/actions/courses.actions";
 import { selectSelectedCourse } from "src/app/store/selectors/app.selector";
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
 
 @Component({
   selector: "app-editcourse",
@@ -36,13 +36,33 @@ export class EditcourseComponent implements OnInit {
     this.getCourseToEdit();
 
     this.form = this.fb.group({
-      name: this.course.name,
-      description: this.course.description,
-      length: this.course.length,
-      date: this.course.date,
-      authors: this.course.authors,
+      name: [this.course.name, [Validators.required, Validators.maxLength(50)]],
+      description: [this.course.description, [Validators.required, Validators.maxLength(500)]],
+      length: [this.course.length,  [Validators.required, Validators.pattern('^\d+$')]],
+      date: [this.course.date, [Validators.required]],
+      authors: [this.course.authors, [Validators.required]],
       header: "Edit Course"
     })
+  }
+
+  get name(){
+    return this.form.get('name')
+  }
+
+  get description(){
+    return this.form.get('description')
+  }
+
+  get length(){
+    return this.form.get('length')
+  }
+
+  get date(){
+    return this.form.get('date')
+  }
+
+  get authors(){
+    return this.form.get('authors')
   }
 
   getCourseToEdit(){

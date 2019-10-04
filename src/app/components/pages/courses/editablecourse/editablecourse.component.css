@@ -97,3 +97,9 @@
   font-family: "Source Sans Pro", sans-serif;
   font-size: 14;
 }
+
+.input-error{
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 14;
+  color: red;
+}
