@@ -1,5 +1,5 @@
-<div class="add-course-form">
-  <h3 class="add-course-heading">{{ course.header }}</h3>
+<div class="add-course-form" [formGroup]="form">
+  <h3 class="add-course-heading">{{ form.header }}</h3>
   <form>
     <div class="form-group form-control--long">
       <div class="label-group">
@@ -10,8 +10,7 @@
         type="text"
         class="form-control"
         placeholder="Text Input"
-        [(ngModel)]="course.name"
-        value="course.name"
+        formControlName="title"
         name="name"
       />
     </div>
@@ -24,8 +23,7 @@
         type="text"
         class="form-control form-control--description description-input"
         placeholder="Add description"
-        [(ngModel)]="course.description"
-        value="course.description"
+        formControlName="description"
         name="description"
       ></textarea>
     </div>
@@ -38,8 +36,7 @@
         type="text"
         class="form-control "
         placeholder="Minutes"
-        [(ngModel)]="course.length"
-        value="course.length"
+        formControlName="length"
         name="length"
       />
     </div>
@@ -52,7 +49,7 @@
         type="date"
         class="form-control form-control--date"
         placeholder="mm-dd-yyyy"
-        [(ngModel)]="course.date"
+        formControlName="date"
         value="course.date"
         name="date"
       />
@@ -66,7 +63,7 @@
         type="text"
         class="form-control"
         placeholder="Start typing"
-        [(ngModel)]="course.authors"
+        formControlName="authors"
         name="authors"
       />
     </div>

@@ -11,6 +11,7 @@ import {
   getCourseById
 } from "src/app/store/actions/courses.actions";
 import { selectSelectedCourse } from "src/app/store/selectors/app.selector";
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: "app-editcourse",
@@ -19,6 +20,7 @@ import { selectSelectedCourse } from "src/app/store/selectors/app.selector";
 })
 export class EditcourseComponent implements OnInit {
   course: EditableCourse;
+  form: FormGroup;
   courseEdited;
 
   constructor(
@@ -26,10 +28,24 @@ export class EditcourseComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private loaderService: LoaderService,
-    private store: Store<IAppState>
+    private store: Store<IAppState>,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit() {
+    this.getCourseToEdit();
+
+    this.form = this.fb.group({
+      name: this.course.name,
+      description: this.course.description,
+      length: this.course.length,
+      date: this.course.date,
+      authors: this.course.authors,
+      header: "Edit Course"
+    })
+  }
+
+  getCourseToEdit(){
     this.loaderService.show();
     const course_id = +this.route.snapshot.paramMap.get("id");
     this.store.dispatch(getCourseById({ id: course_id }));

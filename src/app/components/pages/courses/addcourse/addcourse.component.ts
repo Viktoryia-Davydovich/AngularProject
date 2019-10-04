@@ -6,6 +6,7 @@ import { LoaderService } from "src/app/core/services/loader.service";
 import { Store } from "@ngrx/store";
 import { IAppState } from "src/app/store/state/app.state";
 import { addCourse } from "src/app/store/actions/courses.actions";
+import {FormBuilder, FormGroup } from '@angular/forms'
 
 @Component({
   selector: "app-addcourse",
@@ -13,15 +14,29 @@ import { addCourse } from "src/app/store/actions/courses.actions";
   styleUrls: ["../editablecourse/editablecourse.component.css"]
 })
 export class AddcourseComponent implements OnInit {
+  form: FormGroup;
   course: EditableCourse;
+
   constructor(
     private courseService: CourseService,
     private router: Router,
     private loaderService: LoaderService,
-    private store: Store<IAppState>
+    private store: Store<IAppState>,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit() {
+    this.form = this.fb.group({
+      name: "",
+      description: "",
+      length: 0,
+      date: null,
+      authors: [],
+      header: "New Course"
+    })
+
+    this.form.valueChanges.subscribe()
+    /*
     this.course = {
       name: "",
       description: "",
@@ -29,7 +44,7 @@ export class AddcourseComponent implements OnInit {
       date: null,
       authors: [],
       header: "New Course"
-    };
+    }*/
   }
 
   handleSubmit() {
