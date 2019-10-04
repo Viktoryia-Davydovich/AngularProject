@@ -30,41 +30,5 @@ module.exports = server => {
     res.json(courses);
   });
 
-  /*
-
-  router.post("/courses/new", (req, res, next) => {
-    newCourse = req.body;
-    courses = server.db.getState().courses;
-    courses.push(newCourse);
-    courses.res.json(courses);
-  });
-
-  router.put("/courses/edit", (req, res, next) => {
-    let courses = server.db.getState().courses;
-    updCourse = courses.find(course => {
-      course.id === req.body.id;
-    });
-    updCourse.title = req.body.title;
-    updCourse.description = req.body.description;
-    updCourse.length = req.body.length;
-    updCourse.authors = req.body.authors;
-  });
-
-  router.delete("/courses/delete/:id", (req, res, next) => {
-    let courses = server.db.getState().courses;
-    deletedCourse = courses.find(course => {
-      course.id === req.body;
-    });
-
-    courses.splice(
-      this.courses.indexOf(
-        courses.find(course => {
-          course.id === req.params;
-        })
-      ),
-      1
-    );
-  });
-*/
   return router;
 };

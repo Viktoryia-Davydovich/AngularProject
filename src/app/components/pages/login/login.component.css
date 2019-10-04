@@ -36,7 +36,8 @@
 .login-submit-btn {
   border: none;
   border-radius: 3px;
-  color: #a8a9b4;
+  color: #ffffff;
+  background-color: #9bc837;
   padding: 6px 18px;
   font-size: 14px;
   font-weight: 600;

@@ -4,7 +4,9 @@ import { Course } from "src/app/models/Course";
 import { FilterPipe } from "src/app/shared/pipes/filter.pipe";
 import { OrderByDatePipe } from "src/app/shared/pipes/order-by-date.pipe";
 import { CourseService } from "src/app/core/services/course.service";
-import { Observable } from "rxjs";
+import { Observable, pipe } from "rxjs";
+import { finalize } from "rxjs/operators";
+import { LoaderService } from "src/app/core/services/loader.service";
 
 @Component({
   selector: "app-courselist",
@@ -12,13 +14,16 @@ import { Observable } from "rxjs";
   styleUrls: ["./courselist.component.css"]
 })
 export class CourselistComponent implements OnInit {
-  courses: Course[];
-  filteredCourses: Course[];
+  courses: Course[] = [];
+  filteredCourses: Course[] = [];
   searchedCourse: string;
   start: number = 0;
   end: number = 3;
 
-  constructor(private courseService: CourseService) {}
+  constructor(
+    private courseService: CourseService,
+    private loaderService: LoaderService
+  ) {}
 
   ngOnInit() {
     this.updateCourselist();
@@ -43,18 +48,31 @@ export class CourselistComponent implements OnInit {
     this.courses = orderByPipe.transform(this.courses);
   }
 
-  onSearchCourse(text: string) {
-    const filterPipe = new FilterPipe();
-    this.searchedCourse = text;
-    this.courseService
-      .searchCourses(text)
-      .subscribe(filteredCourses => (this.filteredCourses = filteredCourses));
+  onSearchCourse(searchText: string) {
+    this.courseService.searchCourses(searchText).subscribe(
+      res => {
+        console.log("res", res);
+        if (res.length === 0) {
+          this.updateCourselist();
+        } else {
+          this.filteredCourses = res;
+        }
+      },
+      err => {
+        console.log("error", err);
+      }
+    );
   }
+
+  onApiSearchResponse(apiResp: any) {
+    this.filteredCourses = apiResp;
+  }
+
   onDeleted = (deletedCourseId: number) => {
-    console.log(`You have deleted course number ${deletedCourseId}`);
-    let c = confirm("Are you sure you want to delete this item?");
-    if (c === true) {
-      this.courseService.deleteCourse(deletedCourseId);
+    const confirmation = confirm("Are you sure you want to delete this item?");
+    if (confirmation === true) {
+      console.log(`You have deleted course number ${deletedCourseId}`);
+      this.courseService.deleteCourse(deletedCourseId).subscribe();
     }
   };
 

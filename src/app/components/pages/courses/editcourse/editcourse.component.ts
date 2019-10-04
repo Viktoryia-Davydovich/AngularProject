@@ -29,7 +29,9 @@ export class EditcourseComponent implements OnInit {
   handleSubmit() {
     let updatedCourse = new UpdatedCourse();
     updatedCourse = Object.assign(updatedCourse, this.course);
-    this.courseService.updateCourse(updatedCourse);
+    this.courseService
+      .updateCourse(updatedCourse.id, updatedCourse)
+      .subscribe();
     this.router.navigate(["/courses"]);
   }
 }

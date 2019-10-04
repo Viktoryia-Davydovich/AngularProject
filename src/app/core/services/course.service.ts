@@ -7,53 +7,66 @@ import {
   EditableCourse
 } from "src/app/models/course";
 import { Observable, of } from "rxjs";
-import { map, tap, catchError } from "rxjs/operators";
+import { map, tap, catchError, finalize } from "rxjs/operators";
+import { LoaderService } from "./loader.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class CourseService {
   private baseUrl: string = "http://localhost:3004/courses";
-  courses: Course[];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private loaderService: LoaderService) {}
 
   getCourseList(start: number, end: number): any {
-    return this.http.get<Course[]>(
-      `${this.baseUrl}?start=${start}&count=${end}`
-    );
+    this.loaderService.show();
+    return this.http
+      .get<Course[]>(`${this.baseUrl}?start=${start}&count=${end}`)
+      .pipe(finalize(() => this.loaderService.hide()));
   }
 
   searchCourses(searchedCourse: string): any {
+    this.loaderService.show();
     if (!searchedCourse.trim()) {
       return of([]);
     }
-    return this.http.get<Course[]>(
-      `${this.baseUrl}?textFragment=${searchedCourse}`
-    );
+    return this.http
+      .get<Course[]>(`${this.baseUrl}?textFragment=${searchedCourse}`)
+      .pipe(finalize(() => this.loaderService.hide()));
   }
 
   getCourseById(id: number) {
-    return this.http.get(`${this.baseUrl}/${id}`);
+    this.loaderService.show();
+    return this.http
+      .get(`${this.baseUrl}/${id}`)
+      .pipe(finalize(() => this.loaderService.hide()));
   }
 
   createCourse(addedCourse: NewCourse) {
+    this.loaderService.show();
     const newCourse = {
-      id: this.courses.length,
       name: addedCourse.name,
       length: addedCourse.length,
       authors: addedCourse.authors,
       date: new Date(),
       description: addedCourse.description
     };
-    return this.http.post(`${this.baseUrl}/new`, newCourse);
+    return this.http
+      .post(`${this.baseUrl}`, newCourse)
+      .pipe(finalize(() => this.loaderService.hide()));
   }
 
-  deleteCourse(courseId: number): void {
-    this.http.delete(`${this.baseUrl}/delete/${courseId}`);
+  deleteCourse(courseId: number) {
+    this.loaderService.show();
+    return this.http
+      .delete(`${this.baseUrl}/${courseId}`)
+      .pipe(finalize(() => this.loaderService.hide()));
   }
 
-  updateCourse(updatedCourse: UpdatedCourse) {
-    return this.http.put(`${this.baseUrl}/edit`, updatedCourse);
+  updateCourse(courseId: number, updatedCourse: UpdatedCourse) {
+    this.loaderService.show();
+    return this.http
+      .put(`${this.baseUrl}/${courseId}`, updatedCourse)
+      .pipe(finalize(() => this.loaderService.hide()));
   }
 }

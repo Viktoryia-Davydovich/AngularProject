@@ -7,10 +7,7 @@
     [course]="course"
     (deleted)="onDeleted($event)"
   ></app-course>
-  <div
-    *ngIf="searchedCourse && filteredCourses.length === 0"
-    class="course-no-data-msg"
-  >
+  <div *ngIf="filteredCourses.length === 0" class="course-no-data-msg">
     No data. Feel free to add new course
   </div>
   <button

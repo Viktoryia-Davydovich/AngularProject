@@ -1,7 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { EditableCourse } from "src/app/models/Course";
+import { EditableCourse, NewCourse } from "src/app/models/Course";
 import { CourseService } from "src/app/core/services/course.service";
 import { Router } from "@angular/router";
+import { LoaderService } from "src/app/core/services/loader.service";
+import { finalize } from "rxjs/operators";
+import { pipe } from "rxjs";
 
 @Component({
   selector: "app-addcourse",
@@ -10,7 +13,11 @@ import { Router } from "@angular/router";
 })
 export class AddcourseComponent implements OnInit {
   course: EditableCourse;
-  constructor(private courseService: CourseService, private router: Router) {}
+  constructor(
+    private courseService: CourseService,
+    private router: Router,
+    private loaderService: LoaderService
+  ) {}
 
   ngOnInit() {
     this.course = {
@@ -24,7 +31,8 @@ export class AddcourseComponent implements OnInit {
   }
 
   handleSubmit() {
-    this.courseService.createCourse(this.course);
+    console.log(this.course);
+    this.courseService.createCourse(this.course).subscribe();
     this.router.navigate(["/courses"]);
   }
 }
