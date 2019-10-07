@@ -78,8 +78,16 @@ export class CoursesEffects {
       ofType("[Courselist Page] Find"),
       exhaustMap(action =>
         this.courseService
-          .searchCourses(action.searchString)
-          .pipe(map(() => getCourselist({ start: 0, end: 3 })))
+          .searchCourses(action.start, action.end, action.searchString)
+          .pipe(
+            map((courselist: Course[]) => {
+              courselist = courselist.map(course => {
+                course.date = new Date(course.date);
+                return course;
+              });
+              return listCourses({ courses: courselist });
+            })
+          )
       )
     );
 

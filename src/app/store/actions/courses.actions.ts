@@ -26,7 +26,7 @@ export const getCourseById = createAction(
 
 export const findCourses = createAction(
   "[Courselist Page] Find",
-  props<{ searchString: string }>()
+  props<{ start: number; end: number; searchString: string }>()
 );
 
 export const getCourselist = createAction(

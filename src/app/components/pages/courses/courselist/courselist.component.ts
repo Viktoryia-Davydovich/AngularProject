@@ -2,11 +2,9 @@ import { Component, OnInit } from "@angular/core";
 
 import { Course } from "src/app/models/Course";
 import { CourseService } from "src/app/core/services/course.service";
-import { Observable, pipe } from "rxjs";
-import { finalize, map } from "rxjs/operators";
+import { Observable } from "rxjs";
 import { LoaderService } from "src/app/core/services/loader.service";
 import { Store, select } from "@ngrx/store";
-import { IAppState } from "src/app/store/state/app.state";
 import {
   getCourselist,
   findCourses,
@@ -20,11 +18,9 @@ import { selectCourses, AppState } from "src/app/store/selectors/app.selector";
   styleUrls: ["./courselist.component.css"]
 })
 export class CourselistComponent implements OnInit {
-  private subscription;
-  //courses: Observable<Course[]>;
-  //filteredCourses: Course[] = [];
-  filteredCourses: Observable<Course[]>;
-  searchedCourse: string;
+  filteredCourses: Course[];
+  filteredCourses$: Observable<Course[]>;
+  searchedCourse: string = "";
   start: number = 0;
   end: number = 3;
 
@@ -40,16 +36,35 @@ export class CourselistComponent implements OnInit {
 
   updateCourselist() {
     this.loaderService.show();
-    this.store.dispatch(getCourselist({ start: this.start, end: this.end }));
-    this.filteredCourses = this.store.pipe(select(selectCourses));
-    console.log(this.filteredCourses);
+    if (this.searchedCourse === "") {
+      this.store.dispatch(getCourselist({ start: this.start, end: this.end }));
+    } else {
+      this.store.dispatch(
+        findCourses({
+          start: this.start,
+          end: this.end,
+          searchString: this.searchedCourse
+        })
+      );
+    }
+    this.filteredCourses$ = this.store.pipe(select(selectCourses));
+    this.filteredCourses$.subscribe(data => (this.filteredCourses = data));
     this.loaderService.hide();
   }
 
   onSearchCourse(searchText: string) {
     this.loaderService.show();
-    this.store.dispatch(findCourses({ searchString: searchText }));
-    this.filteredCourses = this.store.pipe(select(selectCourses));
+    this.searchedCourse = searchText;
+    this.end = 3;
+    this.store.dispatch(
+      findCourses({
+        start: this.start,
+        end: this.end,
+        searchString: searchText
+      })
+    );
+    this.filteredCourses$ = this.store.pipe(select(selectCourses));
+    this.filteredCourses$.subscribe(data => (this.filteredCourses = data));
     this.loaderService.hide();
   }
 
@@ -60,7 +75,8 @@ export class CourselistComponent implements OnInit {
       console.log(`You have deleted course number ${deletedCourseId}`);
       this.loaderService.show();
       this.store.dispatch(deleteCourse({ id: deletedCourseId }));
-      this.filteredCourses = this.store.pipe(select(selectCourses));
+      this.filteredCourses$ = this.store.pipe(select(selectCourses));
+      this.filteredCourses$.subscribe(data => (this.filteredCourses = data));
       this.loaderService.hide();
     }
   };

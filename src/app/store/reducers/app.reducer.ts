@@ -2,23 +2,23 @@ import { listCourses, onFoundCourseById } from "../actions/courses.actions";
 import {
   login,
   logout,
-  assignLoggedUser,
-  assignUserInfo
+  assignUserInfo,
+  onLogin
 } from "../actions/auth.actions";
 import { createReducer, on, State } from "@ngrx/store";
 import { initialAppState } from "../state/app.state";
 
 const _reducer = createReducer(
   initialAppState,
-  on(assignLoggedUser, (state, { loggedUser }) => ({
+  on(onLogin, (state, { authenticated }) => ({
     ...state,
-    activeUser: loggedUser
+    isAuthenticated: authenticated
   })),
   on(assignUserInfo, (state, { userInfo }) => ({
     ...state,
     userInfo: userInfo
   })),
-  on(logout, state => ({ ...state, activeUser: null })),
+  on(logout, state => ({ ...state, userInfo: null, isAuthenticated: false })),
   on(listCourses, (state, { courses }) => ({
     ...state,
     courses: courses.slice(0)

@@ -4,7 +4,6 @@ import { Course } from "src/app/models/Course";
 export interface IAppState {
   courses: Course[];
   selectedCourse: Course;
-  activeUser: User;
   userInfo: LoggedUser;
   isAuthenticated: boolean;
 }
@@ -12,7 +11,6 @@ export interface IAppState {
 export const initialAppState: IAppState = {
   courses: null,
   selectedCourse: null,
-  activeUser: null,
   userInfo: null,
   isAuthenticated: false
 };

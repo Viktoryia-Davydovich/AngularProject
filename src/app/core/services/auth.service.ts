@@ -14,16 +14,13 @@ export class AuthService {
   token: any;
   private baseUrl: string = "http://localhost:3004/auth";
 
-  constructor(
-    private http: HttpClient,
-  ) {}
+  constructor(private http: HttpClient) {}
 
   login(user: User): any {
-    return this.http
-      .post(this.baseUrl + "/login", {
-        login: user.login,
-        password: user.password
-      })
+    return this.http.post(this.baseUrl + "/login", {
+      login: user.login,
+      password: user.password
+    });
   }
 
   logout() {
@@ -38,7 +35,6 @@ export class AuthService {
   }
 
   getUserInfo(): any {
-    return this.http
-      .get(this.baseUrl + "/userinfo")
+    return this.http.get(this.baseUrl + "/userinfo");
   }
 }

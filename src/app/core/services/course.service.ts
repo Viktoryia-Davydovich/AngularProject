@@ -19,21 +19,22 @@ export class CourseService {
   constructor(private http: HttpClient) {}
 
   getCourseList(start: number, end: number): any {
-    return this.http
-      .get<Course[]>(`${this.baseUrl}?start=${start}&count=${end}`)
+    return this.http.get<Course[]>(
+      `${this.baseUrl}?start=${start}&count=${end}`
+    );
   }
 
-  searchCourses(searchedCourse: string): any {
+  searchCourses(start: number, end: number, searchedCourse: string): any {
     if (!searchedCourse.trim()) {
       return of([]);
     }
-    return this.http
-      .get<Course[]>(`${this.baseUrl}?textFragment=${searchedCourse}`)
+    return this.http.get<Course[]>(
+      `${this.baseUrl}?start=${start}&count=${end}&textFragment=${searchedCourse}`
+    );
   }
 
   getCourseById(id: number) {
-    return this.http
-      .get(`${this.baseUrl}/${id}`)
+    return this.http.get(`${this.baseUrl}/${id}`);
   }
 
   createCourse(addedCourse: NewCourse) {
@@ -44,17 +45,14 @@ export class CourseService {
       date: new Date(),
       description: addedCourse.description
     };
-    return this.http
-      .post(`${this.baseUrl}`, newCourse)
+    return this.http.post(`${this.baseUrl}`, newCourse);
   }
 
   deleteCourse(courseId: number) {
-    return this.http
-      .delete(`${this.baseUrl}/${courseId}`)
+    return this.http.delete(`${this.baseUrl}/${courseId}`);
   }
 
   updateCourse(courseId: number, updatedCourse: UpdatedCourse) {
-    return this.http
-      .put(`${this.baseUrl}/${courseId}`, updatedCourse)
+    return this.http.put(`${this.baseUrl}/${courseId}`, updatedCourse);
   }
 }

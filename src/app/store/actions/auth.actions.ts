@@ -12,9 +12,10 @@ export const login = createAction(
 export const getUserInfo = createAction("[Login Page] Get user info");
 
 // these are handled by reducer
-export const assignLoggedUser = createAction(
-  "[Login Page] Assign logged user",
-  props<{ loggedUser: User }>()
+
+export const onLogin = createAction(
+  "[Login Page] On login",
+  props<{ authenticated: boolean }>()
 );
 
 export const assignUserInfo = createAction(
@@ -27,7 +28,8 @@ export const logout = createAction("[Login Page] Logout");
 const all = union({
   login,
   logout,
-  assignLoggedUser
+  onLogin,
+  assignUserInfo
 });
 
 export type AuthActions = typeof all;
