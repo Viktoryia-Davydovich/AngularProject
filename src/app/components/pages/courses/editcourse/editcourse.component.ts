@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { CourseService } from "src/app/core/services/course.service";
 import { Router, ActivatedRoute } from "@angular/router";
-import { EditableCourse, UpdatedCourse } from "src/app/models/Course";
+import { EditableCourse, UpdatedCourse, Course } from "src/app/models/Course";
 import { LoaderService } from "src/app/core/services/loader.service";
 import { finalize } from "rxjs/operators";
 import { IAppState } from "src/app/store/state/app.state";
@@ -10,7 +10,11 @@ import {
   updateCourse,
   getCourseById
 } from "src/app/store/actions/courses.actions";
-import { selectSelectedCourse } from "src/app/store/selectors/app.selector";
+import {
+  selectSelectedCourse,
+  AppState
+} from "src/app/store/selectors/app.selector";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-editcourse",
@@ -19,22 +23,23 @@ import { selectSelectedCourse } from "src/app/store/selectors/app.selector";
 })
 export class EditcourseComponent implements OnInit {
   course: EditableCourse;
-  courseEdited;
+  course$: Observable<Course>;
 
   constructor(
-    private courseService: CourseService,
     private router: Router,
     private route: ActivatedRoute,
     private loaderService: LoaderService,
-    private store: Store<IAppState>
+    private store: Store<AppState>
   ) {}
 
   ngOnInit() {
     this.loaderService.show();
     const course_id = +this.route.snapshot.paramMap.get("id");
     this.store.dispatch(getCourseById({ id: course_id }));
-    this.courseEdited = this.store.pipe(select(selectSelectedCourse));
-    this.course = { ...this.courseEdited, header: "Edit Course" };
+    this.course$ = this.store.pipe(select(selectSelectedCourse));
+    this.course$.subscribe(
+      data => (this.course = { ...data, header: "Edit Course" })
+    );
     this.loaderService.hide();
   }
 
@@ -42,7 +47,6 @@ export class EditcourseComponent implements OnInit {
     this.loaderService.show();
     let updatedCourse = new UpdatedCourse();
     updatedCourse = Object.assign(updatedCourse, this.course);
-
     this.store.dispatch(
       updateCourse({ id: updatedCourse.id, course: updatedCourse })
     );

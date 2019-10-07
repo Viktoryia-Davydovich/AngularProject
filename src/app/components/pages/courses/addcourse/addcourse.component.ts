@@ -6,6 +6,7 @@ import { LoaderService } from "src/app/core/services/loader.service";
 import { Store } from "@ngrx/store";
 import { IAppState } from "src/app/store/state/app.state";
 import { addCourse } from "src/app/store/actions/courses.actions";
+import { AppState } from "src/app/store/selectors/app.selector";
 
 @Component({
   selector: "app-addcourse",
@@ -18,7 +19,7 @@ export class AddcourseComponent implements OnInit {
     private courseService: CourseService,
     private router: Router,
     private loaderService: LoaderService,
-    private store: Store<IAppState>
+    private store: Store<AppState>
   ) {}
 
   ngOnInit() {

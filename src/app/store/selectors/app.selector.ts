@@ -1,33 +1,33 @@
 import { createSelector } from "@ngrx/store";
 import { IAppState } from "../state/app.state";
 
-export const activeUser = (state: IAppState) => state.activeUser;
+export interface AppState {
+  appState: IAppState;
+}
+
+export const selectApp = (state: AppState): IAppState => state.appState;
+
 export const userInfo = (state: IAppState) => state.userInfo;
 export const isAuthenticated = (state: IAppState) => state.isAuthenticated;
 export const courses = (state: IAppState) => state.courses;
 export const selectedCourse = (state: IAppState) => state.selectedCourse;
 
-export const selectActiveUser = createSelector(
-  activeUser,
-  state => state
-);
-
 export const selectUserInfo = createSelector(
-  userInfo,
-  state => state
+  selectApp,
+  userInfo
 );
 
 export const selectIsAuthenticated = createSelector(
-  isAuthenticated,
-  state => state
+  selectApp,
+  isAuthenticated
 );
 
 export const selectCourses = createSelector(
-  courses,
-  state => state
+  selectApp,
+  courses
 );
 
 export const selectSelectedCourse = createSelector(
-  selectedCourse,
-  state => state
+  selectApp,
+  selectedCourse
 );
