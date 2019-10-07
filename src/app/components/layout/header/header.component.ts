@@ -8,7 +8,8 @@ import { Store, select } from "@ngrx/store";
 import { getUserInfo } from "src/app/store/actions/auth.actions";
 import {
   selectActiveUser,
-  selectUserInfo
+  selectUserInfo,
+  AppState
 } from "src/app/store/selectors/app.selector";
 import { Observable } from "rxjs";
 import { LoggedUser } from "src/app/models/User";
@@ -26,7 +27,7 @@ export class HeaderComponent implements OnInit {
     private loginService: AuthService,
     private router: Router,
     private loaderService: LoaderService,
-    private store: Store<IAppState>
+    private store: Store<AppState>
   ) {}
 
   ngOnInit() {

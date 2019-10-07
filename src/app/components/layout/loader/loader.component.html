@@ -1,5 +1,5 @@
-<div [class.hidden]="!show">
+<div>
   <div class="loader-overlay">
-    <div *ngIf="show | async" class="loader"></div>
+    <div [style.display]="show ? 'block' : 'none'" class="loader"></div>
   </div>
 </div>

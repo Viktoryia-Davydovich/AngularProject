@@ -10,9 +10,11 @@ import {
   updateCourse,
   getCourseById
 } from "src/app/store/actions/courses.actions";
-import { selectSelectedCourse } from "src/app/store/selectors/app.selector";
-import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
-
+import {
+  selectSelectedCourse,
+  AppState
+} from "src/app/store/selectors/app.selector";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-editcourse",
@@ -29,7 +31,7 @@ export class EditcourseComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private loaderService: LoaderService,
-    private store: Store<IAppState>,
+    private store: Store<AppState>,
     private fb: FormBuilder
   ) {}
 
@@ -38,35 +40,41 @@ export class EditcourseComponent implements OnInit {
 
     this.form = this.fb.group({
       name: [this.course.name, [Validators.required, Validators.maxLength(50)]],
-      description: [this.course.description, [Validators.required, Validators.maxLength(500)]],
-      length: [this.course.length,  [Validators.required, Validators.pattern('^\d+$')]],
+      description: [
+        this.course.description,
+        [Validators.required, Validators.maxLength(500)]
+      ],
+      length: [
+        this.course.length,
+        [Validators.required, Validators.pattern("^d+$")]
+      ],
       date: [this.course.date, [Validators.required]],
       authors: [this.course.authors, [Validators.required]],
       header: "Edit Course"
-    })
+    });
   }
 
-  get name(){
-    return this.form.get('name')
+  get name() {
+    return this.form.get("name");
   }
 
-  get description(){
-    return this.form.get('description')
+  get description() {
+    return this.form.get("description");
   }
 
-  get length(){
-    return this.form.get('length')
+  get length() {
+    return this.form.get("length");
   }
 
-  get date(){
-    return this.form.get('date')
+  get date() {
+    return this.form.get("date");
   }
 
-  get authors(){
-    return this.form.get('authors')
+  get authors() {
+    return this.form.get("authors");
   }
 
-  getCourseToEdit(){
+  getCourseToEdit() {
     this.loaderService.show();
     const course_id = +this.route.snapshot.paramMap.get("id");
     this.store.dispatch(getCourseById({ id: course_id }));

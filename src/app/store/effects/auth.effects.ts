@@ -13,13 +13,14 @@ import {
 } from "../actions/auth.actions";
 import { Router } from "@angular/router";
 import { LoggedUser } from "src/app/models/User";
+import { AppState } from "../selectors/app.selector";
 
 @Injectable()
 export class AuthEffects {
   constructor(
     private actions$: Actions<AuthActions>,
     private authService: AuthService,
-    private store: Store<IAppState>,
+    private store: Store<AppState>,
     private router: Router
   ) {}
 
@@ -29,7 +30,7 @@ export class AuthEffects {
       ofType("[Login Page] Login"),
       exhaustMap(action =>
         this.authService.login(action.loggingUser).pipe(
-          map((data: LoggedUser )  => {
+          map((data: LoggedUser) => {
             localStorage.setItem("this_user", data.fakeToken);
             assignLoggedUser({ loggedUser: data });
             this.router.navigate(["/courses"]);

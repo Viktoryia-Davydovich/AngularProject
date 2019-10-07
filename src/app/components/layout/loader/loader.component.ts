@@ -8,10 +8,13 @@ import { LoaderService } from "src/app/core/services/loader.service";
   styleUrls: ["./loader.component.css"]
 })
 export class LoaderComponent implements OnInit {
-  show: Subject<boolean>;
+  show: boolean;
 
   constructor(private loaderService: LoaderService) {
-    this.show = this.loaderService.isLoading;
+    this.loaderService.isLoading.asObservable().subscribe((val: boolean) => {
+      this.show = val;
+      console.log(val);
+    });
   }
 
   ngOnInit() {}

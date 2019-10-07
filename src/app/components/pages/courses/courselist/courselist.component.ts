@@ -12,7 +12,7 @@ import {
   findCourses,
   deleteCourse
 } from "../../../../store/actions/courses.actions";
-import { selectCourses } from "src/app/store/selectors/app.selector";
+import { selectCourses, AppState } from "src/app/store/selectors/app.selector";
 
 @Component({
   selector: "app-courselist",
@@ -31,7 +31,7 @@ export class CourselistComponent implements OnInit {
   constructor(
     private courseService: CourseService,
     private loaderService: LoaderService,
-    private store: Store<IAppState>
+    private store: Store<AppState>
   ) {}
 
   ngOnInit() {

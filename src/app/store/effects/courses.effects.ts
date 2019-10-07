@@ -12,13 +12,14 @@ import {
   onFoundCourseById
 } from "../actions/courses.actions";
 import { Observable } from "rxjs";
+import { AppState } from "../selectors/app.selector";
 
 @Injectable()
 export class CoursesEffects {
   constructor(
     private actions$: Actions<CoursesActions>,
     private courseService: CourseService,
-    private store: Store<IAppState>
+    private store: Store<AppState>
   ) {}
 
   @Effect()

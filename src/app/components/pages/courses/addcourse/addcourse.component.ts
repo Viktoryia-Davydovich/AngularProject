@@ -6,7 +6,8 @@ import { LoaderService } from "src/app/core/services/loader.service";
 import { Store } from "@ngrx/store";
 import { IAppState } from "src/app/store/state/app.state";
 import { addCourse } from "src/app/store/actions/courses.actions";
-import {FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AppState } from "src/app/store/selectors/app.selector";
 
 @Component({
   selector: "app-addcourse",
@@ -21,7 +22,7 @@ export class AddcourseComponent implements OnInit {
     private courseService: CourseService,
     private router: Router,
     private loaderService: LoaderService,
-    private store: Store<IAppState>,
+    private store: Store<AppState>,
     private fb: FormBuilder
   ) {}
 
@@ -29,31 +30,31 @@ export class AddcourseComponent implements OnInit {
     this.form = this.fb.group({
       name: ["", [Validators.required, Validators.maxLength(50)]],
       description: ["", [Validators.required, Validators.maxLength(500)]],
-      length: [0, [Validators.required, Validators.pattern('^\d+$')]],
+      length: [0, [Validators.required, Validators.pattern("^d+$")]],
       date: [null, [Validators.required]],
       authors: [[], [Validators.required]],
       header: "New Course"
-    })
+    });
   }
 
-  get name(){
-    return this.form.get('name')
+  get name() {
+    return this.form.get("name");
   }
 
-  get description(){
-    return this.form.get('description')
+  get description() {
+    return this.form.get("description");
   }
 
-  get length(){
-    return this.form.get('length')
+  get length() {
+    return this.form.get("length");
   }
 
-  get date(){
-    return this.form.get('date')
+  get date() {
+    return this.form.get("date");
   }
 
-  get authors(){
-    return this.form.get('authors')
+  get authors() {
+    return this.form.get("authors");
   }
 
   handleSubmit() {
