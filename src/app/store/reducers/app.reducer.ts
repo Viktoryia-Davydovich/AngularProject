@@ -1,4 +1,8 @@
-import { listCourses, onFoundCourseById } from "../actions/courses.actions";
+import {
+  listCourses,
+  onFoundCourseById,
+  listAuthors
+} from "../actions/courses.actions";
 import {
   login,
   logout,
@@ -26,7 +30,8 @@ const _reducer = createReducer(
   on(onFoundCourseById, (state, { foundCourseById }) => ({
     ...state,
     selectedCourse: foundCourseById
-  }))
+  })),
+  on(listAuthors, (state, { authors }) => ({ ...state, authors: authors }))
 );
 
 export function reducer(state, action) {

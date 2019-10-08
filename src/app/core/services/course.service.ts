@@ -9,6 +9,7 @@ import {
 import { Observable, of } from "rxjs";
 import { map, tap, catchError, finalize } from "rxjs/operators";
 import { LoaderService } from "./loader.service";
+import { Author } from "src/app/models/Author";
 
 @Injectable({
   providedIn: "root"
@@ -22,6 +23,10 @@ export class CourseService {
     return this.http.get<Course[]>(
       `${this.baseUrl}?start=${start}&count=${end}`
     );
+  }
+
+  getAuthorList(): any {
+    return this.http.get<Author[]>(`${this.baseUrl}/authors`);
   }
 
   searchCourses(start: number, end: number, searchedCourse: string): any {

@@ -11,6 +11,7 @@ export const userInfo = (state: IAppState) => state.userInfo;
 export const isAuthenticated = (state: IAppState) => state.isAuthenticated;
 export const courses = (state: IAppState) => state.courses;
 export const selectedCourse = (state: IAppState) => state.selectedCourse;
+export const authors = (state: IAppState) => state.authors;
 
 export const selectUserInfo = createSelector(
   selectApp,
@@ -30,4 +31,9 @@ export const selectCourses = createSelector(
 export const selectSelectedCourse = createSelector(
   selectApp,
   selectedCourse
+);
+
+export const selectAuthors = createSelector(
+  selectApp,
+  authors
 );

@@ -42,6 +42,16 @@ import { CoursesEffects } from "./store/effects/courses.effects";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { environment } from "src/environments/environment";
 import { AuthEffects } from "./store/effects/auth.effects";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+import { AuthorsComponent } from "./components/authors/authors.component";
+import {
+  MAT_CHIPS_DEFAULT_OPTIONS,
+  MatChipsModule
+} from "@angular/material/chips";
+import { MatIconModule } from "@angular/material/icon";
+import { ENTER, COMMA } from "@angular/cdk/keycodes";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MatFormFieldModule, MatInputModule } from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -61,9 +71,15 @@ import { AuthEffects } from "./store/effects/auth.effects";
     NotFoundComponent,
     AddcourseComponent,
     EditcourseComponent,
-    LoaderComponent
+    LoaderComponent,
+    AuthorsComponent
   ],
   imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatIconModule,
+    MatChipsModule,
     BrowserModule,
     FontAwesomeModule,
     AppRoutingModule,
@@ -77,13 +93,20 @@ import { AuthEffects } from "./store/effects/auth.effects";
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production // Restrict extension to log-only mode
-    })
+    }),
+    NoopAnimationsModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
+    },
+    {
+      provide: MAT_CHIPS_DEFAULT_OPTIONS,
+      useValue: {
+        separatorKeyCodes: [ENTER, COMMA]
+      }
     }
   ],
   bootstrap: [AppComponent]

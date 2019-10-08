@@ -9,10 +9,12 @@ import {
   listCourses,
   CoursesActions,
   getCourselist,
-  onFoundCourseById
+  onFoundCourseById,
+  listAuthors
 } from "../actions/courses.actions";
 import { Observable } from "rxjs";
 import { AppState } from "../selectors/app.selector";
+import { Author } from "src/app/models/Author";
 
 @Injectable()
 export class CoursesEffects {
@@ -103,6 +105,19 @@ export class CoursesEffects {
               onFoundCourseById({ foundCourseById: foundCourse })
             )
           )
+      )
+    );
+
+  @Effect()
+  loadAuthors$ = () =>
+    this.actions$.pipe(
+      ofType("[Courselist Page] Get authorlist"),
+      exhaustMap(() =>
+        this.courseService.getAuthorList().pipe(
+          map((authorlist: Author[]) => {
+            return listAuthors({ authors: authorlist });
+          })
+        )
       )
     );
 }

@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Action, createAction, props, union } from "@ngrx/store";
 import { Course, NewCourse, UpdatedCourse } from "../../models/Course";
+import { Author } from "src/app/models/Author";
 
 // these are handled by effects
 
@@ -34,6 +35,8 @@ export const getCourselist = createAction(
   props<{ start: number; end: number }>()
 );
 
+export const getAuthorlist = createAction("[Courselist Page] Get authorlist");
+
 // these are handled by reducer
 
 export const listCourses = createAction(
@@ -46,6 +49,11 @@ export const onFoundCourseById = createAction(
   props<{ foundCourseById: Course }>()
 );
 
+export const listAuthors = createAction(
+  "[Courselist Page] Get authorlist",
+  props<{ authors: Author[] }>()
+);
+
 const all = union({
   addCourse,
   deleteCourse,
@@ -53,6 +61,7 @@ const all = union({
   getCourseById,
   findCourses,
   getCourselist,
+  getAuthorlist,
   listCourses,
   onFoundCourseById
 });
