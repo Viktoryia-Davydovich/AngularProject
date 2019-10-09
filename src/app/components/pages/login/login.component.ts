@@ -13,7 +13,7 @@ import { login } from "src/app/store/actions/auth.actions";
   styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
-  @Input() user: User = { login: "", password: "" };
+  user: User = { login: "", password: "" };
 
   constructor(
     private loginService: AuthService,

@@ -44,56 +44,39 @@ export class AuthorsComponent implements OnInit {
   constructor(private store: Store<AppState>) {
     this.store.dispatch(getAuthorlist());
     this.authorsFull$ = this.store.pipe(select(selectAuthors));
-    this.authorsFull$.subscribe(authors => (this.authorsFull = authors));
+    this.authorsFull$.subscribe(authors => {
+      this.authorsFull = authors;
+      this.authorsFiltered$ = this.authorsControl.valueChanges.pipe(
+        startWith(null),
+        map(author => (author ? this.filterAuthor(author) : this.authorsFull))
+      );
+    });
   }
 
-  ngOnInit() {
-    this.authorsFiltered$ = this.authorsControl.valueChanges.pipe(
-      startWith(null),
-      map((authorName: string | null) =>
-        authorName ? this.filterAuthor(authorName) : this.courseAuthors.slice()
-      )
-    );
-  }
+  ngOnInit() {}
 
-  private filterAuthor(value: string): Author[] {
-    const filterValues = value.toLowerCase().split(" ");
+  ngOnChanges() {}
+
+  private filterAuthor(value): Author[] {
+    console.log(value);
+    const filterValue = value.toLowerCase();
 
     return this.authorsFull.filter(
-      author =>
-        author.firstName.toLowerCase().indexOf(filterValues[0]) === 0 &&
-        author.lastName.toLowerCase().indexOf(filterValues[1]) === 0
+      author => author.name.toLowerCase().indexOf(filterValue) === 0
     );
-  }
-
-  add(event: MatChipInputEvent): void {
-    if (!this.matAutocomplete.isOpen) {
-      const input = event.input;
-      const value = event.value;
-
-      // Add author
-      if ((value || "").trim()) {
-      }
-
-      // Reset the input value
-      if (input) {
-        input.value = "";
-      }
-
-      this.authorsControl.setValue(null);
-    }
   }
 
   remove(author: Author): void {
     const index = this.courseAuthors.indexOf(author);
 
     if (index >= 0) {
-      // remove
+      this.courseAuthors.splice(index, 1);
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    // this.authors.push(event.option.viewValue);
+    this.courseAuthors.push(event.option.value);
+    console.log(this.courseAuthors);
     this.authorInput.nativeElement.value = "";
     this.authorsControl.setValue(null);
   }

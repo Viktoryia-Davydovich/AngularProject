@@ -26,7 +26,7 @@ export class CourseService {
   }
 
   getAuthorList(): any {
-    return this.http.get<Author[]>(`${this.baseUrl}/authors`);
+    return this.http.get<Author[]>("http://localhost:3004/authors");
   }
 
   searchCourses(start: number, end: number, searchedCourse: string): any {

@@ -63,6 +63,7 @@ const all = union({
   getCourselist,
   getAuthorlist,
   listCourses,
+  listAuthors,
   onFoundCourseById
 });
 

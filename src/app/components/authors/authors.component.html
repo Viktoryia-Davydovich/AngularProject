@@ -1,23 +1,22 @@
 <mat-form-field class="chip-list">
   <mat-chip-list #chipList aria-label="Author selection">
     <mat-chip
-      *ngFor="let author of authors"
+      *ngFor="let author of courseAuthors"
       [selectable]="selectable"
       [removable]="removable"
       (removed)="remove(author)"
     >
-      {{ author.toString() }}
+      {{ author.name }}
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>
     <input
       placeholder="Add author..."
       #authorInput
-      [formControl]="authorControl"
+      [formControl]="authorsControl"
       [matAutocomplete]="auto"
       [matChipInputFor]="chipList"
       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
       [matChipInputAddOnBlur]="addOnBlur"
-      (matChipInputTokenEnd)="add($event)"
     />
   </mat-chip-list>
   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
@@ -25,7 +24,7 @@
       *ngFor="let author of authorsFiltered$ | async"
       [value]="author"
     >
-      {{ author.toString() }}
+      {{ author.name }}
     </mat-option>
   </mat-autocomplete>
 </mat-form-field>
