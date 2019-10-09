@@ -29,12 +29,14 @@ export class AuthorsComponent implements OnInit {
 
   authorsControl = new FormControl();
 
-  @Input() courseAuthors: Author[] = [];
+  @Input() courseAuthors: Author[];
 
   authorsFull$: Observable<Author[]>;
   authorsFull: Author[];
 
   authorsFiltered$: Observable<Author[]>;
+
+  authors: Author[] = [];
 
   @ViewChild("authorInput", { static: false }) authorInput: ElementRef<
     HTMLInputElement
@@ -42,6 +44,9 @@ export class AuthorsComponent implements OnInit {
   @ViewChild("auto", { static: false }) matAutocomplete: MatAutocomplete;
 
   constructor(private store: Store<AppState>) {
+    if (this.courseAuthors !== undefined) {
+      this.authors = this.courseAuthors.splice(0);
+    }
     this.store.dispatch(getAuthorlist());
     this.authorsFull$ = this.store.pipe(select(selectAuthors));
     this.authorsFull$.subscribe(authors => {
@@ -57,9 +62,8 @@ export class AuthorsComponent implements OnInit {
 
   ngOnChanges() {}
 
-  private filterAuthor(value): Author[] {
-    console.log(value);
-    const filterValue = value.toLowerCase();
+  private filterAuthor(value: Author): Author[] {
+    const filterValue = value.name.toLowerCase();
 
     return this.authorsFull.filter(
       author => author.name.toLowerCase().indexOf(filterValue) === 0
@@ -67,16 +71,16 @@ export class AuthorsComponent implements OnInit {
   }
 
   remove(author: Author): void {
-    const index = this.courseAuthors.indexOf(author);
+    const index = this.authors.indexOf(author);
 
     if (index >= 0) {
-      this.courseAuthors.splice(index, 1);
+      this.authors.splice(index, 1);
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.courseAuthors.push(event.option.value);
-    console.log(this.courseAuthors);
+    this.authors.push(event.option.value);
+    console.log(this.authors);
     this.authorInput.nativeElement.value = "";
     this.authorsControl.setValue(null);
   }
