@@ -1,5 +1,12 @@
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
-import { Component, ElementRef, ViewChild, OnInit, Input } from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  ViewChild,
+  OnInit,
+  Input,
+  forwardRef
+} from "@angular/core";
 import { FormControl } from "@angular/forms";
 import {
   MatAutocompleteSelectedEvent,
@@ -13,13 +20,21 @@ import { Author } from "../../models/Author";
 import { AppState, selectAuthors } from "src/app/store/selectors/app.selector";
 import { Store, select } from "@ngrx/store";
 import { getAuthorlist } from "src/app/store/actions/courses.actions";
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
   selector: "app-authors",
   templateUrl: "./authors.component.html",
-  styleUrls: ["./authors.component.css"]
+  styleUrls: ["./authors.component.css"],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => AuthorsComponent),
+      multi: true
+    }
+  ]
 })
-export class AuthorsComponent implements OnInit {
+export class AuthorsComponent implements OnInit, ControlValueAccessor {
   visible = true;
   selectable = true;
   removable = true;
@@ -62,6 +77,9 @@ export class AuthorsComponent implements OnInit {
 
   ngOnChanges() {}
 
+  onTouched = () => {};
+  onChange = (author: Author) => {};
+
   private filterAuthor(value: Author): Author[] {
     const filterValue = value.name.toLowerCase();
 
@@ -83,5 +101,15 @@ export class AuthorsComponent implements OnInit {
     console.log(this.authors);
     this.authorInput.nativeElement.value = "";
     this.authorsControl.setValue(null);
+  }
+
+  writeValue(author: Author): void {
+    this.authors.push(author);
+  }
+  registerOnChange(fn: (author: Author) => void): void {
+    this.onChange = fn;
+  }
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
   }
 }
