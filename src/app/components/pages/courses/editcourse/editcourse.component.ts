@@ -45,10 +45,7 @@ export class EditcourseComponent implements OnInit {
         this.course.description,
         [Validators.required, Validators.maxLength(500)]
       ],
-      length: [
-        this.course.length,
-        [Validators.required, Validators.pattern("^d+$")]
-      ],
+      length: [this.course.length, [Validators.required]],
       date: [this.course.date, [Validators.required]],
       authors: [this.course.authors, [Validators.required]],
       header: "Edit Course"

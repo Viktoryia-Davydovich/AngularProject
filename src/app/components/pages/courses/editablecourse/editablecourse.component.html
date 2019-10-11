@@ -4,12 +4,12 @@
     <div class="form-group form-control--long">
       <div class="label-group">
         <p class="input-label">Title:</p>
-        <p class="input-error" *ngIf="name.errors?.maxLength && name.touched">
+        <p class="input-error" *ngIf="name.errors.maxlength">
           Title length must not exceed 50
         </p>
         <p
           class="input-label-required"
-          *ngIf="name.touched && name.errors?.required"
+          *ngIf="name.touched && name.errors.required"
         >
           *required
         </p>
@@ -27,13 +27,13 @@
         <p class="input-label">Description:</p>
         <p
           class="input-error"
-          *ngIf="description.errors?.maxLength && description.touched"
+          *ngIf="description.errors.maxlength && description.dirty"
         >
           Description length must not exceed 500
         </p>
         <p
           class="input-label-required"
-          *ngIf="description.touched && description.errors?.required"
+          *ngIf="description.touched && description.errors.required"
         >
           *required
         </p>
@@ -49,18 +49,15 @@
     <div class="form-group form-control--short">
       <div class="label-group">
         <p class="input-label">Duration:</p>
-        <p class="input-error" *ngIf="length.errors?.pattern && length.touched">
-          Duration must be a number
-        </p>
         <p
           class="input-label-required"
-          *ngIf="length.touched && length.errors?.required"
+          *ngIf="length.touched && length.errors.required"
         >
           *required
         </p>
       </div>
       <input
-        type="text"
+        type="number"
         class="form-control "
         placeholder="Minutes"
         formControlName="length"
@@ -72,7 +69,7 @@
         <p class="input-label">Date:</p>
         <p
           class="input-label-required"
-          *ngIf="date.touched && date.errors?.required"
+          *ngIf="date.touched && date.errors.required"
         >
           *required
         </p>
@@ -91,18 +88,22 @@
         <p class="input-label">Authors:</p>
         <p
           class="input-error"
-          *ngIf="!authors.errors?.validAuthorList && authors.dirty"
+          *ngIf="authors.errors.validAuthorList && authors.dirty"
         >
           Add at least one author
         </p>
         <p
           class="input-label-required"
-          *ngIf="authors.touched && authors.errors?.required"
+          *ngIf="authors.touched && authors.errors.required"
         >
           *required
         </p>
       </div>
-      <app-authors [courseAuthors]="authors"></app-authors>
+      <app-authors
+        [courseAuthors]="authors"
+        formControlName="authors"
+        name="authors"
+      ></app-authors>
     </div>
     <div class="add-course-buttons">
       <input
