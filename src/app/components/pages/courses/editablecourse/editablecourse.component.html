@@ -90,6 +90,12 @@
       <div class="label-group">
         <p class="input-label">Authors:</p>
         <p
+          class="input-error"
+          *ngIf="!authors.errors?.validAuthorList && authors.dirty"
+        >
+          Add at least one author
+        </p>
+        <p
           class="input-label-required"
           *ngIf="authors.touched && authors.errors?.required"
         >

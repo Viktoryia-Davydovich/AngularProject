@@ -77,9 +77,6 @@ export class AuthorsComponent implements OnInit, ControlValueAccessor {
 
   ngOnChanges() {}
 
-  onTouched = () => {};
-  onChange = (author: Author) => {};
-
   private filterAuthor(value: Author): Author[] {
     const filterValue = value.name.toLowerCase();
 
@@ -97,19 +94,23 @@ export class AuthorsComponent implements OnInit, ControlValueAccessor {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.authors.push(event.option.value);
-    console.log(this.authors);
-    this.authorInput.nativeElement.value = "";
-    this.authorsControl.setValue(null);
+    this.writeValue(event.option.value);
   }
 
   writeValue(author: Author): void {
     this.authors.push(author);
+    this.authorInput.nativeElement.value = "";
+    this.authorsControl.setValue(null);
+    this.onChange(this.authors);
   }
-  registerOnChange(fn: (author: Author) => void): void {
+
+  registerOnChange(fn: (authors: Author[]) => void): void {
     this.onChange = fn;
   }
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
+
+  onTouched = () => {};
+  onChange = (authors: Author[]) => {};
 }

@@ -8,6 +8,7 @@ import { IAppState } from "src/app/store/state/app.state";
 import { addCourse } from "src/app/store/actions/courses.actions";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AppState } from "src/app/store/selectors/app.selector";
+import { ValidateAuthorList } from "src/app/components/authors/authors.validator";
 
 @Component({
   selector: "app-addcourse",
@@ -32,7 +33,7 @@ export class AddcourseComponent implements OnInit {
       description: ["", [Validators.required, Validators.maxLength(500)]],
       length: [0, [Validators.required, Validators.pattern("^d+$")]],
       date: [null, [Validators.required]],
-      authors: [[], [Validators.required]],
+      authors: [[], [Validators.required, ValidateAuthorList]],
       header: "New Course"
     });
   }
