@@ -97,8 +97,8 @@ export class AuthorsComponent implements OnInit, ControlValueAccessor {
     this.writeValue(event.option.value);
   }
 
-  writeValue(author: Author): void {
-    this.authors.push(author);
+  writeValue(authors: Author[]): void {
+    this.authors = authors;
     this.authorInput.nativeElement.value = "";
     this.authorsControl.setValue(null);
     this.onChange(this.authors);

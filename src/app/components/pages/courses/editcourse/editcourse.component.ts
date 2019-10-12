@@ -78,7 +78,7 @@ export class EditcourseComponent implements OnInit {
     this.store.dispatch(getCourseById({ id: course_id }));
     this.course$ = this.store.pipe(select(selectSelectedCourse));
     this.course$.subscribe(
-      data => (this.course = { ...data, header: "Edit Course" })
+      data => (this.course = { ...data, header: "Edit Course" }) //this form[val].setValue()
     );
     this.loaderService.hide();
   }
