@@ -18,7 +18,10 @@ const _reducer = createReducer(
     ...state,
     userInfo: userInfo
   })),
-  on(logout, state => ({ ...state, userInfo: null, isAuthenticated: false })),
+  on(logout, state => {
+    localStorage.removeItem("this_user");
+    return { ...state, userInfo: null, isAuthenticated: false };
+  }),
   on(listCourses, (state, { courses }) => ({
     ...state,
     courses: courses.slice(0)
