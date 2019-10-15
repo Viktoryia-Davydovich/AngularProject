@@ -60,11 +60,14 @@ export class EditcourseComponent implements OnInit {
       console.log(data);
       if (data) {
         const date = new Date(data.date)
+        const yyyy = date.getFullYear()
+        const MM = date.getMonth() < 10 ? `0${date.getMonth()}` : `${date.getMonth()}`
+        const dd = date.getDay() < 10 ? `0${date.getDay()}` : `${date.getDay()}`
         return this.form.patchValue({
           name: data.name,
           description: data.description,
           length: data.length,
-          date: `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`,
+          date: `${yyyy}-${MM}-${dd}`,
           authors: data.authors
         });
       }
