@@ -20,11 +20,9 @@ import { LoggedUser } from "src/app/models/User";
 export class HeaderComponent implements OnInit {
   username: string = "User login";
   userInfo$: Observable<LoggedUser>;
-  userInfo: LoggedUser;
   isLoggedIn$: Observable<boolean>;
   isLoggedIn: boolean;
   constructor(
-    private loginService: AuthService,
     private router: Router,
     private loaderService: LoaderService,
     private store: Store<AppState>
@@ -43,9 +41,9 @@ export class HeaderComponent implements OnInit {
     this.store.dispatch(getUserInfo());
     this.userInfo$ = this.store.pipe(select(selectUserInfo));
     this.userInfo$.subscribe(data => {
-      this.userInfo = data;
-      this.username = this.userInfo.name.first + " " + this.userInfo.name.last;
-      console.log(this.username);
+      if (data) {
+        this.username = data.name.first + " " + data.name.last;
+      }
     });
     this.loaderService.hide();
   }

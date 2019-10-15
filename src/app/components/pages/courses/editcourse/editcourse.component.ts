@@ -23,7 +23,8 @@ import { Observable } from "rxjs";
   styleUrls: ["../editablecourse/editablecourse.component.css"]
 })
 export class EditcourseComponent implements OnInit {
-  course: EditableCourse;
+  header: string = "Edit Course";
+  course: EditableCourse = new EditableCourse();
   form: FormGroup;
   courseEdited;
   course$: Observable<Course>;
@@ -34,11 +35,7 @@ export class EditcourseComponent implements OnInit {
     private loaderService: LoaderService,
     private store: Store<AppState>,
     private fb: FormBuilder
-  ) {}
-
-  ngOnInit() {
-    this.getCourseToEdit();
-
+  ) {
     this.form = this.fb.group({
       name: [this.course.name, [Validators.required, Validators.maxLength(50)]],
       description: [
@@ -47,9 +44,46 @@ export class EditcourseComponent implements OnInit {
       ],
       length: [this.course.length, [Validators.required]],
       date: [this.course.date, [Validators.required]],
-      authors: [this.course.authors, [Validators.required]],
-      header: "Edit Course"
+      authors: [this.course.authors, [Validators.required]]
     });
+  }
+
+  ngOnInit() {
+    this.getCourseToEdit();
+  }
+
+  getCourseToEdit() {
+    this.loaderService.show();
+    const course_id = +this.route.snapshot.paramMap.get("id");
+    this.store.dispatch(getCourseById({ id: course_id }));
+    this.store.pipe(select(selectSelectedCourse)).subscribe(data => {
+      console.log(data);
+      if (data) {
+        return this.form.patchValue({
+          name: data.name,
+          description: data.description,
+          length: data.length,
+          date: new Date(
+            data.date.getUTCFullYear(),
+            data.date.getMonth(),
+            data.date.getDate()
+          ),
+          authors: data.authors
+        });
+      }
+    });
+    this.loaderService.hide();
+  }
+
+  handleSubmit() {
+    this.loaderService.show();
+    let updatedCourse = new UpdatedCourse();
+    updatedCourse = Object.assign(updatedCourse, this.course);
+    this.store.dispatch(
+      updateCourse({ id: updatedCourse.id, course: updatedCourse })
+    );
+    this.loaderService.hide();
+    this.router.navigate(["/courses"]);
   }
 
   get name() {
@@ -70,27 +104,5 @@ export class EditcourseComponent implements OnInit {
 
   get authors() {
     return this.form.get("authors");
-  }
-
-  getCourseToEdit() {
-    this.loaderService.show();
-    const course_id = +this.route.snapshot.paramMap.get("id");
-    this.store.dispatch(getCourseById({ id: course_id }));
-    this.course$ = this.store.pipe(select(selectSelectedCourse));
-    this.course$.subscribe(
-      data => (this.course = { ...data, header: "Edit Course" }) //this form[val].setValue()
-    );
-    this.loaderService.hide();
-  }
-
-  handleSubmit() {
-    this.loaderService.show();
-    let updatedCourse = new UpdatedCourse();
-    updatedCourse = Object.assign(updatedCourse, this.course);
-    this.store.dispatch(
-      updateCourse({ id: updatedCourse.id, course: updatedCourse })
-    );
-    this.loaderService.hide();
-    this.router.navigate(["/courses"]);
   }
 }

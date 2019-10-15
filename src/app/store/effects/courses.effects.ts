@@ -98,13 +98,12 @@ export class CoursesEffects {
     this.actions$.pipe(
       ofType("[Courselist Page] By id"),
       exhaustMap(action =>
-        this.courseService
-          .getCourseById(action.id)
-          .pipe(
-            map((foundCourse: Course) =>
-              onFoundCourseById({ foundCourseById: foundCourse })
-            )
-          )
+        this.courseService.getCourseById(action.id).pipe(
+          map((foundCourse: Course) => {
+            console.log(foundCourse);
+            return onFoundCourseById({ foundCourseById: foundCourse });
+          })
+        )
       )
     );
 

@@ -16,6 +16,7 @@ import { ValidateAuthorList } from "src/app/components/authors/authors.validator
   styleUrls: ["../editablecourse/editablecourse.component.css"]
 })
 export class AddcourseComponent implements OnInit {
+  header: string = "New Course";
   form: FormGroup;
   course: EditableCourse;
 
@@ -33,8 +34,7 @@ export class AddcourseComponent implements OnInit {
       description: ["", [Validators.required, Validators.maxLength(500)]],
       length: [0, [Validators.required, Validators.pattern("^d+$")]],
       date: [null, [Validators.required]],
-      authors: [[], [Validators.required, ValidateAuthorList]],
-      header: "New Course"
+      authors: [[], [Validators.required, ValidateAuthorList]]
     });
   }
 

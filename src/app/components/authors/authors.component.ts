@@ -95,13 +95,13 @@ export class AuthorsComponent implements OnInit, ControlValueAccessor {
 
   selected(event: MatAutocompleteSelectedEvent): void {
     this.writeValue(event.option.value);
+    this.authorInput.nativeElement.value = "";
+    this.authorsControl.setValue(null);
+    this.onChange(this.authors);
   }
 
   writeValue(authors: Author[]): void {
     this.authors = authors;
-    this.authorInput.nativeElement.value = "";
-    this.authorsControl.setValue(null);
-    this.onChange(this.authors);
   }
 
   registerOnChange(fn: (authors: Author[]) => void): void {
