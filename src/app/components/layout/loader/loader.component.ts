@@ -13,9 +13,8 @@ export class LoaderComponent implements OnInit {
   constructor(private loaderService: LoaderService) {
     this.loaderService.isLoading.asObservable().subscribe((val: boolean) => {
       this.show = val;
-      console.log(val);
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

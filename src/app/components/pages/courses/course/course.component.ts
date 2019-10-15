@@ -15,12 +15,11 @@ export class CourseComponent implements OnInit {
   @Input() course: Course;
   @Output() deleted = new EventEmitter<number>();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
-  ngOnChanges() {}
+  ngOnChanges() { }
 
   ngOnInit() {
-    console.log(this.course);
   }
 
   delete(courseId: number) {

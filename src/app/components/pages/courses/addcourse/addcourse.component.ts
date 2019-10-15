@@ -26,7 +26,7 @@ export class AddcourseComponent implements OnInit {
     private loaderService: LoaderService,
     private store: Store<AppState>,
     private fb: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -61,7 +61,7 @@ export class AddcourseComponent implements OnInit {
   handleSubmit() {
     console.log(this.course);
     this.loaderService.show();
-    this.store.dispatch(addCourse({ course: this.course }));
+    this.store.dispatch(addCourse({ ...this.form.value }));
     this.loaderService.hide();
     this.router.navigate(["/courses"]);
   }

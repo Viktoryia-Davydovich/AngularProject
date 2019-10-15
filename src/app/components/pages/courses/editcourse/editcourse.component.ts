@@ -17,6 +17,7 @@ import {
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Observable } from "rxjs";
 import { Author } from 'src/app/models/Author';
+import { ValidateAuthorList } from 'src/app/components/authors/authors.validator';
 
 @Component({
   selector: "app-editcourse",
@@ -24,6 +25,7 @@ import { Author } from 'src/app/models/Author';
   styleUrls: ["../editablecourse/editablecourse.component.css"]
 })
 export class EditcourseComponent implements OnInit {
+  courseId: number;
   header: string = "Edit Course";
   course: EditableCourse = new EditableCourse();
   form: FormGroup;
@@ -45,7 +47,7 @@ export class EditcourseComponent implements OnInit {
       ],
       length: [this.course.length, [Validators.required]],
       date: [this.course.date, [Validators.required]],
-      authors: [this.course.authors, [Validators.required]]
+      authors: [this.course.authors, [Validators.required, ValidateAuthorList]]
     });
   }
 
@@ -55,8 +57,8 @@ export class EditcourseComponent implements OnInit {
 
   getCourseToEdit() {
     this.loaderService.show();
-    const course_id = +this.route.snapshot.paramMap.get("id");
-    this.store.dispatch(getCourseById({ id: course_id }));
+    this.courseId = +this.route.snapshot.paramMap.get("id");
+    this.store.dispatch(getCourseById({ id: this.courseId }));
     this.store.pipe(select(selectSelectedCourse)).subscribe(data => {
       console.log(data);
       if (data) {
@@ -78,8 +80,8 @@ export class EditcourseComponent implements OnInit {
 
   handleSubmit() {
     this.loaderService.show();
-    let updatedCourse = new UpdatedCourse();
-    updatedCourse = Object.assign(updatedCourse, this.course);
+    console.log(this.form.value)
+    const updatedCourse: UpdatedCourse = { id: this.courseId, date: new Date(this.form.value.date), ...this.form.value };
     this.store.dispatch(
       updateCourse({ id: updatedCourse.id, course: updatedCourse })
     );

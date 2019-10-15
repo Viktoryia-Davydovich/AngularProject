@@ -1,6 +1,6 @@
 <div class="add-course-form">
   <h3 class="add-course-heading">{{ header }}</h3>
-  <form [formGroup]="form">
+  <form [formGroup]="form" (ngSubmit)="handleSubmit()">
     <div class="form-group form-control--long">
       <div class="label-group">
         <p class="input-label">Title:</p>
@@ -48,7 +48,7 @@
     <div class="form-group form-control--medium">
       <div class="label-group">
         <p class="input-label">Authors:</p>
-        <p class="input-error" *ngIf="authors.errors?.validAuthorList && authors.dirty">
+        <p class="input-error" *ngIf="authors.errors?.invalidAuthorList && authors.dirty">
           Add at least one author
         </p>
         <p class="input-label-required" *ngIf="authors.touched && authors.errors?.required">
@@ -59,8 +59,7 @@
     </div>
     <div class="add-course-buttons">
       <input type="button" class="add-course-button add-course__cancel-btn" value="Cancel" routerLink="/courses" />
-      <input [disabled]="form.invalid" type="submit" class="add-course-button add-course__save-btn" value="Save"
-        (click)="handleSubmit()" />
+      <input [disabled]="form.invalid" type="submit" class="add-course-button add-course__save-btn" value="Save" />
     </div>
   </form>
 </div>
