@@ -7,13 +7,13 @@
     [course]="course"
     (deleted)="onDeleted($event)"
   ></app-course>
-  <div *ngIf="filteredCourses.length === 0" class="course-no-data-msg">
+  <div *ngIf="!filteredCourses" class="course-no-data-msg">
     No data. Feel free to add new course
   </div>
   <button
     type="button"
     class="load-more-btn"
-    *ngIf="courses.length >= end"
+    *ngIf="filteredCourses && filteredCourses.length >= end"
     (click)="loadmore()"
   >
     LOAD MORE

@@ -16,34 +16,28 @@ import { LoaderService } from "./loader.service";
 export class CourseService {
   private baseUrl: string = "http://localhost:3004/courses";
 
-  constructor(private http: HttpClient, private loaderService: LoaderService) {}
+  constructor(private http: HttpClient) {}
 
   getCourseList(start: number, end: number): any {
-    this.loaderService.show();
-    return this.http
-      .get<Course[]>(`${this.baseUrl}?start=${start}&count=${end}`)
-      .pipe(finalize(() => this.loaderService.hide()));
+    return this.http.get<Course[]>(
+      `${this.baseUrl}?start=${start}&count=${end}`
+    );
   }
 
-  searchCourses(searchedCourse: string): any {
-    this.loaderService.show();
+  searchCourses(start: number, end: number, searchedCourse: string): any {
     if (!searchedCourse.trim()) {
       return of([]);
     }
-    return this.http
-      .get<Course[]>(`${this.baseUrl}?textFragment=${searchedCourse}`)
-      .pipe(finalize(() => this.loaderService.hide()));
+    return this.http.get<Course[]>(
+      `${this.baseUrl}?start=${start}&count=${end}&textFragment=${searchedCourse}`
+    );
   }
 
   getCourseById(id: number) {
-    this.loaderService.show();
-    return this.http
-      .get(`${this.baseUrl}/${id}`)
-      .pipe(finalize(() => this.loaderService.hide()));
+    return this.http.get(`${this.baseUrl}/${id}`);
   }
 
   createCourse(addedCourse: NewCourse) {
-    this.loaderService.show();
     const newCourse = {
       name: addedCourse.name,
       length: addedCourse.length,
@@ -51,22 +45,14 @@ export class CourseService {
       date: new Date(),
       description: addedCourse.description
     };
-    return this.http
-      .post(`${this.baseUrl}`, newCourse)
-      .pipe(finalize(() => this.loaderService.hide()));
+    return this.http.post(`${this.baseUrl}`, newCourse);
   }
 
   deleteCourse(courseId: number) {
-    this.loaderService.show();
-    return this.http
-      .delete(`${this.baseUrl}/${courseId}`)
-      .pipe(finalize(() => this.loaderService.hide()));
+    return this.http.delete(`${this.baseUrl}/${courseId}`);
   }
 
   updateCourse(courseId: number, updatedCourse: UpdatedCourse) {
-    this.loaderService.show();
-    return this.http
-      .put(`${this.baseUrl}/${courseId}`, updatedCourse)
-      .pipe(finalize(() => this.loaderService.hide()));
+    return this.http.put(`${this.baseUrl}/${courseId}`, updatedCourse);
   }
 }

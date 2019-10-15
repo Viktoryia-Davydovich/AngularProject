@@ -3,6 +3,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 import { Course, EditableCourse } from "../../../../models/course";
 import { ChangeDetectionStrategy } from "@angular/core";
 import { Router } from "@angular/router";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-course",
@@ -16,7 +17,11 @@ export class CourseComponent implements OnInit {
 
   constructor(private router: Router) {}
 
-  ngOnInit() {}
+  ngOnChanges() {}
+
+  ngOnInit() {
+    console.log(this.course);
+  }
 
   delete(courseId: number) {
     this.deleted.emit(courseId);
