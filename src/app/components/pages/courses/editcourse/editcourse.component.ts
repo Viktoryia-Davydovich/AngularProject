@@ -16,6 +16,7 @@ import {
 } from "src/app/store/selectors/app.selector";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Observable } from "rxjs";
+import { Author } from 'src/app/models/Author';
 
 @Component({
   selector: "app-editcourse",

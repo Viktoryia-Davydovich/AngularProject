@@ -41,5 +41,4 @@ export class EditableCourse {
   length: number;
   date?: Date;
   authors?: Author[];
-  header: string;
 }

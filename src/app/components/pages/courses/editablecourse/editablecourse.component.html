@@ -4,121 +4,63 @@
     <div class="form-group form-control--long">
       <div class="label-group">
         <p class="input-label">Title:</p>
-        <p class="input-error" *ngIf="name.errors.maxlength">
+        <p class="input-error" *ngIf="name.errors?.maxlength">
           Title length must not exceed 50
         </p>
-        <p
-          class="input-label-required"
-          *ngIf="name.touched && name.errors.required"
-        >
+        <p class="input-label-required" *ngIf="name.touched && name.errors?.required">
           *required
         </p>
       </div>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Text Input"
-        formControlName="name"
-        name="name"
-      />
+      <input type="text" class="form-control" placeholder="Text Input" formControlName="name" name="name" />
     </div>
     <div class="form-group form-control--long">
       <div class="label-group">
         <p class="input-label">Description:</p>
-        <p
-          class="input-error"
-          *ngIf="description.errors.maxlength && description.dirty"
-        >
+        <p class="input-error" *ngIf="description.errors?.maxlength && description.dirty">
           Description length must not exceed 500
         </p>
-        <p
-          class="input-label-required"
-          *ngIf="description.touched && description.errors.required"
-        >
+        <p class="input-label-required" *ngIf="description.touched && description.errors?.required">
           *required
         </p>
       </div>
-      <textarea
-        type="text"
-        class="form-control form-control--description description-input"
-        placeholder="Add description"
-        formControlName="description"
-        name="description"
-      ></textarea>
+      <textarea type="text" class="form-control form-control--description description-input"
+        placeholder="Add description" formControlName="description" name="description"></textarea>
     </div>
     <div class="form-group form-control--short">
       <div class="label-group">
         <p class="input-label">Duration:</p>
-        <p
-          class="input-label-required"
-          *ngIf="length.touched && length.errors.required"
-        >
+        <p class="input-label-required" *ngIf="length.touched && length.errors?.required">
           *required
         </p>
       </div>
-      <input
-        type="number"
-        class="form-control "
-        placeholder="Minutes"
-        formControlName="length"
-        name="length"
-      />
+      <input type="number" class="form-control " placeholder="Minutes" formControlName="length" name="length" />
     </div>
     <div class="form-group form-control--short">
       <div class="label-group">
         <p class="input-label">Date:</p>
-        <p
-          class="input-label-required"
-          *ngIf="date.touched && date.errors.required"
-        >
+        <p class="input-label-required" *ngIf="date.touched && date.errors?.required">
           *required
         </p>
       </div>
-      <input
-        type="date"
-        class="form-control form-control--date"
-        placeholder="mm-dd-yyyy"
-        formControlName="date"
-        value="course.date"
-        name="date"
-      />
+      <input type="date" class="form-control form-control--date" placeholder="mm-dd-yyyy" formControlName="date"
+        value="course.date" name="date" />
     </div>
     <div class="form-group form-control--medium">
       <div class="label-group">
         <p class="input-label">Authors:</p>
-        <p
-          class="input-error"
-          *ngIf="authors.errors.validAuthorList && authors.dirty"
-        >
+        <p class="input-error" *ngIf="authors.errors?.validAuthorList && authors.dirty">
           Add at least one author
         </p>
-        <p
-          class="input-label-required"
-          *ngIf="authors.touched && authors.errors.required"
-        >
+        <p class="input-label-required" *ngIf="authors.touched && authors.errors?.required">
           *required
         </p>
       </div>
-      <app-authors
-        [courseAuthors]="authors"
-        formControlName="authors"
-        name="authors"
-      ></app-authors>
+      <app-authors [courseAuthors]="authors" formControlName="authors" name="authors"></app-authors>
     </div>
     <div class="add-course-buttons">
-      <input
-        type="button"
-        class="add-course-button add-course__cancel-btn"
-        value="Cancel"
-        routerLink="/courses"
-      />
-      <input
-        [disabled]="form.invalid"
-        type="submit"
-        class="add-course-button add-course__save-btn"
-        value="Save"
-        (click)="handleSubmit()"
-      />
+      <input type="button" class="add-course-button add-course__cancel-btn" value="Cancel" routerLink="/courses" />
+      <input [disabled]="form.invalid" type="submit" class="add-course-button add-course__save-btn" value="Save"
+        (click)="handleSubmit()" />
     </div>
   </form>
 </div>
