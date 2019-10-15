@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 
-import { Course, EditableCourse } from "../../../../models/course";
+import { Course, EditableCourse } from "../../../../models/Course";
 import { ChangeDetectionStrategy } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";

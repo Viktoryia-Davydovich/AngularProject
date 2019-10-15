@@ -59,15 +59,12 @@ export class EditcourseComponent implements OnInit {
     this.store.pipe(select(selectSelectedCourse)).subscribe(data => {
       console.log(data);
       if (data) {
+        const date = new Date(data.date)
         return this.form.patchValue({
           name: data.name,
           description: data.description,
           length: data.length,
-          date: new Date(
-            data.date.getUTCFullYear(),
-            data.date.getMonth(),
-            data.date.getDate()
-          ),
+          date: `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`,
           authors: data.authors
         });
       }

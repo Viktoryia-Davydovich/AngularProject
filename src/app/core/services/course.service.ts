@@ -5,7 +5,7 @@ import {
   NewCourse,
   UpdatedCourse,
   EditableCourse
-} from "src/app/models/course";
+} from "src/app/models/Course";
 import { Observable, of } from "rxjs";
 import { map, tap, catchError, finalize } from "rxjs/operators";
 import { LoaderService } from "./loader.service";
