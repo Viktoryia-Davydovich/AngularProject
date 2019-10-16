@@ -6,7 +6,6 @@ export interface IAppState {
   courses: Course[];
   selectedCourse: Course;
   userInfo: LoggedUser;
-  isAuthenticated: boolean;
   authors: Author[];
 }
 
@@ -14,6 +13,5 @@ export const initialAppState: IAppState = {
   courses: null,
   selectedCourse: null,
   userInfo: null,
-  isAuthenticated: false,
   authors: null
 };

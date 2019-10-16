@@ -6,8 +6,7 @@ import { Store, select } from "@ngrx/store";
 import { getUserInfo, logout } from "src/app/store/actions/auth.actions";
 import {
   selectUserInfo,
-  AppState,
-  selectIsAuthenticated
+  AppState
 } from "src/app/store/selectors/app.selector";
 import { Observable } from "rxjs";
 import { LoggedUser } from "src/app/models/User";
@@ -20,20 +19,19 @@ import { LoggedUser } from "src/app/models/User";
 export class HeaderComponent implements OnInit {
   username: string = "User login";
   userInfo$: Observable<LoggedUser>;
-  isLoggedIn$: Observable<boolean>;
   isLoggedIn: boolean;
   constructor(
     private router: Router,
     private loaderService: LoaderService,
     private store: Store<AppState>
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.isLoggedIn$ = this.store.pipe(select(selectIsAuthenticated));
-    this.isLoggedIn$.subscribe(data => {
-      this.isLoggedIn = data;
+
+    if (localStorage.getItem("this_user")) {
+      this.isLoggedIn = true
       this.updateUserInfo();
-    });
+    }
   }
 
   updateUserInfo() {

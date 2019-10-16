@@ -4,27 +4,21 @@ import {
   listAuthors
 } from "../actions/courses.actions";
 import {
-  login,
   logout,
-  assignUserInfo,
-  onLogin
+  assignUserInfo
 } from "../actions/auth.actions";
 import { createReducer, on, State } from "@ngrx/store";
 import { initialAppState } from "../state/app.state";
 
 const _reducer = createReducer(
   initialAppState,
-  on(onLogin, (state, { authenticated }) => ({
-    ...state,
-    isAuthenticated: authenticated
-  })),
   on(assignUserInfo, (state, { userInfo }) => ({
     ...state,
     userInfo: userInfo
   })),
   on(logout, state => {
     localStorage.removeItem("this_user");
-    return { ...state, userInfo: null, isAuthenticated: false };
+    return { ...state, userInfo: null };
   }),
   on(listCourses, (state, { courses }) => ({
     ...state,
