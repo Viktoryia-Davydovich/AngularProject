@@ -26,13 +26,13 @@ export class AddcourseComponent implements OnInit {
     private loaderService: LoaderService,
     private store: Store<AppState>,
     private fb: FormBuilder
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.form = this.fb.group({
       name: ["", [Validators.required, Validators.maxLength(50)]],
       description: ["", [Validators.required, Validators.maxLength(500)]],
-      length: [0, [Validators.required, Validators.pattern("^d+$")]],
+      length: [0, [Validators.required], Validators.min(0)],
       date: [null, [Validators.required]],
       authors: [[], [Validators.required, ValidateAuthorList]]
     });

@@ -73,9 +73,9 @@ export class AuthorsComponent implements OnInit, ControlValueAccessor {
     });
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
-  ngOnChanges() { }
+  ngOnChanges() {}
 
   private filterAuthor(value: Author): Author[] {
     const filterValue = value.name.toLowerCase();
@@ -91,19 +91,20 @@ export class AuthorsComponent implements OnInit, ControlValueAccessor {
     if (index >= 0) {
       this.authors.splice(index, 1);
     }
+    this.onChange(this.authors);
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.authors.push(event.option.value)
+    this.authors.push(event.option.value);
     this.authorInput.nativeElement.value = "";
     this.authorsControl.setValue(null);
     this.onChange(this.authors);
   }
 
   writeValue(authors: Author[]): void {
-    authors
+    authors;
     this.authors = authors;
-    console.log(this.authors)
+    console.log(this.authors);
   }
 
   registerOnChange(fn: (authors: Author[]) => void): void {
@@ -113,7 +114,7 @@ export class AuthorsComponent implements OnInit, ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  onTouched = () => { };
+  onTouched = () => {};
 
-  onChange = (authors: Author[]) => { };
+  onChange = (authors: Author[]) => {};
 }

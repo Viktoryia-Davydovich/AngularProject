@@ -16,8 +16,8 @@ import {
 } from "src/app/store/selectors/app.selector";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Observable } from "rxjs";
-import { Author } from 'src/app/models/Author';
-import { ValidateAuthorList } from 'src/app/components/authors/authors.validator';
+import { Author } from "src/app/models/Author";
+import { ValidateAuthorList } from "src/app/components/authors/authors.validator";
 
 @Component({
   selector: "app-editcourse",
@@ -45,7 +45,7 @@ export class EditcourseComponent implements OnInit {
         this.course.description,
         [Validators.required, Validators.maxLength(500)]
       ],
-      length: [this.course.length, [Validators.required]],
+      length: [this.course.length, [Validators.required, Validators.min(0)]],
       date: [this.course.date, [Validators.required]],
       authors: [this.course.authors, [Validators.required, ValidateAuthorList]]
     });
@@ -62,10 +62,12 @@ export class EditcourseComponent implements OnInit {
     this.store.pipe(select(selectSelectedCourse)).subscribe(data => {
       console.log(data);
       if (data) {
-        const date = new Date(data.date)
-        const yyyy = date.getFullYear()
-        const MM = date.getMonth() < 10 ? `0${date.getMonth()}` : `${date.getMonth()}`
-        const dd = date.getDay() < 10 ? `0${date.getDay()}` : `${date.getDay()}`
+        const date = new Date(data.date);
+        const yyyy = date.getFullYear();
+        const MM =
+          date.getMonth() < 10 ? `0${date.getMonth()}` : `${date.getMonth()}`;
+        const dd =
+          date.getDay() < 10 ? `0${date.getDay()}` : `${date.getDay()}`;
         return this.form.patchValue({
           name: data.name,
           description: data.description,
@@ -80,8 +82,12 @@ export class EditcourseComponent implements OnInit {
 
   handleSubmit() {
     this.loaderService.show();
-    console.log(this.form.value)
-    const updatedCourse: UpdatedCourse = { id: this.courseId, date: new Date(this.form.value.date), ...this.form.value };
+    console.log(this.form.value);
+    const updatedCourse: UpdatedCourse = {
+      id: this.courseId,
+      date: new Date(this.form.value.date),
+      ...this.form.value
+    };
     this.store.dispatch(
       updateCourse({ id: updatedCourse.id, course: updatedCourse })
     );
