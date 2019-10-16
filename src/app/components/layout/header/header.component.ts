@@ -1,4 +1,4 @@
-import { Component, OnInit, NgModule } from "@angular/core";
+import { Component, OnInit, NgModule, ChangeDetectorRef } from "@angular/core";
 import { AuthService } from "src/app/core/services/auth.service";
 import { Router } from "@angular/router";
 import { LoaderService } from "src/app/core/services/loader.service";
@@ -24,12 +24,12 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private loaderService: LoaderService,
     private store: Store<AppState>
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
-
     if (localStorage.getItem("this_user")) {
-      this.isLoggedIn = true
+      this.isLoggedIn = true;
       this.updateUserInfo();
     }
   }
@@ -40,6 +40,7 @@ export class HeaderComponent implements OnInit {
     this.userInfo$ = this.store.pipe(select(selectUserInfo));
     this.userInfo$.subscribe(data => {
       if (data) {
+        console.log("data")
         this.username = data.name.first + " " + data.name.last;
       }
     });
@@ -48,6 +49,7 @@ export class HeaderComponent implements OnInit {
 
   onLogOff() {
     this.store.dispatch(logout());
+    this.isLoggedIn = false;
     this.username = "User login";
     this.router.navigate(["/login"]);
   }

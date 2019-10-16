@@ -65,9 +65,9 @@ export class EditcourseComponent implements OnInit {
         const date = new Date(data.date);
         const yyyy = date.getFullYear();
         const MM =
-          date.getMonth() < 10 ? `0${date.getMonth()}` : `${date.getMonth()}`;
+          date.getMonth() < 10 ? `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`;
         const dd =
-          date.getDay() < 10 ? `0${date.getDay()}` : `${date.getDay()}`;
+          date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
         return this.form.patchValue({
           name: data.name,
           description: data.description,
