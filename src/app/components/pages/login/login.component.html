@@ -1,38 +1,40 @@
 <div>
   <div class="login-form">
-    <h3 class="login-heading">Login</h3>
+    <h3 class="login-heading">{{ LOGIN.LOGIN | translate }}</h3>
     <form>
       <div class="form-group">
-        <label class="login-label">E-mail</label>
+        <label class="login-label">{{ LOGIN.EMAIL | translate }}</label>
         <input
           name="login"
           [(ngModel)]="user.login"
           type="text"
           class="form-control login-input-field"
-          placeholder="Enter e-mail"
+          placeholder="{{ 'LOGIN.ENTEREMAIL' | translate }}"
           value=""
         />
       </div>
       <div class="form-group">
-        <label class="login-label">Password:</label>
+        <label class="login-label">{{ LOGIN.PASS | translate }}</label>
         <input
           name="password"
           [(ngModel)]="user.password"
           type="password"
           class="form-control login-input-field"
-          placeholder="Enter password"
+          placeholder="{{ 'LOGIN.ENTERPASS' | translate }}"
           value=""
         />
       </div>
       <div class="login-buttons">
         <div>
-          <a href="#" class="login-forgor-pass">Forgot Password?</a>
+          <a href="#" class="login-forgor-pass">{{
+            LOGIN.FORGOT | translate
+          }}</a>
         </div>
         <div>
           <input
             type="submit"
             class="login-submit-btn"
-            value="Login"
+            value="{{ 'LOGIN.ONSUBMIT' | translate }}"
             (click)="onLogin()"
           />
         </div>

@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { AuthService } from "src/app/core/services/auth.service";
+import { AuthService } from "src/app/services/auth.service";
 import { Router } from "@angular/router";
 import { User } from "src/app/models/User";
-import { LoaderService } from "src/app/core/services/loader.service";
+import { LoaderService } from "src/app/services/loader.service";
 import { finalize } from "rxjs/operators";
 import { Store } from "@ngrx/store";
 

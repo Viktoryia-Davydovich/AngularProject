@@ -8,7 +8,7 @@
     (deleted)="onDeleted($event)"
   ></app-course>
   <div *ngIf="!filteredCourses" class="course-no-data-msg">
-    No data. Feel free to add new course
+    {{ HOME.NODATA }}
   </div>
   <button
     type="button"
@@ -16,6 +16,6 @@
     *ngIf="filteredCourses && filteredCourses.length >= end"
     (click)="loadmore()"
   >
-    LOAD MORE
+    {{ HOME.LOADMORE }}
   </button>
 </div>

@@ -2,7 +2,7 @@
   <div>
     <input
       type="text"
-      placeholder="type to search"
+      placeholder="{{ 'HOME.TYPETOSEARCH' | translate }}"
       (keyup)="keyUp.next($event)"
       class="course-control__search-field"
     />
@@ -15,7 +15,7 @@
     >
       <div class="course-control__add-button-plus"></div>
       <div class="course-control__add-button-plus--horizontal"></div>
-      Add course
+      {{ HOME.ADD }}
     </button>
   </div>
 </div>

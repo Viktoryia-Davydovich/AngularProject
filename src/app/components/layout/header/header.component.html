@@ -1,20 +1,45 @@
 <div class="header">
   <app-logo class="header__logo" routerLink="/courses"></app-logo>
-  <div *ngIf="isLoggedIn" class="header__log-items">
-    <div class="header__log-items">
-      <i class="icon user-icon"></i>
-      <p class="header__log-items--icon-space">
-        {{ username }}
-      </p>
+  <div class="header__items">
+    <div *ngIf="isLoggedIn" class="header__log-items">
+      <div class="header__log-items">
+        <i class="icon user-icon"></i>
+        <p class="header__log-items--icon-space">
+          {{ username }}
+        </p>
+      </div>
+      <a
+        class="header__log-items header__log-items--logoff"
+        (click)="onLogOff()"
+      >
+        <i class="icon exit-icon"></i>
+        <p class="header__log-items--icon-space">
+          {{ HOME.LOGOFF | translate }}
+        </p>
+      </a>
     </div>
-    <a class="header__log-items header__log-items--logoff" (click)="onLogOff()">
-      <i class="icon exit-icon"></i>
-      <p class="header__log-items--icon-space">Log off</p>
-    </a>
-  </div>
-  <div *ngIf="!isLoggedIn" class="header__log-items">
-    <a class="header__log-items header__log-items--logoff" routerLink="/login">
-      <p class="header__log-items--icon-space">Log in</p>
-    </a>
+    <div *ngIf="!isLoggedIn" class="header__log-items">
+      <a
+        class="header__log-items header__log-items--logoff"
+        routerLink="/login"
+      >
+        <p class="header__log-items--icon-space">
+          {{ HOME.LOGIN | translate }}
+        </p>
+      </a>
+    </div>
+    <div class="header__items--langselect">
+      <label for="">
+        {{ HOME.LANGSELECT | translate }}
+        <select #langselect (change)="translate.use(langselect.value)"
+          ><option
+            *ngFor="let lang of translate.getLangs()"
+            [value]="lang"
+            [selected]="lang === translate.currentLang"
+            >{{ lang }}</option
+          ></select
+        ></label
+      >
+    </div>
   </div>
 </div>

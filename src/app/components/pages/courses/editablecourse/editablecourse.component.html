@@ -3,15 +3,15 @@
   <form [formGroup]="form" (ngSubmit)="handleSubmit()">
     <div class="form-group form-control--long">
       <div class="label-group">
-        <p class="input-label">Title:</p>
+        <p class="input-label">{{ ADDEDIT.TITLE | translate }}</p>
         <p class="input-error" *ngIf="name.errors?.maxlength">
-          Title length must not exceed 50
+          {{ ADDEDIT.TITLELENGTH | translate }}
         </p>
         <p
           class="input-label-required"
           *ngIf="name.touched && name.errors?.required"
         >
-          *required
+          {{ ADDEDIT.REQUIRED | translate }}
         </p>
       </div>
       <input
@@ -24,18 +24,18 @@
     </div>
     <div class="form-group form-control--long">
       <div class="label-group">
-        <p class="input-label">Description:</p>
+        <p class="input-label">{{ ADDEDIT.DESCR | translate }}</p>
         <p
           class="input-error"
           *ngIf="description.errors?.maxlength && description.dirty"
         >
-          Description length must not exceed 500
+          {{ ADDEDIT.DESCRLENGTH | translate }}
         </p>
         <p
           class="input-label-required"
           *ngIf="description.touched && description.errors?.required"
         >
-          *required
+          {{ ADDEDIT.REQUIRED | translate }}
         </p>
       </div>
       <textarea
@@ -48,12 +48,12 @@
     </div>
     <div class="form-group form-control--short">
       <div class="label-group">
-        <p class="input-label">Duration:</p>
+        <p class="input-label">{{ ADDEDIT.DUR | translate }}</p>
         <p
           class="input-label-required"
           *ngIf="length.touched && length.errors?.required"
         >
-          *required
+          {{ ADDEDIT.REQUIRED | translate }}
         </p>
       </div>
       <input
@@ -66,12 +66,12 @@
     </div>
     <div class="form-group form-control--short">
       <div class="label-group">
-        <p class="input-label">Date:</p>
+        <p class="input-label">{{ ADDEDIT.DATE | translate }}</p>
         <p
           class="input-label-required"
           *ngIf="date.touched && date.errors?.required"
         >
-          *required
+          {{ ADDEDIT.REQUIRED | translate }}
         </p>
       </div>
       <input
@@ -85,18 +85,18 @@
     </div>
     <div class="form-group form-control--medium">
       <div class="label-group">
-        <p class="input-label">Authors:</p>
+        <p class="input-label">{{ ADDEDIT.AUTHORS | translate }}</p>
         <p
           class="input-error"
           *ngIf="authors.errors?.invalidAuthorList && authors.dirty"
         >
-          Add at least one author
+          {{ ADDEDIT.AUTHORSLEAST | translate }}
         </p>
         <p
           class="input-label-required"
           *ngIf="authors.touched && authors.errors?.required"
         >
-          *required
+          {{ ADDEDIT.REQUIRED | translate }}
         </p>
       </div>
       <app-authors
@@ -109,14 +109,14 @@
       <input
         type="button"
         class="add-course-button add-course__cancel-btn"
-        value="Cancel"
+        value="{{ 'ADDEDIT.CANCEL' | translate }}"
         routerLink="/courses"
       />
       <input
         [disabled]="form.invalid"
         type="submit"
         class="add-course-button add-course__save-btn"
-        value="Save"
+        value="{{ 'ADDEDIT.SAVE' | translate }}"
       />
     </div>
   </form>

@@ -1,0 +1,35 @@
+{
+  "HOME": {
+    "LOGIN": "Log in",
+    "LOGOFF": "Log off",
+    "LANGSELECT": "Select language",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "NODATA": "No data. Feel free to add new course",
+    "LOADMORE": "LOAD MORE",
+    "ADD": "Add course",
+    "TYPETOSEARCH": "type to search"
+  },
+  "ADDEDIT": {
+    "TITLE": "Title:",
+    "TITLELENGTH": "Title length must not exceed 50",
+    "DESCR": "Description:",
+    "DESCRLENGTH": "Description length must not exceed 500",
+    "REQUIRED": "*required",
+    "DUR": "Duration:",
+    "DATE": "Date:",
+    "AUTHORS": "Authors:",
+    "AUTHORSLEAST": "Add at least one author",
+    "CANCEL": "Cancel",
+    "SAVE": "Save"
+  },
+  "LOGIN": {
+    "LOGIN": "Login",
+    "EMAIL": "E-mail:",
+    "PASS": "Password:",
+    "FORGOT": "Forgot Password?",
+    "ONSUBMIT": "Login",
+    "ENTEREMAIL": "Enter e-mail",
+    "ENTERPASS": "Enter password"
+  }
+}

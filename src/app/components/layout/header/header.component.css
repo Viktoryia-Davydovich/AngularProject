@@ -3,7 +3,6 @@
   padding-left: 85px;
   padding-right: 39px;
   justify-content: space-between;
-  align-items: center;
   display: flex;
   color: #ffffff;
 }
@@ -12,6 +11,15 @@
   padding-top: 1rem;
   padding-bottom: 1rem;
   cursor: pointer;
+}
+
+.header__items {
+  display: flex;
+  align-items: center;
+}
+
+.header__items--langselect {
+  margin-left: 1.2rem;
 }
 
 .header__log-items {

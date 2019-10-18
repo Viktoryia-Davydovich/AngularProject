@@ -34,7 +34,7 @@
           [icon]="['fas', 'pencil-alt']"
           class="font-icon-padding"
         ></fa-icon>
-        Edit
+        {{ HOME.EDIT }}
       </button>
       <button
         type="button"
@@ -42,7 +42,7 @@
         (click)="delete(course.id)"
       >
         <fa-icon [icon]="['fas', 'trash']" class="font-icon-padding"></fa-icon>
-        Delete
+        {{ HOME.DELETE }}
       </button>
     </div>
   </div>

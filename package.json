@@ -29,8 +29,12 @@
     "@ngrx/effects": "^8.4.0",
     "@ngrx/store": "^8.4.0",
     "@ngrx/store-devtools": "^8.3.0",
+    "@ngx-translate/core": "^11.0.1",
+    "@ngx-translate/http-loader": "^4.0.0",
     "@reactivex/rxjs": "^6.5.2",
+    "angular-in-memory-web-api": "^0.9.0",
     "angular2-uuid": "^1.1.1",
+    "nativescript-angular": "^8.2.2",
     "rxjs": "^6.5.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"

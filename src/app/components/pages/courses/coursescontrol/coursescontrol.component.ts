@@ -18,8 +18,8 @@ import {
   distinctUntilChanged,
   finalize
 } from "rxjs/operators";
-import { CourseService } from "src/app/core/services/course.service";
-import { LoaderService } from "src/app/core/services/loader.service";
+import { CourseService } from "src/app/services/course.service";
+import { LoaderService } from "src/app/services/loader.service";
 
 @Component({
   selector: "app-coursescontrol",

@@ -1,15 +1,14 @@
 import { Component, OnInit, NgModule, ChangeDetectorRef } from "@angular/core";
-import { AuthService } from "src/app/core/services/auth.service";
+import { AuthService } from "src/app/services/auth.service";
 import { Router } from "@angular/router";
-import { LoaderService } from "src/app/core/services/loader.service";
+import { LoaderService } from "src/app/services/loader.service";
 import { Store, select } from "@ngrx/store";
 import { getUserInfo, logout } from "src/app/store/actions/auth.actions";
-import {
-  selectUserInfo,
-  AppState
-} from "src/app/store/selectors/app.selector";
+import { selectUserInfo, AppState } from "src/app/store/selectors/app.selector";
 import { Observable } from "rxjs";
 import { LoggedUser } from "src/app/models/User";
+import { TranslateService } from "@ngx-translate/core";
+import { browser } from "protractor";
 
 @Component({
   selector: "app-header",
@@ -20,11 +19,17 @@ export class HeaderComponent implements OnInit {
   username: string = "User login";
   userInfo$: Observable<LoggedUser>;
   isLoggedIn: boolean;
+
   constructor(
     private router: Router,
     private loaderService: LoaderService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    public translate: TranslateService
   ) {
+    translate.addLangs(["en", "ru"]);
+    translate.setDefaultLang("en");
+    const browserLang = translate.getBrowserLang();
+    translate.use(browserLang.match(/en|ru/) ? browserLang : "en");
   }
 
   ngOnInit() {
@@ -40,7 +45,7 @@ export class HeaderComponent implements OnInit {
     this.userInfo$ = this.store.pipe(select(selectUserInfo));
     this.userInfo$.subscribe(data => {
       if (data) {
-        console.log("data")
+        console.log("data");
         this.username = data.name.first + " " + data.name.last;
       }
     });

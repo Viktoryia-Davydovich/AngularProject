@@ -1,7 +1,11 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import {
+  HttpClientModule,
+  HttpClient,
+  HttpBackend
+} from "@angular/common/http";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { StoreModule } from "@ngrx/store";
 import { reducer } from "./store/reducers/app.reducer";
@@ -36,14 +40,14 @@ import { AddcourseComponent } from "./components/pages/courses/addcourse/addcour
 import { EditcourseComponent } from "./components/pages/courses/editcourse/editcourse.component";
 import { TokenInterceptor } from "./auth/http-interceptor.service";
 import { LoaderComponent } from "./components/layout/loader/loader.component";
-import { LoaderService } from "./core/services/loader.service";
 import { EffectsModule } from "@ngrx/effects";
 import { CoursesEffects } from "./store/effects/courses.effects";
+import { AuthorsComponent } from "./components/authors/authors.component";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { environment } from "src/environments/environment";
 import { AuthEffects } from "./store/effects/auth.effects";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { AuthorsComponent } from "./components/authors/authors.component";
+
 import {
   MAT_CHIPS_DEFAULT_OPTIONS,
   MatChipsModule
@@ -52,6 +56,9 @@ import { MatIconModule } from "@angular/material/icon";
 import { ENTER, COMMA } from "@angular/cdk/keycodes";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatFormFieldModule, MatInputModule } from "@angular/material";
+
+import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
+import { HttpLoaderFactory } from "./shared/helpers/httpLoaderfactory";
 
 @NgModule({
   declarations: [
@@ -94,7 +101,14 @@ import { MatFormFieldModule, MatInputModule } from "@angular/material";
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production // Restrict extension to log-only mode
     }),
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpBackend]
+      }
+    })
   ],
   providers: [
     {

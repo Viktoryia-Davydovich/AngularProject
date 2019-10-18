@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType, Effect } from "@ngrx/effects";
 import { map, mergeMap, catchError, exhaustMap } from "rxjs/operators";
-import { CourseService } from "../../core/services/course.service";
+import { CourseService } from "../../services/course.service";
 import { Course } from "src/app/models/Course";
 import { Store, Action } from "@ngrx/store";
 import { IAppState } from "../state/app.state";

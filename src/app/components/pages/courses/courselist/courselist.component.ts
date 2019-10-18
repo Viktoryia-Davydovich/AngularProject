@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 
 import { Course } from "src/app/models/Course";
-import { CourseService } from "src/app/core/services/course.service";
+import { CourseService } from "src/app/services/course.service";
 import { Observable } from "rxjs";
-import { LoaderService } from "src/app/core/services/loader.service";
+import { LoaderService } from "src/app/services/loader.service";
 import { Store, select } from "@ngrx/store";
 import {
   getCourselist,

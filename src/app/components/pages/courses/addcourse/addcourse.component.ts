@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { EditableCourse, NewCourse } from "src/app/models/Course";
-import { CourseService } from "src/app/core/services/course.service";
+import { CourseService } from "src/app/services/course.service";
 import { Router } from "@angular/router";
-import { LoaderService } from "src/app/core/services/loader.service";
+import { LoaderService } from "src/app/services/loader.service";
 import { Store } from "@ngrx/store";
 import { IAppState } from "src/app/store/state/app.state";
 import { addCourse } from "src/app/store/actions/courses.actions";
